@@ -1,0 +1,11 @@
+# Cloudflare Security: Ignore server-side code, config, and sensitive files from being served as public static assets
+_worker.js
+functions/
+wrangler.toml
+wrangler.jsonc
+d1_schema.sql
+CLOUDFLARE_D1_SETUP.md
+.git/
+.gitignore
+AGENTS.md
+server.exe

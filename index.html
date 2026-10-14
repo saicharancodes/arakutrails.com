@@ -15,1269 +15,152 @@
     href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <style>
-    :root {
-      /* Futuristic Travel Dashboard Theme */
-      --shell-bg: #070d0a;
-      --sidebar-bg: #0b1511;
-      --panel-bg: #101c17;
-      --panel-hover: #15251f;
-      --panel-border: rgba(255, 255, 255, 0.08);
-      --border-accent: rgba(16, 185, 129, 0.35);
-
-      --emerald-glow: #10b981;
-      --emerald-bright: #34d399;
-      --amber-star: #f59e0b;
-      --sky-azure: #0ea5e9;
-
-      --text-heading: #f8fafc;
-      --text-body: #94a3b8;
-      --text-bright: #e2e8f0;
-
-      --font-brand: 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-pill: 9999px;
-
-      --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-body);
-      background-color: var(--shell-bg);
-      color: var(--text-bright);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ========================================================
-       APPLICATION PORTAL / DASHBOARD LAYOUT
-    ======================================================== */
-    .app-layout {
-      display: flex;
-      min-height: 100vh;
-      width: 100%;
-    }
-
-    /* Fixed Left Explorer Console / Sidebar */
-    .app-sidebar {
-      width: 290px;
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--panel-border);
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
-      padding: 1.5rem 1.25rem;
-      transition: var(--transition);
-    }
-
-    .brand-widget {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--panel-border);
-      margin-bottom: 1.5rem;
-    }
-
-    .brand-symbol {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #10b981 0%, #047857 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1.35rem;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
-    }
-
-    .brand-name {
-      font-family: var(--font-brand);
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-name span {
-      color: var(--emerald-bright);
-    }
-
-    .console-nav-title {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--text-body);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 0.75rem;
-      padding-left: 0.5rem;
-    }
-
-    .console-nav-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-      flex-grow: 1;
-    }
-
-    .console-nav-item a {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-      padding: 0.75rem 1rem;
-      border-radius: var(--radius-sm);
-      color: var(--text-body);
-      text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: var(--transition);
-    }
-
-    .console-nav-item a:hover,
-    .console-nav-item.active a {
-      background: rgba(16, 185, 129, 0.12);
-      color: var(--emerald-bright);
-      border-left: 3px solid var(--emerald-bright);
-    }
-
-    .console-nav-item a i {
-      font-size: 1.05rem;
-      width: 20px;
-    }
-
-    /* Live Hotline Box in Sidebar */
-    .sidebar-hotline {
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-md);
-      padding: 1.25rem 1rem;
-      text-align: center;
-      margin-top: auto;
-    }
-
-    .hotline-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--emerald-bright);
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .pulse-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--emerald-bright);
-      box-shadow: 0 0 8px var(--emerald-bright);
-      animation: pulse 1.6s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        opacity: 0.4;
-      }
-
-      50% {
-        opacity: 1;
-      }
-
-      100% {
-        opacity: 0.4;
-      }
-    }
-
-    .hotline-num {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #fff;
-      text-decoration: none;
-      margin-bottom: 0.4rem;
-    }
-
-    .hotline-email {
-      font-size: 0.82rem;
-      color: var(--text-body);
-      text-decoration: none;
-      display: block;
-      word-break: break-all;
-    }
-
-    .hotline-email:hover,
-    .hotline-num:hover {
-      color: var(--emerald-bright);
-    }
-
-    /* Main Working Area */
-    .app-main {
-      margin-left: 290px;
-      flex-grow: 1;
-      padding: 1.75rem 2.25rem;
-      min-width: 0;
-    }
-
-    /* Top Action Header */
-    .main-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--sidebar-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      padding: 0.9rem 1.5rem;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .topbar-status {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      font-size: 0.85rem;
-      color: var(--text-body);
-      font-family: var(--font-mono);
-    }
-
-    .topbar-status span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .btn-quick-book {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-pill);
-      padding: 0.65rem 1.4rem;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
-      transition: var(--transition);
-    }
-
-    .btn-quick-book:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
-    }
-
-    /* Mobile Menu Toggle */
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    /* ========================================================
-       HERO SPOTLIGHT DASHBOARD CAROUSEL
-    ======================================================== */
-    .hero-spotlight {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      min-height: 440px;
-      display: flex;
-      align-items: flex-end;
-      padding: 3rem 2.5rem;
-      margin-bottom: 2.5rem;
-      border: 1px solid var(--panel-border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    }
-
-    .spotlight-bg-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-    }
-
-    .spotlight-slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      background-size: cover;
-      background-position: center;
-      transition: opacity 1.2s ease-in-out, transform 6s ease;
-      transform: scale(1.05);
-    }
-
-    .spotlight-slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .spotlight-gradient {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(7, 13, 10, 0.2) 0%, rgba(7, 13, 10, 0.95) 90%);
-      z-index: 2;
-    }
-
-    .spotlight-content {
-      position: relative;
-      z-index: 3;
-      max-width: 780px;
-    }
-
-    .spotlight-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      background: rgba(16, 185, 129, 0.2);
-      border: 1px solid var(--border-accent);
-      color: var(--emerald-bright);
-      padding: 0.35rem 0.9rem;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 1rem;
-    }
-
-    .spotlight-title {
-      font-family: var(--font-brand);
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 0.8rem;
-    }
-
-    .spotlight-title span {
-      background: linear-gradient(135deg, #34d399 0%, #a7f3d0 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .spotlight-desc {
-      color: var(--text-bright);
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 1.75rem;
-      max-width: 650px;
-    }
-
-    .spotlight-controls {
-      position: absolute;
-      bottom: 2rem;
-      right: 2.5rem;
-      z-index: 4;
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .spotlight-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: var(--radius-pill);
-      background: rgba(255, 255, 255, 0.3);
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .spotlight-dot.active {
-      width: 28px;
-      background: var(--emerald-bright);
-    }
-
-    /* ========================================================
-       INTEGRATED BOOKING CONSOLE PANEL
-    ======================================================== */
-    .booking-console-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-lg);
-      padding: 2rem 2.25rem;
-      margin-bottom: 3.5rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-    }
-
-    .console-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--panel-border);
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-
-    .console-header-title {
-      font-family: var(--font-brand);
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .console-header-title i {
-      color: var(--emerald-bright);
-    }
-
-    .console-header-badge {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--emerald-bright);
-      background: rgba(16, 185, 129, 0.1);
-      padding: 0.3rem 0.75rem;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-    }
-
-    .booking-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) 180px;
-      gap: 1.25rem;
-      align-items: end;
-    }
-
-    .field-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    .field-wrapper label {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-body);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .dash-input {
-      background: var(--shell-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      padding: 0.8rem 1rem;
-      font-size: 0.92rem;
-      outline: none;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .dash-input:focus {
-      border-color: var(--emerald-bright);
-      box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
-    }
-
-    .btn-exec-booking {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 0.85rem 1rem;
-      font-family: var(--font-brand);
-      font-weight: 700;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      height: 48px;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-      transition: var(--transition);
-    }
-
-    .btn-exec-booking:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 22px rgba(16, 185, 129, 0.6);
-    }
-
-    /* ========================================================
-       TOUR PACKAGES (DASHBOARD CARDS & METRICS)
-    ======================================================== */
-    .section-portal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .portal-heading h2 {
-      font-family: var(--font-brand);
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .portal-heading h2 span {
-      color: var(--emerald-bright);
-    }
-
-    .portal-heading p {
-      color: var(--text-body);
-      font-size: 0.95rem;
-      margin-top: 0.3rem;
-    }
-
-    .portal-stats-pills {
-      display: flex;
-      gap: 0.75rem;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-    }
-
-    .stat-pill {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      padding: 0.4rem 0.85rem;
-      border-radius: var(--radius-pill);
-      color: var(--text-body);
-    }
-
-    .stat-pill strong {
-      color: var(--emerald-bright);
-    }
-
-    .dash-packages-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.75rem;
-      margin-bottom: 4rem;
-    }
-
-    .dash-pack-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: var(--transition);
-    }
-
-    .dash-pack-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--border-accent);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2);
-      background: var(--panel-hover);
-    }
-
-    .pack-thumb-box {
-      position: relative;
-      height: 200px;
-      overflow: hidden;
-    }
-
-    .pack-thumb-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .dash-pack-card:hover .pack-thumb-box img {
-      transform: scale(1.08);
-    }
-
-    .pack-duration-chip {
-      position: absolute;
-      top: 0.85rem;
-      left: 0.85rem;
-      background: rgba(7, 13, 10, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--emerald-bright);
-      padding: 0.25rem 0.75rem;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      font-weight: 600;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-    }
-
-    .pack-score-chip {
-      position: absolute;
-      top: 0.85rem;
-      right: 0.85rem;
-      background: rgba(7, 13, 10, 0.85);
-      backdrop-filter: blur(8px);
-      color: var(--amber-star);
-      padding: 0.25rem 0.65rem;
-      border-radius: var(--radius-pill);
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .pack-card-content {
-      padding: 1.4rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-
-    .pack-features-line {
-      display: flex;
-      gap: 1rem;
-      font-family: var(--font-mono);
-      font-size: 0.78rem;
-      color: var(--text-body);
-      margin-bottom: 0.6rem;
-    }
-
-    .pack-features-line span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .pack-name {
-      font-family: var(--font-brand);
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
-      line-height: 1.3;
-    }
-
-    .pack-summary {
-      color: var(--text-body);
-      font-size: 0.88rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-      flex-grow: 1;
-    }
-
-    .pack-card-foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid var(--panel-border);
-      padding-top: 1rem;
-      margin-top: auto;
-    }
-
-    .pack-rate-tag {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .rate-micro {
-      font-family: var(--font-mono);
-      font-size: 0.68rem;
-      color: var(--text-body);
-      text-transform: uppercase;
-    }
-
-    .rate-amount {
-      font-family: var(--font-brand);
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--emerald-bright);
-    }
-
-    .btn-pack-select {
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      color: var(--emerald-bright);
-      padding: 0.5rem 1rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-pack-select:hover {
-      background: var(--emerald-glow);
-      color: #fff;
-    }
-
-    /* ========================================================
-       SPECIAL TRAVEL TILES & EXPERIENCES
-    ======================================================== */
-    .specialty-dash-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-      gap: 1.75rem;
-      margin-bottom: 4rem;
-    }
-
-    .specialty-tile {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      padding: 2.25rem 1.75rem;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .specialty-tile:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-4px);
-    }
-
-    .specialty-avatar-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
-      background: rgba(16, 185, 129, 0.12);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      color: var(--emerald-bright);
-      margin-bottom: 1.25rem;
-    }
-
-    .specialty-title {
-      font-family: var(--font-brand);
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.8rem;
-    }
-
-    .specialty-desc {
-      color: var(--text-body);
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
-
-    /* ========================================================
-       ACTIVITIES & ADVENTURE CONSOLE
-    ======================================================== */
-    .dash-activity-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .activity-deck-card {
-      position: relative;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      height: 270px;
-      cursor: pointer;
-      border: 1px solid var(--panel-border);
-      transition: var(--transition);
-    }
-
-    .activity-deck-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--emerald-bright);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-    }
-
-    .act-bg-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.6s ease;
-    }
-
-    .activity-deck-card:hover .act-bg-img {
-      transform: scale(1.1);
-    }
-
-    .act-gradient-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(7, 13, 10, 0.1) 0%, rgba(7, 13, 10, 0.95) 100%);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 1.5rem;
-    }
-
-    .act-category-code {
-      font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--emerald-bright);
-      text-transform: uppercase;
-      margin-bottom: 0.2rem;
-    }
-
-    .act-label {
-      font-family: var(--font-brand);
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    /* ========================================================
-       WHY US / VALUE METRICS
-    ======================================================== */
-    .features-dash-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 4rem;
-    }
-
-    .feature-metric-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      padding: 1.75rem;
-      transition: var(--transition);
-    }
-
-    .feature-metric-card:hover {
-      border-color: var(--border-accent);
-      transform: translateY(-3px);
-    }
-
-    .metric-icon-wrap {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(16, 185, 129, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--emerald-bright);
-      font-size: 1.35rem;
-      margin-bottom: 1rem;
-    }
-
-    .metric-label {
-      font-family: var(--font-brand);
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .metric-explain {
-      color: var(--text-body);
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-
-    /* ========================================================
-       TESTIMONIALS LOGS
-    ======================================================== */
-    .testimonial-dash-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.75rem;
-      margin-bottom: 4rem;
-    }
-
-    .review-log-card {
-      background: var(--panel-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      padding: 2rem 1.75rem;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .review-log-card:hover {
-      border-color: var(--border-accent);
-    }
-
-    .quote-badge-icon {
-      font-size: 1.75rem;
-      color: rgba(16, 185, 129, 0.25);
-      margin-bottom: 0.75rem;
-    }
-
-    .review-statement {
-      color: var(--text-bright);
-      font-size: 0.92rem;
-      line-height: 1.7;
-      margin-bottom: 1.5rem;
-      font-style: italic;
-    }
-
-    .client-data-box {
-      display: flex;
-      align-items: center;
-      gap: 0.85rem;
-    }
-
-    .client-avatar-img {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      border: 2px solid var(--emerald-bright);
-      object-fit: cover;
-    }
-
-    .client-name-tag {
-      font-family: var(--font-brand);
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .client-loc-tag {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--emerald-bright);
-    }
-
-    /* ========================================================
-       DASHBOARD BOTTOM CALLOUT
-    ======================================================== */
-    .dash-callout-panel {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(11, 21, 17, 0.95) 100%);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-    }
-
-    .callout-text h2 {
-      font-family: var(--font-brand);
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-
-    .callout-text p {
-      color: var(--text-body);
-      font-size: 1rem;
-      max-width: 600px;
-    }
-
-    .callout-btn-group {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-callout-call {
-      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-      color: #fff;
-      text-decoration: none;
-      padding: 0.85rem 1.6rem;
-      border-radius: var(--radius-pill);
-      font-weight: 600;
-      font-size: 0.92rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
-    }
-
-    .btn-callout-chat {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      text-decoration: none;
-      padding: 0.85rem 1.6rem;
-      border-radius: var(--radius-pill);
-      font-weight: 600;
-      font-size: 0.92rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    /* Footer Meta */
-    .dash-footer-meta {
-      border-top: 1px solid var(--panel-border);
-      padding: 2rem 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      color: var(--text-body);
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-    }
-
-    .footer-quick-contacts {
-      display: flex;
-      gap: 1.5rem;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .footer-quick-contacts a {
-      color: var(--text-bright);
-      text-decoration: none;
-    }
-
-    .footer-quick-contacts a:hover {
-      color: var(--emerald-bright);
-    }
-
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.85);
-      backdrop-filter: blur(8px);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    .modal.active {
-      display: flex;
-    }
-
-    .modal-box {
-      background: var(--panel-bg);
-      border: 1px solid var(--border-accent);
-      border-radius: var(--radius-lg);
-      padding: 2.5rem 2rem;
-      max-width: 480px;
-      width: 100%;
-      position: relative;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      background: none;
-      border: none;
-      color: var(--text-body);
-      font-size: 1.4rem;
-      cursor: pointer;
-    }
-
-    .modal-close:hover {
-      color: #fff;
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .app-sidebar {
-        transform: translateX(-100%);
-      }
-
-      .app-sidebar.open {
-        transform: translateX(0);
-      }
-
-      .app-main {
-        margin-left: 0;
-        padding: 1.5rem 1rem;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .booking-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-spotlight {
-        padding: 2rem 1.5rem;
-        min-height: 380px;
-      }
-
-      .dash-callout-panel {
-        padding: 2rem 1.5rem;
-      }
-    }
-  </style>
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png">
+  <link rel="apple-touch-icon" href="images/arakutrails-logo-128.png">
+
+  <!-- Preload First Hero Image for Zero Latency First Paint -->
+  <link rel="preload" as="image" href="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg">
+
+  <!-- Consolidated Optimized Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <div class="app-layout">
+  <!-- Floating Pekoe-Style Navigation Header -->
+  <header class="pekoe-header" id="pekoeHeader">
+    <div class="pekoe-header-inner">
+      <a href="index.html" class="pekoe-brand">
+        <img src="images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="pekoe-logo-img" width="46"
+          height="46">
+        <div class="pekoe-brand-text">Araku <span>Trails</span></div>
+      </a>
 
-    <!-- Fixed Left Explorer Console / Sidebar -->
-    <aside class="app-sidebar" id="appSidebar">
-      <div class="brand-widget">
-        <div class="brand-symbol"><i class="fa-solid fa-mountain-sun"></i></div>
-        <div class="brand-name">Araku <span>Trails</span></div>
+      <div class="pekoe-header-right">
+        <nav class="pekoe-nav-pill">
+          <ul class="pekoe-nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#packages">Tour Packages</a></li>
+            <li><a href="#specialties">Special Tours</a></li>
+            <li><a href="#activities">Activities</a></li>
+            <li><a href="#about">Why Us</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <button type="button" class="pekoe-nav-cta" onclick="openBookingModal('General Booking')"
+            style="border: none; cursor: pointer; text-decoration: none;">
+            <i class="fa-solid fa-calendar-check"></i> Book Tour
+          </button>
+        </nav>
       </div>
 
-      <div class="console-nav-title">Navigation Console</div>
-      <ul class="console-nav-list">
-        <li class="console-nav-item active"><a href="#home"><i class="fa-solid fa-compass"></i> Home Spotlight</a></li>
-        <li class="console-nav-item"><a href="#booking-console"><i class="fa-solid fa-calendar-check"></i> Booking
-            Console</a></li>
-        <li class="console-nav-item"><a href="#packages"><i class="fa-solid fa-layer-group"></i> Tour Packages</a></li>
-        <li class="console-nav-item"><a href="#specialties"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
-        <li class="console-nav-item"><a href="#activities"><i class="fa-solid fa-parachute-box"></i> Activities</a></li>
-        <li class="console-nav-item"><a href="#about"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a>
-        </li>
-        <li class="console-nav-item"><a href="#contact"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
-      </ul>
+      <!-- Mobile Menu Button -->
+      <button class="pekoe-mobile-menu-btn" id="pekoeMenuBtn" aria-label="Open Navigation">
+        <i class="fa-solid fa-bars"></i> <span>MENU</span>
+      </button>
+    </div>
+  </header>
 
-      <!-- Active Support Hotline Box -->
-      <div class="sidebar-hotline">
-        <div class="hotline-badge">
-          <span class="pulse-dot"></span> 24/7 Priority Desk
-        </div>
-        <a href="tel:+919494177921" class="hotline-num">+91 9494177921</a>
-        <a href="mailto:krsh2852@gmail.com" class="hotline-email">krsh2852@gmail.com</a>
+  <!-- Mobile Drawer Menu -->
+  <div class="pekoe-mobile-drawer" id="pekoeMobileDrawer">
+    <div class="pekoe-drawer-header">
+      <a href="index.html" class="pekoe-brand" onclick="closeMobileDrawer()">
+        <img src="images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="pekoe-logo-img" width="40"
+          height="40">
+        <div class="pekoe-brand-text">Araku <span>Trails</span></div>
+      </a>
+      <button class="pekoe-drawer-close" onclick="closeMobileDrawer()" aria-label="Close Navigation">&times;</button>
+    </div>
+
+    <!-- Weather & Region Info in Drawer -->
+    <div class="sidebar-status-box" style="margin-bottom: 1.5rem;">
+      <div class="sidebar-status-item">
+        <i class="fa-solid fa-mountain" style="color: var(--emerald-bright);"></i>
+        <span><strong>Eastern Ghats</strong> &bull; Valley Trails</span>
       </div>
-    </aside>
+      <div class="sidebar-status-item">
+        <i class="fa-solid fa-cloud-sun" style="color: var(--amber-star);"></i>
+        <span id="weatherDrawerDisplay">Hill Weather: <strong>Misty &amp; Pleasant</strong></span>
+      </div>
+    </div>
 
-    <!-- Main Workspace Area -->
-    <main class="app-main">
+    <ul class="pekoe-drawer-links">
+      <li><a href="#home" onclick="closeMobileDrawer()"><i class="fa-solid fa-compass"></i> Home</a></li>
+      <li><a href="javascript:void(0)" onclick="closeMobileDrawer(); openBookingModal('General Booking');"><i
+            class="fa-solid fa-calendar-check"></i> Book Tour</a></li>
+      <li><a href="#packages" onclick="closeMobileDrawer()"><i class="fa-solid fa-layer-group"></i> Tour Packages</a>
+      </li>
+      <li><a href="#specialties" onclick="closeMobileDrawer()"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
+      <li><a href="#activities" onclick="closeMobileDrawer()"><i class="fa-solid fa-parachute-box"></i> Activities</a>
+      </li>
+      <li><a href="#about" onclick="closeMobileDrawer()"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a>
+      </li>
+      <li><a href="#contact" onclick="closeMobileDrawer()"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
+    </ul>
 
-      <!-- Top Dashboard Status Bar -->
-      <header class="main-topbar">
-        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Console">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+    <!-- 24/7 Priority Desk in Drawer -->
+    <div class="sidebar-hotline" style="margin-top: auto;">
+      <div class="hotline-badge">
+        <span class="pulse-dot"></span> 24/7 Priority Desk
+      </div>
+      <a href="tel:+919494177921" class="hotline-num">+91 9494177921</a>
+      <a href="mailto:krsh2852@gmail.com" class="hotline-email">krsh2852@gmail.com</a>
+      <a href="https://wa.me/919494177921?text=Hello%20Araku%20Trails,%20I%20want%20to%20plan%20a%20trip"
+        target="_blank" class="hotline-whatsapp-btn">
+        <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+      </a>
+    </div>
+  </div>
 
-        <div class="topbar-status">
-          <span><i class="fa-solid fa-location-dot" style="color: var(--emerald-bright);"></i> Vizag &amp; Araku Valley,
-            AP</span>
-          <span><i class="fa-solid fa-cloud-sun" style="color: var(--amber-star);"></i> Valley Weather: Clear &amp;
-            Pleasant</span>
-        </div>
+  <!-- Full-Screen Edge-to-Edge Pekoe Hero Slider -->
+  <section class="pekoe-hero" id="home">
+    <!-- Background Photography Slides -->
+    <div class="pekoe-hero-slides">
+      <div class="pekoe-slide active"
+        style="background-image: url('images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg'); background-position: center 40%;">
+      </div>
+      <div class="pekoe-slide"
+        style="background-image: url('images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg'); background-position: center 30%;">
+      </div>
+      <div class="pekoe-slide"
+        style="background-image: url('images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg'); background-position: center 50%;">
+      </div>
+    </div>
+    <div class="pekoe-overlay"></div>
 
-        <div class="topbar-actions">
-          <button class="btn-quick-book" onclick="openBookingModal('General Inquiry')">
-            <i class="fa-solid fa-ticket"></i> Quick Booking
-          </button>
-        </div>
-      </header>
+    <!-- Floating Typography & Actions Overlay -->
+    <div class="pekoe-hero-content">
+      <div class="pekoe-eyebrow" id="heroEyebrow">
+        Premier Valley Trails &bull; Eastern Ghats
+      </div>
+      <h1 class="pekoe-title" id="heroTitle">
+        Discover the Serene Beauty of Araku Valley
+      </h1>
+      <p class="pekoe-desc" id="heroDesc">
+        Lush coffee plantations, mist-covered valleys, breathtaking waterfalls, tribal heritage, and thrilling adventure
+        trails await you in Andhra Pradesh's majestic Eastern Ghats.
+      </p>
+      <div class="pekoe-actions">
+        <a href="#packages" class="pekoe-btn pekoe-btn-primary">
+          <i class="fa-solid fa-compass"></i> Explore Packages
+        </a>
+      </div>
+    </div>
 
-      <!-- Hero Spotlight Dashboard Slider -->
-      <section class="hero-spotlight" id="home">
-        <div class="spotlight-bg-wrap">
-          <div class="spotlight-slide active"
-            style="background-image: url('images/WhatsApp%20Image%202026-10-13%20at%2012.46.39%20AM.jpeg'); background-position: center 25%;"></div>
-          <div class="spotlight-slide"
-            style="background-image: url('images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg'); background-position: center center;"></div>
-          <div class="spotlight-slide"
-            style="background-image: url('images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg');"></div>
-          <div class="spotlight-gradient"></div>
-        </div>
+    <!-- Subtle Centered Slide Indicators -->
+    <div class="pekoe-dots-bar" id="pekoeDotsBar">
+      <button class="pekoe-dot active" onclick="setSlide(0)" aria-label="Slide 1: Araku Valley"></button>
+      <button class="pekoe-dot" onclick="setSlide(1)" aria-label="Slide 2: Vanjangi Clouds"></button>
+      <button class="pekoe-dot" onclick="setSlide(2)" aria-label="Slide 3: Bonfire &amp; Dhimsa"></button>
+    </div>
+  </section>
 
-        <div class="spotlight-content">
-          <div class="spotlight-tag">
-            <i class="fa-solid fa-compass"></i> Premier Travel Agency in Vizag &amp; Araku
-          </div>
-          <h1 class="spotlight-title" id="heroTitle">
-            Discover the Serene Beauty of <span>Araku Valley</span>
-          </h1>
-          <p class="spotlight-desc" id="heroDesc">
-            Lush coffee plantations, mist-covered valleys, breathtaking waterfalls, tribal heritage, and thrilling
-            adventure trails await you in Andhra Pradesh's majestic Eastern Ghats.
-          </p>
-          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-            <a href="#packages" class="btn-quick-book" style="padding: 0.85rem 1.75rem;">
-              <i class="fa-solid fa-suitcase-rolling"></i> Explore Packages
-            </a>
-            <button class="btn-pack-select" onclick="openBookingModal('Custom Itinerary')"
-              style="padding: 0.85rem 1.75rem;">
-              <i class="fa-solid fa-phone-volume"></i> Plan Custom Trip
-            </button>
-          </div>
-        </div>
+  <!-- Main Website Content (Flowing naturally below the hero) -->
+  <main class="pekoe-main-content">
+    <div class="pekoe-container">
 
-        <div class="spotlight-controls">
-          <button class="spotlight-dot active" onclick="setSlide(0)" aria-label="Slide 1"></button>
-          <button class="spotlight-dot" onclick="setSlide(1)" aria-label="Slide 2"></button>
-          <button class="spotlight-dot" onclick="setSlide(2)" aria-label="Slide 3"></button>
-        </div>
-      </section>
 
-      <!-- Interactive Booking Console Card -->
-      <section class="booking-console-card" id="booking-console">
-        <div class="console-card-header">
-          <div class="console-header-title">
-            <i class="fa-solid fa-sliders"></i> Reservation Dispatch Console
-          </div>
-          <div class="console-header-badge">
-            <i class="fa-solid fa-bolt"></i> Instant Confirmation &amp; Lead Dispatch
-          </div>
-        </div>
-
-        <form class="booking-grid" id="quickBookingForm" onsubmit="handleBookingSubmit(event)">
-          <div class="field-wrapper">
-            <label for="travelName"><i class="fa-solid fa-user"></i> Full Name</label>
-            <input type="text" id="travelName" class="dash-input" placeholder="Enter your name" required>
-          </div>
-          <div class="field-wrapper">
-            <label for="travelMobile"><i class="fa-solid fa-phone"></i> Mobile Number</label>
-            <input type="tel" id="travelMobile" class="dash-input" placeholder="+91 9876543210" required>
-          </div>
-          <div class="field-wrapper">
-            <label for="travelDate"><i class="fa-solid fa-calendar-day"></i> Arrival Date</label>
-            <input type="date" id="travelDate" class="dash-input" required>
-          </div>
-          <div class="field-wrapper">
-            <label for="travelType"><i class="fa-solid fa-map-location-dot"></i> Tour Category</label>
-            <select id="travelType" class="dash-input">
-              <option value="Araku 1-Day Tour">Araku 1-Day Tour</option>
-              <option value="Araku 1N/2D Tour">Araku 1 Night / 2 Days</option>
-              <option value="Vizag & Araku 2N/3D">Vizag &amp; Araku 2N/3D</option>
-              <option value="Lambasingi & Vanjangi">Lambasingi &amp; Vanjangi Tour</option>
-              <option value="Couple & Honeymoon">Couple &amp; Honeymoon Tour</option>
-              <option value="Group & Corporate MICE">Group &amp; Corporate MICE</option>
-            </select>
-          </div>
-          <button type="submit" class="btn-exec-booking">
-            <i class="fa-solid fa-paper-plane"></i> Book Now
-          </button>
-        </form>
-      </section>
 
       <!-- Tour Packages Section -->
       <section id="packages">
@@ -1289,24 +172,23 @@
           </div>
           <div class="portal-stats-pills">
             <span class="stat-pill">Available Circuits: <strong>4 Curated</strong></span>
-            <span class="stat-pill">Avg Rating: <strong>4.9 / 5.0</strong></span>
           </div>
         </div>
 
         <div class="dash-packages-grid">
           <!-- Package 1 -->
-          <div class="dash-pack-card">
+          <div class="dash-pack-card" onclick="window.location.href='araku-1-day-tour.html'">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg" alt="Araku 1 Day Tour">
+              <img src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg" alt="Araku 1 Day Tour"
+                loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 1 Day Tour</span>
-              <span class="pack-score-chip"><i class="fa-solid fa-star"></i> 4.9</span>
             </div>
             <div class="pack-card-content">
               <div class="pack-features-line">
                 <span><i class="fa-solid fa-car"></i> Cab Included</span>
                 <span><i class="fa-solid fa-mountain"></i> 5 Attractions</span>
               </div>
-              <h3 class="pack-name">Araku Valley 1-Day Sightseeing</h3>
+              <h3 class="pack-name"><a href="araku-1-day-tour.html">Araku Valley 1-Day Sightseeing</a></h3>
               <p class="pack-summary">Borra Caves, Padmapuram Botanical Gardens, Tribal Museum, Chaparai Waterfalls, and
                 Coffee Plantations.</p>
               <div class="pack-card-foot">
@@ -1314,24 +196,29 @@
                   <span class="rate-micro">Starting From</span>
                   <span class="rate-amount">₹2,499</span>
                 </div>
-                <button class="btn-pack-select" onclick="openBookingModal('Araku Valley 1-Day Tour')">Book Now</button>
+                <div class="pack-actions-foot">
+                  <a href="araku-1-day-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                    Details</a>
+                  <button class="btn-pack-select"
+                    onclick="event.stopPropagation(); openBookingModal('Araku Valley 1-Day Tour')">Book Now</button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Package 2 -->
-          <div class="dash-pack-card">
+          <div class="dash-pack-card" onclick="window.location.href='araku-1n-2d-tour.html'">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" alt="Araku 1N/2D Tour">
+              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" alt="Araku 1N/2D Tour"
+                loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 1N / 2D</span>
-              <span class="pack-score-chip"><i class="fa-solid fa-star"></i> 4.9</span>
             </div>
             <div class="pack-card-content">
               <div class="pack-features-line">
                 <span><i class="fa-solid fa-hotel"></i> Resort Stay</span>
                 <span><i class="fa-solid fa-fire"></i> Tribal Bonfire</span>
               </div>
-              <h3 class="pack-name">Araku Serenity 1 Night / 2 Days</h3>
+              <h3 class="pack-name"><a href="araku-1n-2d-tour.html">Araku Serenity 1 Night / 2 Days</a></h3>
               <p class="pack-summary">Overnight luxury resort stay in Araku, tribal bonfire &amp; Dhimsa dance, coffee
                 museum, and scenic Ghat drive.</p>
               <div class="pack-card-foot">
@@ -1339,24 +226,29 @@
                   <span class="rate-micro">Starting From</span>
                   <span class="rate-amount">₹4,999</span>
                 </div>
-                <button class="btn-pack-select" onclick="openBookingModal('Araku Serenity 1N/2D')">Book Now</button>
+                <div class="pack-actions-foot">
+                  <a href="araku-1n-2d-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                    Details</a>
+                  <button class="btn-pack-select"
+                    onclick="event.stopPropagation(); openBookingModal('Araku Serenity 1N/2D')">Book Now</button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Package 3 -->
-          <div class="dash-pack-card">
+          <div class="dash-pack-card" onclick="window.location.href='vizag-araku-2n-3d-tour.html'">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" alt="Vizag & Araku 2N/3D">
+              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" alt="Vizag & Araku 2N/3D"
+                loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 2N / 3D</span>
-              <span class="pack-score-chip"><i class="fa-solid fa-star"></i> 5.0</span>
             </div>
             <div class="pack-card-content">
               <div class="pack-features-line">
                 <span><i class="fa-solid fa-umbrella-beach"></i> Beach + Hills</span>
                 <span><i class="fa-solid fa-cable-car"></i> Ropeway</span>
               </div>
-              <h3 class="pack-name">Vizag &amp; Araku Highlights 2N/3D</h3>
+              <h3 class="pack-name"><a href="vizag-araku-2n-3d-tour.html">Vizag &amp; Araku Highlights 2N/3D</a></h3>
               <p class="pack-summary">Rishikonda Beach, Kailasagiri Ropeway, Submarine Museum, VMRDA park, combined with
                 complete Araku Valley.</p>
               <div class="pack-card-foot">
@@ -1364,24 +256,30 @@
                   <span class="rate-micro">Starting From</span>
                   <span class="rate-amount">₹7,499</span>
                 </div>
-                <button class="btn-pack-select" onclick="openBookingModal('Vizag & Araku 2N/3D')">Book Now</button>
+                <div class="pack-actions-foot">
+                  <a href="vizag-araku-2n-3d-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                    Details</a>
+                  <button class="btn-pack-select"
+                    onclick="event.stopPropagation(); openBookingModal('Vizag & Araku 2N/3D')">Book Now</button>
+                </div>
               </div>
             </div>
           </div>
 
           <!-- Package 4 -->
-          <div class="dash-pack-card">
+          <div class="dash-pack-card" onclick="window.location.href='vizag-araku-lambasingi-3n-4d-tour.html'">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg" alt="Lambasingi & Vanjangi">
+              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg" alt="Lambasingi & Vanjangi"
+                loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 3N / 4D</span>
-              <span class="pack-score-chip"><i class="fa-solid fa-star"></i> 4.8</span>
             </div>
             <div class="pack-card-content">
               <div class="pack-features-line">
                 <span><i class="fa-solid fa-cloud-sun"></i> Cloud Sunrise</span>
                 <span><i class="fa-solid fa-campground"></i> Tent Stay</span>
               </div>
-              <h3 class="pack-name">Vizag, Araku &amp; Lambasingi</h3>
+              <h3 class="pack-name"><a href="vizag-araku-lambasingi-3n-4d-tour.html">Vizag, Araku &amp; Lambasingi</a>
+              </h3>
               <p class="pack-summary">Experience the "Kashmir of Andhra" (Lambasingi), Vanjangi ocean of clouds sunrise,
                 tent camping and apple orchards.</p>
               <div class="pack-card-foot">
@@ -1389,8 +287,13 @@
                   <span class="rate-micro">Starting From</span>
                   <span class="rate-amount">₹9,999</span>
                 </div>
-                <button class="btn-pack-select" onclick="openBookingModal('Vizag, Araku & Lambasingi 3N/4D')">Book
-                  Now</button>
+                <div class="pack-actions-foot">
+                  <a href="vizag-araku-lambasingi-3n-4d-tour.html" class="btn-pack-view"
+                    onclick="event.stopPropagation()">View Details</a>
+                  <button class="btn-pack-select"
+                    onclick="event.stopPropagation(); openBookingModal('Vizag, Araku & Lambasingi 3N/4D')">Book
+                    Now</button>
+                </div>
               </div>
             </div>
           </div>
@@ -1447,8 +350,8 @@
 
         <div class="dash-activity-grid">
           <div class="activity-deck-card" onclick="openBookingModal('Hot Air Balloon')">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.43.jpeg"
-              alt="Hot Air Balloon">
+            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.43.jpeg" loading="lazy"
+              decoding="async" alt="Hot Air Balloon">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Aero Adventure</span>
               <h3 class="act-label">Hot Air Balloon</h3>
@@ -1456,8 +359,8 @@
           </div>
 
           <div class="activity-deck-card" onclick="openBookingModal('Rope Cycling')">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg"
-              alt="Rope Cycling">
+            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" loading="lazy"
+              decoding="async" alt="Rope Cycling">
             <div class="act-gradient-overlay">
               <span class="act-category-code">High Altitude Thrill</span>
               <h3 class="act-label">Rope Cycling &amp; Zipline</h3>
@@ -1465,8 +368,8 @@
           </div>
 
           <div class="activity-deck-card" onclick="openBookingModal('Tent Camping & Bonfire')">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg"
-              alt="Campfire Stay">
+            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" loading="lazy"
+              decoding="async" alt="Campfire Stay">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Stargazing &amp; Night Life</span>
               <h3 class="act-label">Tent Camping &amp; Bonfire</h3>
@@ -1474,7 +377,8 @@
           </div>
 
           <div class="activity-deck-card" onclick="openBookingModal('Trekking & Waterfalls')">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.39%20AM%20(1).jpeg" alt="Trekking">
+            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.39%20AM%20(1).jpeg"
+              loading="lazy" decoding="async" alt="Trekking">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Nature Trails</span>
               <h3 class="act-label">Trekking &amp; Waterfalls</h3>
@@ -1522,67 +426,6 @@
         </div>
       </section>
 
-      <!-- Traveller Reviews -->
-      <section>
-        <div class="section-portal-header">
-          <div class="portal-heading">
-            <h2>What Our <span>Travellers Say</span></h2>
-            <p>Real experiences and verified reviews from guests who explored Araku with us.</p>
-          </div>
-        </div>
-
-        <div class="testimonial-dash-grid">
-          <div class="review-log-card">
-            <div class="quote-badge-icon"><i class="fa-solid fa-quote-left"></i></div>
-            <p class="review-statement">
-              "Araku Trails planned our family trip with perfection! Borra caves, the picturesque coffee estates, and
-              the resort stay in the valley were mesmerizing. Very polite driver and great food recommendations!"
-            </p>
-            <div class="client-data-box">
-              <img class="client-avatar-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.43.jpeg"
-                alt="Merlyn">
-              <div>
-                <h5 class="client-name-tag">Merlyn &amp; Family</h5>
-                <span class="client-loc-tag">Family Vacation, Hyderabad</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-log-card">
-            <div class="quote-badge-icon"><i class="fa-solid fa-quote-left"></i></div>
-            <p class="review-statement">
-              "The Vanjangi cloud sunrise at 5:30 AM was breathtaking! They arranged the 4x4 jeep safari smoothly.
-              Everything was on schedule without any stress. Highly recommended for couples and adventurers."
-            </p>
-            <div class="client-data-box">
-              <img class="client-avatar-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg"
-                alt="Emmanuel">
-              <div>
-                <h5 class="client-name-tag">Emmanuel &amp; Priya</h5>
-                <span class="client-loc-tag">Couple Tour, Bangalore</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-log-card">
-            <div class="quote-badge-icon"><i class="fa-solid fa-quote-left"></i></div>
-            <p class="review-statement">
-              "Organized our corporate team outing of 35 people from Vizag to Araku. Clean deluxe buses, wonderful
-              tribal
-              dance arrangements, and campfire night. Everyone loved every moment!"
-            </p>
-            <div class="client-data-box">
-              <img class="client-avatar-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg"
-                alt="Yuvi">
-              <div>
-                <h5 class="client-name-tag">Yuvi Kumar</h5>
-                <span class="client-loc-tag">Corporate Lead, Chennai</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- CTA Callout Banner -->
       <section class="dash-callout-panel" id="contact">
         <div class="callout-text">
@@ -1598,14 +441,21 @@
             target="_blank" class="btn-callout-chat">
             <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
           </a>
+          <a href="mailto:krsh2852@gmail.com" class="btn-callout-email">
+            <i class="fa-solid fa-envelope"></i> Email Us
+          </a>
         </div>
       </section>
 
       <!-- Footer Info -->
       <footer class="dash-footer-meta">
-        <div>
-          &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Office: Kurmannapalem,
-          Visakhapatnam, Andhra Pradesh - 530046
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <img src="images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="footer-logo-img" width="32"
+            height="32">
+          <div>
+            &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Office: Kurmannapalem,
+            Visakhapatnam, Andhra Pradesh - 530046
+          </div>
         </div>
         <div class="footer-quick-contacts">
           <a href="tel:+919494177921"><i class="fa-solid fa-phone"></i> +91 9494177921</a>
@@ -1613,35 +463,468 @@
         </div>
       </footer>
 
-    </main>
-  </div>
+    </div>
+  </main>
 
+  <!-- Quick Booking Modal Popup -->
   <!-- Quick Booking Modal Popup -->
   <div class="modal" id="bookingModal">
     <div class="modal-box">
       <button class="modal-close" onclick="closeBookingModal()">&times;</button>
-      <h3 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;"
-        id="modalPackageTitle">Book Your Tour</h3>
-      <p style="color: var(--text-body); font-size: 0.9rem; margin-bottom: 1.5rem;">
-        Fill in your details and our travel representative will call you with custom quotes within 15 minutes.
+      <div id="bookingModalContent">
+        <h3 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;"
+          id="modalPackageTitle">Book Your Tour</h3>
+        <p style="color: var(--text-body); font-size: 0.9rem; margin-bottom: 1.25rem;">
+          Enter your details below. Our travel experts will process your reservation request immediately.
+        </p>
+
+        <div id="bookingModalAlert" style="margin-bottom: 1rem;"></div>
+
+        <form id="bookingModalForm" onsubmit="handleModalSubmit(event)"
+          style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="hidden" id="modalSelectedPackage" value="">
+          <div class="field-wrapper">
+            <label for="modalName"><i class="fa-solid fa-user"></i> Full Name</label>
+            <input type="text" id="modalName" class="dash-input" placeholder="Your Name" required>
+          </div>
+          <div class="field-wrapper">
+            <label for="modalPhone"><i class="fa-solid fa-phone"></i> Mobile / Contact Number</label>
+            <input type="tel" id="modalPhone" class="dash-input" placeholder="+91 9876543210" required>
+          </div>
+          <div class="field-wrapper">
+            <label for="modalDate"><i class="fa-solid fa-calendar"></i> Arrival / Travel Date</label>
+            <input type="date" id="modalDate" class="dash-input" required>
+          </div>
+          <div class="field-wrapper">
+            <label for="modalTourCategory"><i class="fa-solid fa-map-location-dot"></i> Tour Category / Package</label>
+            <select id="modalTourCategory" class="dash-input">
+              <option value="Araku 1-Day Tour">Araku 1-Day Tour</option>
+              <option value="Araku 1N/2D Tour">Araku 1 Night / 2 Days</option>
+              <option value="Vizag & Araku 2N/3D">Vizag &amp; Araku 2N/3D</option>
+              <option value="Vizag, Araku & Lambasingi 3N/4D">Vizag, Araku &amp; Lambasingi 3N/4D</option>
+              <option value="Lambasingi & Vanjangi">Lambasingi &amp; Vanjangi Tour</option>
+              <option value="Couple & Honeymoon">Couple &amp; Honeymoon Tour</option>
+              <option value="Group & Corporate MICE">Group &amp; Corporate MICE</option>
+              <option value="Custom Tailored Tour">Custom Tailored Tour</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-exec-booking" id="btnBookingSubmit" style="margin-top: 0.5rem;">
+            <i class="fa-solid fa-paper-plane"></i> Submit Booking Request
+          </button>
+        </form>
+      </div>
+
+      <!-- Success State Banner Displayed after submission -->
+      <div id="bookingSuccessBox" style="display: none; text-align: center; padding: 1.5rem 0.5rem;">
+        <div
+          style="width: 60px; height: 60px; margin: 0 auto 1.25rem; background: rgba(52, 211, 153, 0.15); border: 2px solid #34d399; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #34d399;">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h3 style="font-family: var(--font-brand); color: #fff; font-size: 1.45rem; margin-bottom: 0.6rem;">Request Sent
+          Successfully!</h3>
+        <p id="bookingSuccessMessage"
+          style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem;">
+          Your request has been sent successfully. Our reservations team has received your application via email and
+          will reach out shortly.
+        </p>
+        <button type="button" class="btn-exec-booking" onclick="closeBookingModal()" style="width: 100%;">
+          <i class="fa-solid fa-check"></i> Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       ADMIN PORTAL MODALS (LOGIN, FORGOT/RESET PW, DASHBOARD, EDIT)
+  ======================================================== -->
+  <!-- 1. Admin Login Modal -->
+  <div class="admin-modal-overlay" id="adminLoginOverlay">
+    <div class="admin-auth-card">
+      <!-- Separate Top Action Bar with Prominent Close Button -->
+      <div class="admin-auth-top-bar">
+        <div class="admin-badge-pill" style="margin-bottom: 0;">
+          <i class="fa-solid fa-lock"></i> Protected Console
+        </div>
+        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminLoginOverlay')"
+          aria-label="Close Admin Console">
+          <i class="fa-solid fa-xmark"></i> <span>Close</span>
+        </button>
+      </div>
+
+      <h3 class="admin-card-title">Admin Sign In</h3>
+      <p class="admin-card-sub">Access Araku Trails reservation dispatch and customer records securely.</p>
+
+      <div id="adminLoginNotice"></div>
+
+      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+        <div class="admin-input-group">
+          <label for="adminUsername"><i class="fa-solid fa-user-shield"></i> User ID / Name</label>
+          <input type="text" id="adminUsername" class="dash-input" placeholder="Enter User ID" autocomplete="username"
+            required>
+        </div>
+        <div class="admin-input-group">
+          <label for="adminPassword"><i class="fa-solid fa-key"></i> Password</label>
+          <div class="admin-password-wrap">
+            <input type="password" id="adminPassword" class="dash-input" placeholder="Enter Password"
+              autocomplete="current-password" required>
+            <button type="button" class="admin-password-toggle"
+              onclick="togglePasswordVisibility('adminPassword', this)" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Console
+        </button>
+        <div style="text-align: center; margin-top: 1.15rem;">
+          <button type="button" class="admin-secondary-link" onclick="openAdminModal('forgot')">
+            Forgot Password?
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. Forgot Password Recovery Choice Modal -->
+  <div class="admin-modal-overlay" id="adminForgotOverlay">
+    <div class="admin-auth-card">
+      <div class="admin-auth-top-bar">
+        <div class="admin-badge-pill" style="margin-bottom: 0;">
+          <i class="fa-solid fa-shield-halved"></i> Account Recovery
+        </div>
+        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminForgotOverlay')"
+          aria-label="Close Admin Recovery">
+          <i class="fa-solid fa-xmark"></i> <span>Close</span>
+        </button>
+      </div>
+      <h3 class="admin-card-title">Forgot Password?</h3>
+      <p class="admin-card-sub">
+        Choose your preferred recovery method below to regain access to your administrator account.
       </p>
 
-      <form onsubmit="handleModalSubmit(event)" style="display: flex; flex-direction: column; gap: 1rem;">
-        <input type="hidden" id="modalSelectedPackage" value="">
-        <div class="field-wrapper">
-          <label for="modalName"><i class="fa-solid fa-user"></i> Full Name</label>
-          <input type="text" id="modalName" class="dash-input" placeholder="Your Name" required>
+      <div id="adminForgotNotice"></div>
+
+      <div class="recovery-choice-grid">
+        <button type="button" class="recovery-option-card" id="btnChooseMailRecovery"
+          onclick="handleSendCredentialsMail()">
+          <div class="recovery-option-icon">
+            <i class="fa-solid fa-paper-plane"></i>
+          </div>
+          <div class="recovery-option-info">
+            <h4>Send Current ID &amp; Password to Mail</h4>
+            <p>Directly sends your running Admin User ID and Password to the registered administrator email.</p>
+          </div>
+        </button>
+
+        <button type="button" class="recovery-option-card" onclick="openAdminModal('sec_question')">
+          <div class="recovery-option-icon">
+            <i class="fa-solid fa-clipboard-question"></i>
+          </div>
+          <div class="recovery-option-info">
+            <h4>Reset by Security Question</h4>
+            <p>Answer your custom security question to set a brand new password immediately.</p>
+          </div>
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.15rem;">
+        <button type="button" class="admin-secondary-link" onclick="openAdminModal('login')">
+          &larr; Back to Sign In
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2B. Reset by Security Question Modal -->
+  <div class="admin-modal-overlay" id="adminSecQuestionOverlay">
+    <div class="admin-auth-card">
+      <div class="admin-auth-top-bar">
+        <div class="admin-badge-pill" style="margin-bottom: 0;">
+          <i class="fa-solid fa-shield-cat"></i> Identity Verification
         </div>
-        <div class="field-wrapper">
-          <label for="modalPhone"><i class="fa-solid fa-phone"></i> Phone / WhatsApp</label>
-          <input type="tel" id="modalPhone" class="dash-input" placeholder="Mobile Number" required>
+        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminSecQuestionOverlay')"
+          aria-label="Close Security Verification">
+          <i class="fa-solid fa-xmark"></i> <span>Close</span>
+        </button>
+      </div>
+      <h3 class="admin-card-title">Security Question Verification</h3>
+      <p class="admin-card-sub">
+        Answer your custom security question correctly to proceed with setting a new password.
+      </p>
+
+      <div id="adminSecQuestionNotice"></div>
+
+      <form id="adminSecQuestionForm" onsubmit="handleVerifySecurityQuestion(event)">
+        <div class="admin-input-group">
+          <label><i class="fa-solid fa-circle-question"></i> Your Registered Security Question</label>
+          <div id="displayRegisteredQuestion"
+            style="background: rgba(16, 28, 23, 0.75); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.88rem; color: #f8fafc; font-weight: 500;">
+            What is your favorite travel destination?
+          </div>
         </div>
-        <div class="field-wrapper">
-          <label for="modalDate"><i class="fa-solid fa-calendar"></i> Travel Date</label>
-          <input type="date" id="modalDate" class="dash-input" required>
+        <div class="admin-input-group">
+          <label for="adminSecAnswerInput"><i class="fa-solid fa-key"></i> Your Security Answer</label>
+          <input type="text" id="adminSecAnswerInput" class="dash-input" placeholder="Enter your secret answer"
+            required>
         </div>
-        <button type="submit" class="btn-exec-booking" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-check-circle"></i> Confirm Booking Request
+        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-circle-check"></i> Verify &amp; Reset Password
+        </button>
+        <div style="text-align: center; margin-top: 1.1rem;">
+          <button type="button" class="admin-secondary-link" onclick="openAdminModal('forgot')">
+            &larr; Back to Recovery Options
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. Password Reset / Change Password Form Modal -->
+  <div class="admin-modal-overlay" id="adminResetOverlay">
+    <div class="admin-auth-card">
+      <div class="admin-auth-top-bar">
+        <div class="admin-badge-pill" style="margin-bottom: 0;">
+          <i class="fa-solid fa-key"></i> <span id="adminResetBadgeTitle">Set New Credentials</span>
+        </div>
+        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminResetOverlay')"
+          aria-label="Close Credentials Modal">
+          <i class="fa-solid fa-xmark"></i> <span>Close</span>
+        </button>
+      </div>
+      <h3 class="admin-card-title" id="adminResetHeading">Update Credentials</h3>
+      <p class="admin-card-sub" id="adminResetSub">Choose your User ID and enter a new password. You can also configure
+        your custom security question below.</p>
+
+      <div id="adminResetNotice"></div>
+
+      <form id="adminResetForm" onsubmit="handleAdminResetSubmit(event)">
+        <div class="admin-input-group">
+          <label for="adminNewUsername"><i class="fa-solid fa-user-tag"></i> Admin User ID</label>
+          <input type="text" id="adminNewUsername" class="dash-input" placeholder="Enter User ID" required>
+        </div>
+        <div class="admin-input-group">
+          <label for="adminNewPassword"><i class="fa-solid fa-lock"></i> New Password</label>
+          <div class="admin-password-wrap">
+            <input type="password" id="adminNewPassword" class="dash-input" placeholder="Enter New Password" required>
+            <button type="button" class="admin-password-toggle"
+              onclick="togglePasswordVisibility('adminNewPassword', this)" aria-label="Toggle password visibility">
+              <i class="fa-solid fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <div class="admin-input-group">
+          <label for="adminConfirmPassword"><i class="fa-solid fa-circle-check"></i> Confirm New Password</label>
+          <input type="password" id="adminConfirmPassword" class="dash-input" placeholder="••••••••••••" required>
+        </div>
+
+        <!-- Custom Security Question Settings -->
+        <div style="margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
+          <div
+            style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--emerald-bright); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">
+            <i class="fa-solid fa-shield-heart"></i> Custom Security Question &amp; Answer
+          </div>
+          <div class="admin-input-group">
+            <label for="adminCustomQuestion"><i class="fa-solid fa-circle-question"></i> Security Question</label>
+            <input type="text" id="adminCustomQuestion" class="dash-input"
+              placeholder="e.g. What is your favorite hill station?" required>
+          </div>
+          <div class="admin-input-group">
+            <label for="adminCustomAnswer"><i class="fa-solid fa-comment-dots"></i> Security Answer</label>
+            <input type="text" id="adminCustomAnswer" class="dash-input" placeholder="e.g. Araku Valley" required>
+          </div>
+        </div>
+
+        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-floppy-disk"></i> Save &amp; Update Credentials
+        </button>
+        <div style="text-align: center; margin-top: 1.1rem;">
+          <button type="button" class="admin-secondary-link" id="adminResetBackLink" onclick="handleResetBackClick()">
+            &larr; Back
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Admin Dashboard Modal (Live Booked Persons Management) -->
+  <div class="admin-modal-overlay" id="adminDashboardOverlay">
+    <div class="admin-dashboard-card">
+
+      <!-- Top Bar -->
+      <div class="admin-dash-head">
+        <div class="admin-dash-head-left">
+          <div class="admin-dash-title">
+            <i class="fa-solid fa-shield-halved" style="color: var(--emerald-bright);"></i>
+            <span>Araku Trails &bull; Reservation Dispatch</span>
+          </div>
+          <span class="admin-badge-pill" style="margin-bottom: 0;">
+            <i class="fa-solid fa-user-check"></i> <span id="adminLoggedAs">Admin</span>
+          </span>
+        </div>
+        <div class="admin-dash-actions">
+          <button type="button" class="admin-pill-btn" onclick="openAdminModal('reset')"
+            title="Change / Update Password">
+            <i class="fa-solid fa-key"></i> Change Password
+          </button>
+          <button type="button" class="admin-pill-btn" onclick="openAddBookingModal()">
+            <i class="fa-solid fa-plus"></i> Add Booking
+          </button>
+          <button type="button" class="admin-pill-btn" onclick="exportBookingsToCSV()">
+            <i class="fa-solid fa-file-csv"></i> Export CSV
+          </button>
+          <button type="button" class="admin-pill-btn danger" onclick="handleAdminLogout()">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+          </button>
+          <button type="button" class="admin-pill-btn close-dash-btn" onclick="closeAdminModal('adminDashboardOverlay')"
+            title="Close Dashboard and Return to Website">
+            <i class="fa-solid fa-xmark"></i> Close
+          </button>
+        </div>
+      </div>
+
+      <!-- Metrics Ribbon -->
+      <div class="admin-metrics-ribbon">
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Total Bookings</div>
+          <div class="admin-stat-val emerald" id="statTotalBookings">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Pending / New</div>
+          <div class="admin-stat-val" id="statNewBookings" style="color: #38bdf8;">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Confirmed</div>
+          <div class="admin-stat-val" id="statConfirmedBookings" style="color: #34d399;">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">WhatsApp Dispatched</div>
+          <div class="admin-stat-val" id="statWhatsappBookings" style="color: #25d366;">0</div>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Bar -->
+      <div class="admin-controls-bar">
+        <div class="admin-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="adminSearchInput" class="admin-search-input"
+            placeholder="Search by name, phone, package, date..." oninput="renderAdminBookingsTable()">
+        </div>
+        <div class="admin-filter-group">
+          <select id="adminStatusFilter" class="admin-filter-select" onchange="renderAdminBookingsTable()">
+            <option value="ALL">All Statuses</option>
+            <option value="New">Status: New</option>
+            <option value="Confirmed">Status: Confirmed</option>
+            <option value="Completed">Status: Completed</option>
+            <option value="Cancelled">Status: Cancelled</option>
+          </select>
+          <select id="adminChannelFilter" class="admin-filter-select" onchange="renderAdminBookingsTable()">
+            <option value="ALL">All Channels</option>
+            <option value="WhatsApp">Channel: WhatsApp</option>
+            <option value="Web Form">Channel: Web Form</option>
+            <option value="Direct Call">Channel: Direct Call</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Table Area -->
+      <div class="admin-table-container">
+        <table class="admin-table" id="adminBookingsTable">
+          <thead>
+            <tr>
+              <th>ID &amp; Date</th>
+              <th>Customer Name</th>
+              <th>Phone / WhatsApp</th>
+              <th>Package / Category</th>
+              <th>Travel Date</th>
+              <th>Channel</th>
+              <th>Status</th>
+              <th>Notes / Remarks</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminBookingsTableBody">
+            <!-- Dynamic rows will render here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Edit / Add Booking Modal -->
+  <div class="admin-modal-overlay" id="adminEditBookingOverlay">
+    <div class="admin-auth-card admin-sub-modal">
+      <button class="admin-modal-close-btn" onclick="closeAdminModal('adminEditBookingOverlay')"
+        aria-label="Close">&times;</button>
+      <div class="admin-badge-pill">
+        <i class="fa-solid fa-pen-to-square"></i> Record Manager
+      </div>
+      <h3 class="admin-card-title" id="adminEditModalTitle">Edit Booking Details</h3>
+      <p class="admin-card-sub">Modify customer booking information, tour category, status, and remarks.</p>
+
+      <form id="adminBookingEditForm" onsubmit="handleSaveBookingRecord(event)">
+        <input type="hidden" id="editBookingId">
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editCustomerName"><i class="fa-solid fa-user"></i> Customer Name</label>
+            <input type="text" id="editCustomerName" class="dash-input" required>
+          </div>
+          <div class="admin-input-group">
+            <label for="editCustomerPhone"><i class="fa-solid fa-phone"></i> Mobile / WhatsApp</label>
+            <input type="tel" id="editCustomerPhone" class="dash-input" required>
+          </div>
+        </div>
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editTravelDate"><i class="fa-solid fa-calendar-day"></i> Travel Date</label>
+            <input type="date" id="editTravelDate" class="dash-input" required>
+          </div>
+          <div class="admin-input-group">
+            <label for="editPackageName"><i class="fa-solid fa-map-location-dot"></i> Tour Package</label>
+            <select id="editPackageName" class="dash-input">
+              <option value="Araku 1-Day Tour">Araku 1-Day Tour</option>
+              <option value="Araku 1N/2D Tour">Araku 1 Night / 2 Days</option>
+              <option value="Vizag & Araku 2N/3D">Vizag &amp; Araku 2N/3D</option>
+              <option value="Lambasingi & Vanjangi">Lambasingi &amp; Vanjangi Tour</option>
+              <option value="Vizag, Araku & Lambasingi 3N/4D">Vizag, Araku &amp; Lambasingi 3N/4D</option>
+              <option value="Hot Air Balloon">Hot Air Balloon</option>
+              <option value="Rope Cycling & Zipline">Rope Cycling &amp; Zipline</option>
+              <option value="Tent Camping & Bonfire">Tent Camping &amp; Bonfire</option>
+              <option value="Trekking & Waterfalls">Trekking &amp; Waterfalls</option>
+              <option value="Custom Valley Tour">Custom Valley Tour</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editBookingStatus"><i class="fa-solid fa-signal"></i> Booking Status</label>
+            <select id="editBookingStatus" class="dash-input">
+              <option value="New">New / Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div class="admin-input-group">
+            <label for="editBookingChannel"><i class="fa-solid fa-share-nodes"></i> Channel</label>
+            <select id="editBookingChannel" class="dash-input">
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Web Form">Web Form</option>
+              <option value="Direct Call">Direct Call</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-input-group">
+          <label for="editBookingNotes"><i class="fa-solid fa-comment-dots"></i> Notes / Hotel &amp; Cab Remarks</label>
+          <textarea id="editBookingNotes" class="dash-input" rows="2" style="resize: vertical;"
+            placeholder="Cab assigned, room booked, special tribal food requests..."></textarea>
+        </div>
+
+        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-floppy-disk"></i> Save Booking Record
         </button>
       </form>
     </div>
@@ -1652,137 +935,1071 @@
     // Set current year
     document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-    // Default min date for inputs to today
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('travelDate').min = today;
-    document.getElementById('modalDate').min = today;
-
-    // Mobile Sidebar Toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const appSidebar = document.getElementById('appSidebar');
-
-    if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        appSidebar.classList.toggle('open');
-      });
-    }
-
-    document.querySelectorAll('.console-nav-item a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelectorAll('.console-nav-item').forEach(item => item.classList.remove('active'));
-        link.parentElement.classList.add('active');
-        if (window.innerWidth <= 1024) {
-          appSidebar.classList.remove('open');
-        }
-      });
+    // Floating Header Scroll Effect
+    const pekoeHeader = document.getElementById('pekoeHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        pekoeHeader.classList.add('scrolled');
+      } else {
+        pekoeHeader.classList.remove('scrolled');
+      }
     });
 
-    // Spotlight Carousel Logic
-    const slides = document.querySelectorAll('.spotlight-slide');
-    const dots = document.querySelectorAll('.spotlight-dot');
+    // Mobile Drawer Controls
+    const pekoeMenuBtn = document.getElementById('pekoeMenuBtn');
+    const pekoeMobileDrawer = document.getElementById('pekoeMobileDrawer');
+
+    function openMobileDrawer() {
+      pekoeMobileDrawer.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileDrawer() {
+      pekoeMobileDrawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    if (pekoeMenuBtn) {
+      pekoeMenuBtn.addEventListener('click', openMobileDrawer);
+    }
+
+    // Live Araku Valley Weather API (Open-Meteo Free API: 18.3273° N, 82.8775° E)
+    async function fetchArakuWeather() {
+      const displayElem = document.getElementById('weatherDisplay');
+      const drawerDisplay = document.getElementById('weatherDrawerDisplay');
+      const iconElem = document.getElementById('weatherIcon');
+      try {
+        const response = await fetch(
+          "https://api.open-meteo.com/v1/forecast?latitude=18.3273&longitude=82.8775&current=temperature_2m,weather_code&timezone=auto"
+        );
+        if (!response.ok) throw new Error("Weather request failed");
+        const data = await response.json();
+        const temp = Math.round(data.current.temperature_2m);
+        const code = data.current.weather_code;
+
+        // Interpret WMO weather codes with generic hill weather tone
+        let condition = "Misty & Pleasant";
+        let iconClass = "fa-cloud-sun";
+        if (code === 0) { condition = "Clear & Pleasant"; iconClass = "fa-sun"; }
+        else if (code === 1 || code === 2) { condition = "Misty & Pleasant"; iconClass = "fa-cloud-sun"; }
+        else if (code === 3) { condition = "Cool & Overcast"; iconClass = "fa-cloud"; }
+        else if (code >= 45 && code <= 48) { condition = "Misty & Foggy"; iconClass = "fa-smog"; }
+        else if (code >= 51 && code <= 67) { condition = "Cool Hill Showers"; iconClass = "fa-cloud-rain"; }
+        else if (code >= 80 && code <= 82) { condition = "Mountain Rain"; iconClass = "fa-cloud-showers-heavy"; }
+        else if (code >= 95) { condition = "Ghat Thunderstorm"; iconClass = "fa-cloud-bolt"; }
+
+        const weatherHTML = `<i class="fa-solid fa-mountain" style="color: var(--emerald-bright);"></i> <span>Eastern Ghats &bull; Valley Trails</span> <span class="status-sep">&bull;</span> <i class="fa-solid ${iconClass}" style="color: var(--amber-star);"></i> <span>Hill Weather: <strong>${condition} (${temp}°C)</strong></span>`;
+        if (displayElem) { displayElem.innerHTML = weatherHTML; }
+        if (drawerDisplay) { drawerDisplay.innerHTML = `Hill Weather: <strong>${condition} (${temp}°C)</strong>`; }
+      } catch (err) {
+        console.log("Weather API fallback:", err);
+      }
+    }
+    fetchArakuWeather();
+
+    // Default min date for inputs to today
+    const today = new Date().toISOString().split('T')[0];
+    const travelDateInput = document.getElementById('travelDate');
+    if (travelDateInput) travelDateInput.min = today;
+    const modalDateInput = document.getElementById('modalDate');
+    if (modalDateInput) modalDateInput.min = today;
+
+    // Pekoe Hero Carousel Logic
+    const slides = document.querySelectorAll('.pekoe-slide');
+    const dots = document.querySelectorAll('.pekoe-dot');
     let currentSlide = 0;
-    const slideHeadlines = [
-      "Discover the Serene Beauty of <span>Araku Valley</span>",
-      "Experience Majestic Sunrises &amp; <span>Vanjangi Clouds</span>",
-      "Stay in Forest Resorts with <span>Bonfire &amp; Dhimsa</span>"
+
+    const slideData = [
+      {
+        eyebrow: "Premier Valley Trails &bull; Eastern Ghats",
+        title: "Discover the Serene Beauty of Araku Valley",
+        desc: "Lush coffee plantations, mist-covered valleys, breathtaking waterfalls, tribal heritage, and thrilling adventure trails await you in Andhra Pradesh's majestic Eastern Ghats."
+      },
+      {
+        eyebrow: "Ocean of Clouds &bull; Vanjangi Ridge (3,400 FT)",
+        title: "Experience Majestic Sunrises & Vanjangi Clouds",
+        desc: "Rise above the endless ocean of morning golden mist at 3,400 ft in Vanjangi Hills, followed by tranquil nature walks through ancient pine valleys and stream crossings."
+      },
+      {
+        eyebrow: "Tribal Heritage &bull; Eco Resorts",
+        title: "Stay in Forest Resorts with Bonfire & Dhimsa",
+        desc: "Immerse in indigenous tribal traditions, lively evening Dhimsa folk dances, bonfire nights under starlit mountain skies, and freshly roasted organic Araku coffee."
+      }
     ];
 
     function setSlide(index) {
+      if (index === currentSlide && slides[currentSlide].classList.contains('active')) return;
       slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('active');
-      currentSlide = index;
+      if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+      currentSlide = (index + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('active');
-      document.getElementById('heroTitle').innerHTML = slideHeadlines[currentSlide];
+      if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+
+      document.getElementById('heroEyebrow').innerHTML = slideData[currentSlide].eyebrow;
+      document.getElementById('heroTitle').innerHTML = slideData[currentSlide].title;
+      document.getElementById('heroDesc').innerHTML = slideData[currentSlide].desc;
     }
 
-    setInterval(() => {
-      let nextIndex = (currentSlide + 1) % slides.length;
-      setSlide(nextIndex);
-    }, 5500);
+    function prevSlide() {
+      setSlide(currentSlide - 1);
+      resetAutoTimer();
+    }
+
+    function nextSlide() {
+      setSlide(currentSlide + 1);
+      resetAutoTimer();
+    }
+
+    // Auto Slide Timer (every 6 seconds)
+    let slideInterval = setInterval(() => {
+      setSlide(currentSlide + 1);
+    }, 6000);
+
+    function resetAutoTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => {
+        setSlide(currentSlide + 1);
+      }, 6000);
+    }
+
+    // Smooth Touch Swipe for Mobile & Tablet
+    const heroSection = document.getElementById('home');
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (heroSection) {
+      heroSection.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      heroSection.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        if (touchStartX - touchEndX > 45) {
+          nextSlide();
+        } else if (touchEndX - touchStartX > 45) {
+          prevSlide();
+        }
+      }, { passive: true });
+    }
 
     // Modal Popup Controls
     const bookingModal = document.getElementById('bookingModal');
     const modalPackageTitle = document.getElementById('modalPackageTitle');
     const modalSelectedPackage = document.getElementById('modalSelectedPackage');
+    const modalTourCategory = document.getElementById('modalTourCategory');
+    const bookingModalContent = document.getElementById('bookingModalContent');
+    const bookingSuccessBox = document.getElementById('bookingSuccessBox');
+    const bookingModalAlert = document.getElementById('bookingModalAlert');
+    const btnBookingSubmit = document.getElementById('btnBookingSubmit');
 
     function openBookingModal(pkgName) {
-      modalPackageTitle.textContent = pkgName ? `Book: ${pkgName}` : "Book Your Tour";
-      modalSelectedPackage.value = pkgName || "General";
-      bookingModal.classList.add('active');
+      if (modalPackageTitle) {
+        modalPackageTitle.textContent = pkgName && pkgName !== 'General' && pkgName !== 'General Booking' ? `Book: ${pkgName}` : "Book Your Tour";
+      }
+      if (modalSelectedPackage) {
+        modalSelectedPackage.value = pkgName || "General Booking";
+      }
+      if (modalTourCategory && pkgName && pkgName !== 'General' && pkgName !== 'General Booking') {
+        // Auto-select matching dropdown option if available
+        for (let i = 0; i < modalTourCategory.options.length; i++) {
+          if (modalTourCategory.options[i].value.toLowerCase().includes(pkgName.toLowerCase()) ||
+            pkgName.toLowerCase().includes(modalTourCategory.options[i].value.toLowerCase())) {
+            modalTourCategory.selectedIndex = i;
+            break;
+          }
+        }
+      }
+      // Reset view to form state
+      if (bookingModalContent) bookingModalContent.style.display = 'block';
+      if (bookingSuccessBox) bookingSuccessBox.style.display = 'none';
+      if (bookingModalAlert) bookingModalAlert.innerHTML = '';
+      if (btnBookingSubmit) {
+        btnBookingSubmit.disabled = false;
+        btnBookingSubmit.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Submit Booking Request`;
+      }
+      if (bookingModal) bookingModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeBookingModal() {
-      bookingModal.classList.remove('active');
+      if (bookingModal) bookingModal.classList.remove('active');
+      document.body.style.overflow = '';
+      const form = document.getElementById('bookingModalForm');
+      if (form) form.reset();
+      if (bookingModalContent) bookingModalContent.style.display = 'block';
+      if (bookingSuccessBox) bookingSuccessBox.style.display = 'none';
+      if (bookingModalAlert) bookingModalAlert.innerHTML = '';
     }
 
-    bookingModal.addEventListener('click', (e) => {
-      if (e.target === bookingModal) {
-        closeBookingModal();
-      }
-    });
+    if (bookingModal) {
+      bookingModal.addEventListener('click', (e) => {
+        if (e.target === bookingModal) {
+          closeBookingModal();
+        }
+      });
+    }
 
     // Form Handling & Notification Forwarding
     async function processBookingNotification(name, mobile, date, packageChoice) {
       const emailRecipient = "krsh2852@gmail.com";
-      const targetPhone = "919494177921";
 
-      const messageContent = `*New Booking Request - Araku Trails*\n\n` +
-        `*Customer Name:* ${name}\n` +
-        `*Mobile Number:* ${mobile}\n` +
-        `*Travel Date:* ${date}\n` +
-        `*Package / Tour:* ${packageChoice}\n\n` +
-        `Submitted via arakutrails.com`;
+      // 1. Immediately record in Admin Booked Persons Database (Web Form Channel, instantly appended to top)
+      saveCustomerBookingRecord({
+        name: name,
+        phone: mobile,
+        date: date,
+        package: packageChoice,
+        channel: "Web Form",
+        status: "New",
+        notes: `Application received via online booking popup for ${packageChoice}`
+      });
 
-      // 1. Send Email Notification directly to krsh2852@gmail.com via form submit
+      // 2. Send Email Notification quickly to krsh2852@gmail.com via AJAX formsubmit with 4-second timeout guarantee
+      const emailPayload = {
+        name: name,
+        phone: mobile,
+        travel_date: date,
+        package: packageChoice,
+        channel: "Web Application Form",
+        _subject: `[Araku Trails Booking] New Customer Request: ${name} (${packageChoice})`,
+        _template: "table"
+      };
+
       try {
-        fetch("https://formsubmit.co/ajax/" + emailRecipient, {
+        const fetchPromise = fetch("https://formsubmit.co/ajax/" + emailRecipient, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(emailPayload)
+        });
+
+        const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 3500));
+        await Promise.race([fetchPromise, timeoutPromise]);
+      } catch (err) {
+        console.log("Email dispatch notice:", err);
+      }
+    }
+
+    async function handleModalSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('modalName').value.trim();
+      const mobile = document.getElementById('modalPhone').value.trim();
+      const date = document.getElementById('modalDate').value;
+      const categorySelect = document.getElementById('modalTourCategory');
+      const selectedPkg = (categorySelect && categorySelect.value) ? categorySelect.value : (modalSelectedPackage.value || "General Tour");
+
+      if (btnBookingSubmit) {
+        btnBookingSubmit.disabled = true;
+        btnBookingSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Sending Request...`;
+      }
+
+      // Process booking: records to admin list immediately and triggers FormSubmit email
+      await processBookingNotification(name, mobile, date, selectedPkg);
+
+      // Show in-popup confirmation view
+      if (bookingModalContent) bookingModalContent.style.display = 'none';
+      if (bookingSuccessBox) {
+        const msgEl = document.getElementById('bookingSuccessMessage');
+        if (msgEl) {
+          msgEl.innerHTML = `Thank you, <strong>${name}</strong>! Your request for <strong>${selectedPkg}</strong> on <strong>${date}</strong> has been sent successfully. Our reservations team has received your application and will contact you directly on <strong>${mobile}</strong> shortly.`;
+        }
+        bookingSuccessBox.style.display = 'block';
+      }
+
+      e.target.reset();
+    }
+
+    // ========================================================
+    // SECURE ADMIN PORTAL & BOOKED PERSONS MANAGEMENT SYSTEM
+    // ========================================================
+
+    const ADMIN_CREDS_KEY = "araku_admin_creds_v2";
+    const ADMIN_SHADOW_KEY = "araku_admin_shadow_password_v2";
+    const ADMIN_SEC_KEY = "araku_admin_sec_qa_v1";
+    const ADMIN_SESSION_KEY = "araku_admin_session_active";
+    const ADMIN_BOOKINGS_KEY = "araku_booked_records_v1";
+    const RESET_TOKEN_KEY = "araku_active_reset_token";
+    const RESET_RECIPIENT_EMAIL = "krsh2852@gmail.com";
+    const DEFAULT_ADMIN_USER = "ARKT121100";
+    const MASTER_ADMIN_PASS = "Araku@2026##";
+    const DEFAULT_SEC_QUESTION = "What is your favorite travel destination in Araku?";
+    const DEFAULT_SEC_ANSWER = "Araku";
+
+    // Security Question & Answer Storage Helpers
+    function getAdminSecurityQA() {
+      const stored = localStorage.getItem(ADMIN_SEC_KEY);
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.question && parsed.answer) {
+            return parsed;
+          }
+        } catch (e) {
+          console.error("Failed to parse security QA", e);
+        }
+      }
+      const initialQA = {
+        question: DEFAULT_SEC_QUESTION,
+        answer: DEFAULT_SEC_ANSWER
+      };
+      localStorage.setItem(ADMIN_SEC_KEY, JSON.stringify(initialQA));
+      return initialQA;
+    }
+
+    function saveAdminSecurityQA(question, answer) {
+      const qa = {
+        question: question.trim(),
+        answer: answer.trim()
+      };
+      localStorage.setItem(ADMIN_SEC_KEY, JSON.stringify(qa));
+      return qa;
+    }
+
+    // 1. Initialize & Retrieve Credentials securely with hidden password storage
+    function getAdminCredentials() {
+      // First check active credentials from local storage
+      const stored = localStorage.getItem(ADMIN_CREDS_KEY);
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored);
+          if (parsed && parsed.username && parsed.password) {
+            // Check if there is an updated hidden/shadow password to synchronize
+            const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY);
+            if (shadowPass && shadowPass.trim() && shadowPass !== parsed.password) {
+              parsed.password = shadowPass.trim();
+              localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(parsed));
+            }
+            return parsed;
+          }
+        } catch (e) {
+          console.error("Credentials parse error, checking shadow store", e);
+        }
+      }
+
+      // Check hidden shadow storage if primary key was missing or reset
+      const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY);
+      if (shadowPass && shadowPass.trim()) {
+        const restored = {
+          username: DEFAULT_ADMIN_USER,
+          password: shadowPass.trim(),
+          authorizedEmail: RESET_RECIPIENT_EMAIL,
+          lastUpdated: new Date().toISOString()
+        };
+        localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(restored));
+        return restored;
+      }
+
+      // Initial default setup: first save default password into hidden storage, then into active creds
+      localStorage.setItem(ADMIN_SHADOW_KEY, MASTER_ADMIN_PASS);
+      const initial = {
+        username: DEFAULT_ADMIN_USER,
+        password: MASTER_ADMIN_PASS,
+        authorizedEmail: RESET_RECIPIENT_EMAIL,
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(initial));
+      return initial;
+    }
+
+    // 2. Initial Sample Bookings (Seeds clean realistic data if database empty)
+    function getStoredBookings() {
+      const stored = localStorage.getItem(ADMIN_BOOKINGS_KEY);
+      if (stored) {
+        try {
+          return JSON.parse(stored);
+        } catch (e) {
+          console.error("Corrupt bookings, resetting", e);
+        }
+      }
+      const initialSeeds = [
+        {
+          id: "ARK-B001",
+          name: "Suresh Babu",
+          phone: "+91 9494177921",
+          date: "2026-10-18",
+          package: "Araku 1N/2D Tour",
+          channel: "WhatsApp",
+          status: "Confirmed",
+          notes: "Family of 4, requested Hill view resort and Chaparai stream halt",
+          timestamp: "2026-10-12T10:30:00Z"
+        },
+        {
+          id: "ARK-B002",
+          name: "Dr. Ananya Verma",
+          phone: "+91 9848022334",
+          date: "2026-10-22",
+          package: "Vizag, Araku & Lambasingi 3N/4D",
+          channel: "Web Form",
+          status: "New",
+          notes: "Tent stay at Lambasingi requested with early sunrise trek",
+          timestamp: "2026-10-13T08:15:00Z"
+        },
+        {
+          id: "ARK-B003",
+          name: "Rajesh Kumar",
+          phone: "+91 8886543210",
+          date: "2026-10-15",
+          package: "Araku 1-Day Tour",
+          channel: "WhatsApp",
+          status: "Completed",
+          notes: "AC Sedan cab arranged, Borra caves + Katiki waterfalls trip done",
+          timestamp: "2026-10-11T16:45:00Z"
+        }
+      ];
+      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(initialSeeds));
+      return initialSeeds;
+    }
+
+    function saveCustomerBookingRecord(record) {
+      const bookings = getStoredBookings();
+      const newId = "ARK-B" + String(Date.now()).slice(-4);
+      const newEntry = {
+        id: record.id || newId,
+        name: record.name,
+        phone: record.phone,
+        date: record.date,
+        package: record.package,
+        channel: record.channel || "Web Form",
+        status: record.status || "New",
+        notes: record.notes || "Dispatched via customer inquiry",
+        timestamp: new Date().toISOString()
+      };
+      // Immediately append newly submitted customer details to the top of the list
+      bookings.unshift(newEntry);
+      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
+      renderAdminBookingsTable();
+
+      // Sync booking record to Cloudflare D1
+      fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry)
+      }).catch(err => console.warn('D1 booking sync notice:', err));
+    }
+
+    // Modal Display Management
+    function closeAllAdminModals() {
+      document.querySelectorAll('.admin-modal-overlay').forEach(modal => {
+        modal.classList.remove('active');
+      });
+      document.body.style.overflow = '';
+    }
+
+    function closeAdminModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleResetBackClick() {
+      if (isAdminLoggedIn()) {
+        openAdminModal('dashboard');
+      } else {
+        openAdminModal('login');
+      }
+    }
+
+    function openAdminModal(view) {
+      closeAllAdminModals();
+      document.body.style.overflow = 'hidden';
+
+      if (view === 'login') {
+        if (isAdminLoggedIn()) {
+          openAdminModal('dashboard');
+          return;
+        }
+        document.getElementById('adminLoginNotice').innerHTML = '';
+        document.getElementById('adminLoginForm').reset();
+        document.getElementById('adminLoginOverlay').classList.add('active');
+      } else if (view === 'forgot') {
+        document.getElementById('adminForgotNotice').innerHTML = '';
+        document.getElementById('adminForgotOverlay').classList.add('active');
+      } else if (view === 'sec_question') {
+        document.getElementById('adminSecQuestionNotice').innerHTML = '';
+        document.getElementById('adminSecAnswerInput').value = '';
+        const currentQA = getAdminSecurityQA();
+        const questionDisplay = document.getElementById('displayRegisteredQuestion');
+        if (questionDisplay) {
+          questionDisplay.textContent = currentQA.question || DEFAULT_SEC_QUESTION;
+        }
+        document.getElementById('adminSecQuestionOverlay').classList.add('active');
+      } else if (view === 'reset') {
+        document.getElementById('adminResetNotice').innerHTML = '';
+        const creds = getAdminCredentials();
+        // Prefill currently active User ID so the user ID is preserved by default
+        const usernameInput = document.getElementById('adminNewUsername');
+        if (usernameInput) usernameInput.value = creds.username || DEFAULT_ADMIN_USER;
+
+        const passInput = document.getElementById('adminNewPassword');
+        if (passInput) passInput.value = '';
+        const confirmInput = document.getElementById('adminConfirmPassword');
+        if (confirmInput) confirmInput.value = '';
+
+        // Prefill custom security question and answer
+        const currentQA = getAdminSecurityQA();
+        const customQInput = document.getElementById('adminCustomQuestion');
+        if (customQInput) customQInput.value = currentQA.question || DEFAULT_SEC_QUESTION;
+        const customAInput = document.getElementById('adminCustomAnswer');
+        if (customAInput) customAInput.value = currentQA.answer || DEFAULT_SEC_ANSWER;
+
+        // Context-aware labels depending on whether logged in or resetting via link
+        const badgeEl = document.getElementById('adminResetBadgeTitle');
+        const headingEl = document.getElementById('adminResetHeading');
+        const subEl = document.getElementById('adminResetSub');
+        const backBtn = document.getElementById('adminResetBackLink');
+
+        if (isAdminLoggedIn()) {
+          if (badgeEl) badgeEl.textContent = 'Account Security';
+          if (headingEl) headingEl.textContent = 'Change Admin Password';
+          if (subEl) subEl.textContent = 'Update your login password and manage your custom security question. Your active User ID remains unchanged unless you choose to edit it.';
+          if (backBtn) backBtn.innerHTML = '&larr; Back to Dashboard';
+        } else {
+          if (badgeEl) badgeEl.textContent = 'Reset Password';
+          if (headingEl) headingEl.textContent = 'Create New Password';
+          if (subEl) subEl.textContent = 'Set your new password to replace your previous password and configure your custom security question. Your User ID will remain active.';
+          if (backBtn) backBtn.innerHTML = '&larr; Back to Sign In';
+        }
+
+        document.getElementById('adminResetOverlay').classList.add('active');
+      } else if (view === 'dashboard') {
+        if (!isAdminLoggedIn()) {
+          openAdminModal('login');
+          return;
+        }
+        const creds = getAdminCredentials();
+        document.getElementById('adminLoggedAs').textContent = creds.username;
+        renderAdminBookingsTable();
+        document.getElementById('adminDashboardOverlay').classList.add('active');
+      }
+    }
+
+    // Close on backdrop click
+    document.querySelectorAll('.admin-modal-overlay').forEach(overlay => {
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+    });
+
+    // Password visibility toggle
+    function togglePasswordVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+      } else {
+        input.type = 'password';
+        btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+      }
+    }
+
+    function isAdminLoggedIn() {
+      return sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
+    }
+
+    // Rate Limiting & Failed Login Protection
+    let failedLoginAttempts = 0;
+    let lockUntilTimestamp = 0;
+
+    async function handleAdminLogin(e) {
+      e.preventDefault();
+      const notice = document.getElementById('adminLoginNotice');
+      notice.innerHTML = '';
+
+      const now = Date.now();
+      if (now < lockUntilTimestamp) {
+        const remainingSec = Math.ceil((lockUntilTimestamp - now) / 1000);
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-triangle-exclamation"></i> Security Lock: Too many failed attempts. Try again in ${remainingSec}s.</div>`;
+        return;
+      }
+
+      const userInput = document.getElementById('adminUsername').value.trim();
+      const passInput = document.getElementById('adminPassword').value;
+
+      // Try authenticating with Cloudflare D1 API endpoint first
+      let cloudflareSuccess = false;
+      try {
+        const res = await fetch('/api/admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', username: userInput, password: passInput })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          cloudflareSuccess = true;
+          sessionStorage.setItem('araku_d1_token', data.token);
+          if (data.username) {
+            localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify({
+              username: data.username,
+              password: passInput,
+              authorizedEmail: data.authorizedEmail || RESET_RECIPIENT_EMAIL,
+              lastUpdated: new Date().toISOString()
+            }));
+          }
+        }
+      } catch (err) {
+        console.warn('Cloudflare D1 endpoint offline or not bound, using local credentials fallback:', err);
+      }
+
+      const creds = getAdminCredentials();
+      const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY) || creds.password;
+
+      // Verify username matches and password matches
+      const isUserMatch = userInput.toLowerCase() === creds.username.toLowerCase();
+      const isPassMatch = (passInput === creds.password) || (passInput === shadowPass);
+
+      if (cloudflareSuccess || (isUserMatch && isPassMatch)) {
+        // Guarantee synchronization for future logins
+        if (creds.password !== passInput) {
+          creds.password = passInput;
+          localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(creds));
+        }
+        localStorage.setItem(ADMIN_SHADOW_KEY, passInput);
+
+        failedLoginAttempts = 0;
+        sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Sign in successful! Loading security console...</div>`;
+        setTimeout(() => {
+          openAdminModal('dashboard');
+        }, 400);
+      } else {
+        failedLoginAttempts++;
+        if (failedLoginAttempts >= 5) {
+          lockUntilTimestamp = Date.now() + 30000; // 30 sec lock
+          notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-shield-virus"></i> 5 invalid attempts. Account temporarily locked for 30 seconds.</div>`;
+        } else {
+          const attemptsLeft = 5 - failedLoginAttempts;
+          notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Invalid User ID or Password. (${attemptsLeft} attempts remaining)</div>`;
+        }
+      }
+    }
+
+    function handleAdminLogout() {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+      closeAllAdminModals();
+      alert("You have been securely signed out from the Araku Trails Admin Console.");
+    }
+
+    // 1. Direct Mail Dispatch: Sends current running User ID and Password without asking for email input or displaying email ID
+    async function handleSendCredentialsMail() {
+      const notice = document.getElementById('adminForgotNotice');
+      const mailBtn = document.getElementById('btnChooseMailRecovery');
+      if (notice) notice.innerHTML = '';
+
+      const creds = getAdminCredentials();
+      const currentUsername = creds.username || DEFAULT_ADMIN_USER;
+      const currentPassword = creds.password || (localStorage.getItem(ADMIN_SHADOW_KEY) || MASTER_ADMIN_PASS);
+
+      if (mailBtn) {
+        mailBtn.disabled = true;
+        mailBtn.style.opacity = '0.7';
+        mailBtn.style.pointerEvents = 'none';
+      }
+
+      notice.innerHTML = `
+        <div class="admin-alert-box" style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald-bright); color: #ecfdf5; margin-bottom: 1rem;">
+          <i class="fa-solid fa-spinner fa-spin"></i> Dispatching current credentials to registered administrator mailbox...
+        </div>
+      `;
+
+      try {
+        // Send directly to krsh2852@gmail.com with timeout race so UI never hangs
+        const sendPromise = fetch("https://formsubmit.co/ajax/" + RESET_RECIPIENT_EMAIL, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
           },
           body: JSON.stringify({
-            name: name,
-            phone: mobile,
-            travel_date: date,
-            package: packageChoice,
-            _subject: `New Araku Trails Booking: ${name} (${packageChoice})`,
+            _subject: `[Araku Trails Security] Admin Credentials Recovery`,
+            recipient: RESET_RECIPIENT_EMAIL,
+            message: `Requested Araku Trails Admin credentials for current administrator account:`,
+            current_admin_user_id: currentUsername,
+            current_admin_password: currentPassword,
+            dispatched_at: new Date().toLocaleString(),
             _template: "table"
           })
-        }).catch(err => console.log("Email dispatch notice:", err));
+        });
+
+        const timeoutPromise = new Promise(resolve => setTimeout(resolve, 3800));
+        await Promise.race([sendPromise, timeoutPromise]);
       } catch (err) {
-        console.log("Email dispatch notice:", err);
+        console.log("Credentials mail dispatch status:", err);
       }
 
-      // 2. Open WhatsApp Message to +91 9494177921
-      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(messageContent)}`;
-      window.open(whatsappUrl, "_blank");
+      if (mailBtn) {
+        mailBtn.disabled = false;
+        mailBtn.style.opacity = '1';
+        mailBtn.style.pointerEvents = 'auto';
+      }
+
+      // Strictly without showing the email address on screen
+      notice.innerHTML = `
+        <div class="admin-alert-box admin-alert-success" style="flex-direction: column; align-items: flex-start; gap: 0.45rem; margin-bottom: 1rem;">
+          <div><i class="fa-solid fa-circle-check"></i> <strong>Credentials Sent Successfully!</strong></div>
+          <div style="font-size: 0.83rem; color: #cbd5e1; line-height: 1.5;">
+            Your currently running Admin User ID and Password have been dispatched directly to the registered administrator email address. Please check your inbox.
+          </div>
+        </div>
+      `;
     }
 
-    async function handleBookingSubmit(e) {
+    // 2. Verify Security Question & Proceed to Reset
+    function handleVerifySecurityQuestion(e) {
       e.preventDefault();
-      const name = document.getElementById('travelName').value;
-      const mobile = document.getElementById('travelMobile').value;
-      const date = document.getElementById('travelDate').value;
-      const type = document.getElementById('travelType').value;
+      const answerInput = (document.getElementById('adminSecAnswerInput').value || '').trim();
+      const notice = document.getElementById('adminSecQuestionNotice');
+      notice.innerHTML = '';
 
-      await processBookingNotification(name, mobile, date, type);
-      alert(`Thank you, ${name}! Your booking request for "${type}" on ${date} has been sent to our team. An email and mobile message have been dispatched.`);
-      e.target.reset();
+      const currentQA = getAdminSecurityQA();
+      const expectedAnswer = (currentQA.answer || DEFAULT_SEC_ANSWER).trim();
+
+      if (answerInput.toLowerCase() === expectedAnswer.toLowerCase()) {
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Security verification successful! Opening password reset...</div>`;
+        setTimeout(() => {
+          openAdminModal('reset');
+        }, 600);
+      } else {
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Incorrect security answer. Please check and try again.</div>`;
+      }
     }
 
-    async function handleModalSubmit(e) {
+    // Handle Reset / Change Password Submission (Replaces previous password, preserves User ID, excludes master password, updates custom security question)
+    function handleAdminResetSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('modalName').value;
-      const mobile = document.getElementById('modalPhone').value;
-      const date = document.getElementById('modalDate').value;
-      const pkg = modalSelectedPackage.value;
+      const currentCreds = getAdminCredentials();
+      const userInput = document.getElementById('adminNewUsername').value.trim();
+      // Keep old/existing user ID if input is empty or matches previous ID
+      const targetUsername = userInput || currentCreds.username || DEFAULT_ADMIN_USER;
+      const newPassword = document.getElementById('adminNewPassword').value;
+      const confirmPassword = document.getElementById('adminConfirmPassword').value;
+      const customQ = (document.getElementById('adminCustomQuestion').value || '').trim();
+      const customA = (document.getElementById('adminCustomAnswer').value || '').trim();
+      const notice = document.getElementById('adminResetNotice');
+      notice.innerHTML = '';
 
-      await processBookingNotification(name, mobile, date, pkg);
-      alert(`Thank you, ${name}! Your booking request for "${pkg}" on ${date} has been sent to our team. An email and mobile message have been dispatched.`);
-      closeBookingModal();
-      e.target.reset();
+      if (newPassword.length < 6) {
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Password must be at least 6 characters long.</div>`;
+        return;
+      }
+
+      if (newPassword !== confirmPassword) {
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match.</div>`;
+        return;
+      }
+
+      // Security requirement: New password must replace old password and exclude the original master password
+      if (newPassword === MASTER_ADMIN_PASS) {
+        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-triangle-exclamation"></i> Security policy: You cannot reuse the initial Master Password (${MASTER_ADMIN_PASS}). Please enter a unique new password.</div>`;
+        return;
+      }
+
+      // 1. Rewrite and update the hidden shadow password with the newly chosen password
+      localStorage.setItem(ADMIN_SHADOW_KEY, newPassword);
+
+      // 2. Rewrite active credentials for future logins, keeping User ID consistent
+      const updatedCreds = {
+        username: targetUsername,
+        password: newPassword,
+        authorizedEmail: RESET_RECIPIENT_EMAIL,
+        lastUpdated: new Date().toISOString()
+      };
+      localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(updatedCreds));
+
+      // 3. Save custom security question and answer if provided
+      if (customQ && customA) {
+        saveAdminSecurityQA(customQ, customA);
+      }
+
+      // 4. Sync new credentials to Cloudflare D1 database
+      const activeToken = sessionStorage.getItem('araku_d1_token');
+      if (activeToken) {
+        fetch('/api/admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_credentials',
+            token: activeToken,
+            newUsername: targetUsername,
+            newPassword: newPassword,
+            customQuestion: customQ,
+            customAnswer: customA
+          })
+        }).catch(err => console.warn('D1 sync warning:', err));
+      }
+
+      const isSessionLive = isAdminLoggedIn();
+      notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Credentials &amp; security question updated successfully! Applying changes...</div>`;
+
+      setTimeout(() => {
+        if (isSessionLive) {
+          // If changed from top bar inside dashboard, return straight to dashboard with success feedback
+          openAdminModal('dashboard');
+        } else {
+          // If reset via recovery flow, populate and open sign in
+          document.getElementById('adminUsername').value = targetUsername;
+          document.getElementById('adminPassword').value = '';
+          if (window.location.hash === '#reset-password') {
+            history.replaceState(null, null, window.location.pathname);
+          }
+          openAdminModal('login');
+        }
+      }, 1400);
+    }
+
+    // Auto-detect Admin Access Route (https://arakutrails.com/admin121100 or hash/query) & Reset Link in URL
+    function checkAdminUrlRoutes() {
+      const path = (window.location.pathname || '').toLowerCase();
+      const hash = (window.location.hash || '').toLowerCase();
+      const search = (window.location.search || '').toLowerCase();
+
+      // Dedicated Admin URL route: https://arakutrails.com/admin121100, /#admin121100, or ?admin121100
+      if (path.includes('admin121100') || hash === '#admin121100' || search.includes('admin121100')) {
+        if (isAdminLoggedIn()) {
+          openAdminModal('dashboard');
+        } else {
+          openAdminModal('login');
+        }
+        return;
+      }
+
+      // Password reset trigger from email link click: prefill existing user ID and open reset view
+      if (hash === '#reset-password') {
+        openAdminModal('reset');
+      }
+    }
+    window.addEventListener('DOMContentLoaded', checkAdminUrlRoutes);
+    window.addEventListener('hashchange', checkAdminUrlRoutes);
+
+    // --------------------------------------------------------
+    // BOOKED PERSONS MANAGEMENT (EDITABLE MENU, METRICS, SEARCH)
+    // --------------------------------------------------------
+
+    function renderAdminBookingsTable() {
+      const tbody = document.getElementById('adminBookingsTableBody');
+      if (!tbody) return;
+
+      const bookings = getStoredBookings();
+      const searchQuery = (document.getElementById('adminSearchInput').value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('adminStatusFilter').value;
+      const channelFilter = document.getElementById('adminChannelFilter').value;
+
+      // Update metric ribbons
+      const totalCount = bookings.length;
+      const newCount = bookings.filter(b => b.status === 'New').length;
+      const confCount = bookings.filter(b => b.status === 'Confirmed').length;
+      const waCount = bookings.filter(b => b.channel === 'WhatsApp').length;
+
+      document.getElementById('statTotalBookings').textContent = totalCount;
+      document.getElementById('statNewBookings').textContent = newCount;
+      document.getElementById('statConfirmedBookings').textContent = confCount;
+      document.getElementById('statWhatsappBookings').textContent = waCount;
+
+      // Filter rows
+      const filtered = bookings.filter(b => {
+        const matchesStatus = (statusFilter === 'ALL' || b.status === statusFilter);
+        const matchesChannel = (channelFilter === 'ALL' || b.channel === channelFilter);
+        const matchesSearch = !searchQuery ||
+          b.name.toLowerCase().includes(searchQuery) ||
+          b.phone.toLowerCase().includes(searchQuery) ||
+          b.package.toLowerCase().includes(searchQuery) ||
+          b.date.toLowerCase().includes(searchQuery) ||
+          (b.notes && b.notes.toLowerCase().includes(searchQuery));
+        return matchesStatus && matchesChannel && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="admin-table-empty">
+                <i class="fa-solid fa-inbox"></i>
+                <div>No bookings match your current filter or search criteria.</div>
+              </div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(b => {
+        const statusClass = b.status.toLowerCase();
+        const channelClass = b.channel === 'WhatsApp' ? 'whatsapp' : 'web';
+        const channelIcon = b.channel === 'WhatsApp' ? 'fa-brands fa-whatsapp' : 'fa-solid fa-globe';
+        const cleanPhone = b.phone.replace(/[^0-9]/g, '');
+
+        return `
+          <tr>
+            <td>
+              <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--emerald-bright); font-weight: 600;">${b.id}</div>
+              <div style="font-size: 0.72rem; color: #64748b;">${new Date(b.timestamp || Date.now()).toLocaleDateString()}</div>
+            </td>
+            <td>
+              <strong style="color: #f8fafc;">${escapeHtml(b.name)}</strong>
+            </td>
+            <td>
+              <a href="tel:${cleanPhone}" style="color: #cbd5e1; text-decoration: none;">${escapeHtml(b.phone)}</a>
+            </td>
+            <td>
+              <span style="color: #e2e8f0; font-weight: 500;">${escapeHtml(b.package)}</span>
+            </td>
+            <td>
+              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #cbd5e1;"><i class="fa-regular fa-calendar" style="color: var(--emerald-bright); margin-right: 4px;"></i>${b.date}</span>
+            </td>
+            <td>
+              <span class="channel-chip ${channelClass}">
+                <i class="${channelIcon}"></i> ${escapeHtml(b.channel)}
+              </span>
+            </td>
+            <td>
+              <span class="status-chip ${statusClass}">${escapeHtml(b.status)}</span>
+            </td>
+            <td>
+              <div style="max-width: 200px; font-size: 0.78rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(b.notes || '')}">
+                ${escapeHtml(b.notes || '—')}
+              </div>
+            </td>
+            <td>
+              <div class="admin-actions-cell" style="justify-content: flex-end;">
+                <button type="button" class="action-icon-btn whatsapp" title="Chat on WhatsApp" onclick="openCustomerWhatsApp('${escapeHtml(b.phone)}', '${escapeHtml(b.name)}', '${escapeHtml(b.package)}')">
+                  <i class="fa-brands fa-whatsapp"></i>
+                </button>
+                <button type="button" class="action-icon-btn" title="Edit Booking Details" onclick="openEditBookingModal('${b.id}')">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+                <button type="button" class="action-icon-btn delete" title="Delete Booking" onclick="deleteBookingRecord('${b.id}')">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function openCustomerWhatsApp(phone, name, pkg) {
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      const msg = `Hello ${name}, greetings from Araku Trails! We are following up regarding your booking request for "${pkg}". How can we assist you with cab details, hotel stays, or itinerary adjustments?`;
+      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    function openAddBookingModal() {
+      document.getElementById('adminBookingEditForm').reset();
+      document.getElementById('editBookingId').value = '';
+      document.getElementById('adminEditModalTitle').textContent = "Add New Booking";
+      document.getElementById('editTravelDate').value = new Date().toISOString().split('T')[0];
+      document.getElementById('adminEditBookingOverlay').classList.add('active');
+    }
+
+    function openEditBookingModal(bookingId) {
+      const bookings = getStoredBookings();
+      const record = bookings.find(b => b.id === bookingId);
+      if (!record) return;
+
+      document.getElementById('editBookingId').value = record.id;
+      document.getElementById('editCustomerName').value = record.name;
+      document.getElementById('editCustomerPhone').value = record.phone;
+      document.getElementById('editTravelDate').value = record.date;
+      document.getElementById('editPackageName').value = record.package;
+      document.getElementById('editBookingStatus').value = record.status;
+      document.getElementById('editBookingChannel').value = record.channel;
+      document.getElementById('editBookingNotes').value = record.notes || '';
+
+      document.getElementById('adminEditModalTitle').textContent = `Edit Booking: ${record.id}`;
+      document.getElementById('adminEditBookingOverlay').classList.add('active');
+    }
+
+    function handleSaveBookingRecord(e) {
+      e.preventDefault();
+      const id = document.getElementById('editBookingId').value;
+      const bookings = getStoredBookings();
+
+      const recordData = {
+        name: document.getElementById('editCustomerName').value.trim(),
+        phone: document.getElementById('editCustomerPhone').value.trim(),
+        date: document.getElementById('editTravelDate').value,
+        package: document.getElementById('editPackageName').value,
+        status: document.getElementById('editBookingStatus').value,
+        channel: document.getElementById('editBookingChannel').value,
+        notes: document.getElementById('editBookingNotes').value.trim()
+      };
+
+      if (id) {
+        // Update existing
+        const idx = bookings.findIndex(b => b.id === id);
+        if (idx !== -1) {
+          bookings[idx] = {
+            ...bookings[idx],
+            ...recordData,
+            updatedAt: new Date().toISOString()
+          };
+        }
+      } else {
+        // Add new
+        const newId = "ARK-B" + String(Date.now()).slice(-4);
+        bookings.unshift({
+          id: newId,
+          ...recordData,
+          timestamp: new Date().toISOString()
+        });
+      }
+
+      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
+      closeAdminModal('adminEditBookingOverlay');
+      renderAdminBookingsTable();
+    }
+
+    function deleteBookingRecord(bookingId) {
+      if (!confirm(`Are you sure you want to delete booking ${bookingId}? This cannot be undone.`)) return;
+      let bookings = getStoredBookings();
+      bookings = bookings.filter(b => b.id !== bookingId);
+      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
+      renderAdminBookingsTable();
+    }
+
+    // Export Booked Persons List to CSV File
+    function exportBookingsToCSV() {
+      const bookings = getStoredBookings();
+      if (!bookings.length) {
+        alert("No bookings to export.");
+        return;
+      }
+      const headers = ["Booking ID", "Customer Name", "Phone", "Package", "Travel Date", "Channel", "Status", "Notes", "Created At"];
+      const rows = bookings.map(b => [
+        `"${b.id}"`,
+        `"${(b.name || '').replace(/"/g, '""')}"`,
+        `"${(b.phone || '').replace(/"/g, '""')}"`,
+        `"${(b.package || '').replace(/"/g, '""')}"`,
+        `"${b.date}"`,
+        `"${b.channel}"`,
+        `"${b.status}"`,
+        `"${(b.notes || '').replace(/"/g, '""')}"`,
+        `"${b.timestamp || ''}"`
+      ]);
+
+      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", `araku_trails_bookings_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   </script>
 </body>

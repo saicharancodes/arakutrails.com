@@ -40,3 +40,4 @@
 - **Preserve Existing Content & Links**: Retain existing copy, guide trails, contact links, and styling; enhance incrementally rather than wiping existing sections.
 - **Path Resolution**: Use clean relative paths (e.g., `./images/...` or `/images/...`) compatible with Cloudflare Pages hosting.
 - **Documentation Integrity**: When updating features, keep documentation and comments synchronized.
+###test
