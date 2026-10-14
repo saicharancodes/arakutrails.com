@@ -1370,6 +1370,13 @@
       bookings.unshift(newEntry);
       localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
       renderAdminBookingsTable();
+
+      // Sync booking record to Cloudflare D1
+      fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEntry)
+      }).catch(err => console.warn('D1 booking sync notice:', err));
     }
 
     // Modal Display Management
@@ -1499,7 +1506,7 @@
     let failedLoginAttempts = 0;
     let lockUntilTimestamp = 0;
 
-    function handleAdminLogin(e) {
+    async function handleAdminLogin(e) {
       e.preventDefault();
       const notice = document.getElementById('adminLoginNotice');
       notice.innerHTML = '';
@@ -1514,14 +1521,39 @@
       const userInput = document.getElementById('adminUsername').value.trim();
       const passInput = document.getElementById('adminPassword').value;
 
+      // Try authenticating with Cloudflare D1 API endpoint first
+      let cloudflareSuccess = false;
+      try {
+        const res = await fetch('/api/admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'login', username: userInput, password: passInput })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          cloudflareSuccess = true;
+          sessionStorage.setItem('araku_d1_token', data.token);
+          if (data.username) {
+            localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify({
+              username: data.username,
+              password: passInput,
+              authorizedEmail: data.authorizedEmail || RESET_RECIPIENT_EMAIL,
+              lastUpdated: new Date().toISOString()
+            }));
+          }
+        }
+      } catch (err) {
+        console.warn('Cloudflare D1 endpoint offline or not bound, using local credentials fallback:', err);
+      }
+
       const creds = getAdminCredentials();
       const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY) || creds.password;
 
-      // Verify username matches and password matches the latest updated/rewritten password
+      // Verify username matches and password matches
       const isUserMatch = userInput.toLowerCase() === creds.username.toLowerCase();
       const isPassMatch = (passInput === creds.password) || (passInput === shadowPass);
 
-      if (isUserMatch && isPassMatch) {
+      if (cloudflareSuccess || (isUserMatch && isPassMatch)) {
         // Guarantee synchronization for future logins
         if (creds.password !== passInput) {
           creds.password = passInput;
@@ -1682,6 +1714,23 @@
       // 3. Save custom security question and answer if provided
       if (customQ && customA) {
         saveAdminSecurityQA(customQ, customA);
+      }
+
+      // 4. Sync new credentials to Cloudflare D1 database
+      const activeToken = sessionStorage.getItem('araku_d1_token');
+      if (activeToken) {
+        fetch('/api/admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'update_credentials',
+            token: activeToken,
+            newUsername: targetUsername,
+            newPassword: newPassword,
+            customQuestion: customQ,
+            customAnswer: customA
+          })
+        }).catch(err => console.warn('D1 sync warning:', err));
       }
 
       const isSessionLive = isAdminLoggedIn();
