@@ -2,6 +2,9 @@ name = "arakutrails-com"
 compatibility_date = "2026-10-12"
 pages_build_output_dir = "."
 
+[assets]
+directory = "."
+
 [[d1_databases]]
 binding = "DB"
 database_name = "arakutrails-db"
