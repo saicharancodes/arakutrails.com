@@ -1,0 +1,13 @@
+# Normalize .html extensions to extensionless canonical URLs
+/araku-1-day-tour.html                   /araku-1-day-tour                   301
+/araku-1n-2d-tour.html                   /araku-1n-2d-tour                   301
+/vizag-araku-2n-3d-tour.html             /vizag-araku-2n-3d-tour             301
+/vizag-araku-lambasingi-3n-4d-tour.html  /vizag-araku-lambasingi-3n-4d-tour  301
+/privacy-policy.html                     /privacy-policy                     301
+
+# Clean internal routing
+/araku-1-day-tour                        /araku-1-day-tour.html              200
+/araku-1n-2d-tour                        /araku-1n-2d-tour.html              200
+/vizag-araku-2n-3d-tour                  /vizag-araku-2n-3d-tour.html        200
+/vizag-araku-lambasingi-3n-4d-tour       /vizag-araku-lambasingi-3n-4d-tour  200
+/privacy-policy                          /privacy-policy.html                200

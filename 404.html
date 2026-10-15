@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found (404) — Araku Trails</title>
+  <meta name="robots" content="noindex, follow">
+  <link rel="stylesheet" href="css/style.css?v=3.1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta name="theme-color" content="#10b981">
+  <style>
+    body {
+      background-color: var(--shell-bg);
+      color: var(--text-bright);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .not-found-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .not-found-card {
+      max-width: 580px;
+      width: 100%;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+    }
+    .not-found-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      color: #f87171;
+      padding: 0.4rem 0.9rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .not-found-title {
+      font-size: 2.25rem;
+      color: var(--text-heading);
+      margin-bottom: 0.75rem;
+      font-family: var(--font-brand);
+    }
+    .not-found-desc {
+      color: var(--text-body);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .not-found-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .not-found-btn {
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .not-found-btn-primary {
+      background: linear-gradient(135deg, var(--emerald-glow), #059669);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35);
+    }
+    .not-found-btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+      transform: translateY(-2px);
+    }
+    .not-found-btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--panel-border);
+      color: var(--text-bright);
+    }
+    .not-found-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <header style="padding: 1.25rem 2rem; border-bottom: 1px solid var(--panel-border); background: var(--sidebar-bg);">
+    <a href="/" style="display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none;">
+      <img src="images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="38" height="38" style="border-radius: 50%;">
+      <span style="font-size: 1.25rem; font-weight: 700; color: #fff; font-family: var(--font-brand);">Araku <span style="color: var(--emerald-bright);">Trails</span></span>
+    </a>
+  </header>
+
+  <main class="not-found-wrap">
+    <div class="not-found-card">
+      <div class="not-found-badge">
+        <i class="fa-solid fa-triangle-exclamation"></i> Error 404
+      </div>
+      <h1 class="not-found-title">Trail Not Found</h1>
+      <p class="not-found-desc">
+        The hill trail or tour page you are looking for has either moved, had its name changed, or vanished into the Eastern Ghats morning mist.
+      </p>
+      <div class="not-found-actions">
+        <a href="/" class="not-found-btn not-found-btn-primary">
+          <i class="fa-solid fa-compass"></i> Return to Main Trails
+        </a>
+        <a href="https://wa.me/919494177921?text=Hello%20Araku%20Trails,%20I%20hit%20a%20missing%20page%20and%20need%20help"
+          target="_blank" rel="noopener noreferrer" class="not-found-btn not-found-btn-secondary">
+          <i class="fa-brands fa-whatsapp"></i> Chat with Guide
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 1.5rem; color: var(--text-body); font-size: 0.85rem; border-top: 1px solid var(--panel-border);">
+    &copy; 2026 <strong>arakutrails.com</strong> &bull; Kurmannapalem, Visakhapatnam, Andhra Pradesh
+  </footer>
+</body>
+</html>

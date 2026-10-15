@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Dashboard — Araku Trails</title>
+  <link rel="stylesheet" href="../css/style.css?v=3.1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    body {
+      background-color: var(--shell-bg);
+      color: var(--text-bright);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-standalone-wrapper {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+      width: 100%;
+      flex: 1;
+    }
+    .admin-standalone-card {
+      background: var(--sidebar-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.45);
+    }
+    .loading-notice {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-body);
+      font-size: 0.95rem;
+    }
+    .status-badge-err {
+      color: #ef4444;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 1rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-standalone-wrapper">
+    <div class="admin-standalone-card">
+      <div id="adminNoticeBox" class="status-badge-err"></div>
+
+      <!-- Top Bar -->
+      <div class="admin-dash-head">
+        <div class="admin-dash-head-left">
+          <div class="admin-dash-title">
+            <i class="fa-solid fa-shield-halved" style="color: var(--emerald-bright);"></i>
+            <span>Araku Trails &bull; Reservation Dispatch</span>
+          </div>
+          <span class="admin-badge-pill" style="margin-bottom: 0;">
+            <i class="fa-solid fa-user-check"></i> <span id="adminLoggedAs">Admin (Access Protected)</span>
+          </span>
+        </div>
+        <div class="admin-dash-actions">
+          <button type="button" class="admin-pill-btn" id="btnAddBooking">
+            <i class="fa-solid fa-plus"></i> Add Booking
+          </button>
+          <button type="button" class="admin-pill-btn" id="btnExportCSV">
+            <i class="fa-solid fa-file-csv"></i> Export CSV
+          </button>
+          <a href="/" class="admin-pill-btn close-dash-btn" title="Return to Website">
+            <i class="fa-solid fa-arrow-left"></i> Main Site
+          </a>
+        </div>
+      </div>
+
+      <!-- Metrics Ribbon -->
+      <div class="admin-metrics-ribbon">
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Total Bookings</div>
+          <div class="admin-stat-val emerald" id="statTotalBookings">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Pending / New</div>
+          <div class="admin-stat-val" id="statNewBookings" style="color: #38bdf8;">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Confirmed</div>
+          <div class="admin-stat-val" id="statConfirmedBookings" style="color: #34d399;">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">WhatsApp Dispatched</div>
+          <div class="admin-stat-val" id="statWhatsappBookings" style="color: #25d366;">0</div>
+        </div>
+      </div>
+
+      <!-- Controls & Filter Bar -->
+      <div class="admin-controls-bar">
+        <div class="admin-search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="adminSearchInput" class="admin-search-input"
+            placeholder="Search by name, phone, package, date...">
+        </div>
+        <div class="admin-filter-group">
+          <select id="adminStatusFilter" class="admin-filter-select">
+            <option value="ALL">All Statuses</option>
+            <option value="New">Status: New</option>
+            <option value="Confirmed">Status: Confirmed</option>
+            <option value="Completed">Status: Completed</option>
+            <option value="Cancelled">Status: Cancelled</option>
+          </select>
+          <select id="adminChannelFilter" class="admin-filter-select">
+            <option value="ALL">All Channels</option>
+            <option value="WhatsApp">Channel: WhatsApp</option>
+            <option value="Web Form">Channel: Web Form</option>
+            <option value="Direct Call">Channel: Direct Call</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Table Area -->
+      <div class="admin-table-container">
+        <table class="admin-table" id="adminBookingsTable">
+          <thead>
+            <tr>
+              <th>ID &amp; Date</th>
+              <th>Customer Name</th>
+              <th>Phone / WhatsApp</th>
+              <th>Package / Category</th>
+              <th>Travel Date</th>
+              <th>Channel</th>
+              <th>Status</th>
+              <th>Notes / Remarks</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminBookingsTableBody">
+            <tr>
+              <td colspan="9" class="loading-notice"><i class="fa-solid fa-spinner fa-spin"></i> Loading reservations from Cloudflare D1...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit / Add Booking Modal -->
+  <div class="admin-modal-overlay" id="adminEditBookingOverlay">
+    <div class="admin-auth-card admin-sub-modal">
+      <button class="admin-modal-close-btn" id="btnEditModalClose" aria-label="Close">&times;</button>
+      <div class="admin-badge-pill">
+        <i class="fa-solid fa-pen-to-square"></i> Record Manager
+      </div>
+      <h3 class="admin-card-title" id="adminEditModalTitle">Edit Booking Details</h3>
+      <p class="admin-card-sub">Modify customer booking information, tour category, status, and remarks.</p>
+
+      <form id="adminBookingEditForm">
+        <input type="hidden" id="editBookingId">
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editCustomerName"><i class="fa-solid fa-user"></i> Customer Name</label>
+            <input type="text" id="editCustomerName" class="dash-input" required>
+          </div>
+          <div class="admin-input-group">
+            <label for="editCustomerPhone"><i class="fa-solid fa-phone"></i> Mobile / WhatsApp</label>
+            <input type="tel" id="editCustomerPhone" class="dash-input" required>
+          </div>
+        </div>
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editTravelDate"><i class="fa-solid fa-calendar-day"></i> Travel Date</label>
+            <input type="date" id="editTravelDate" class="dash-input" required>
+          </div>
+          <div class="admin-input-group">
+            <label for="editPackageName"><i class="fa-solid fa-map-location-dot"></i> Tour Package</label>
+            <select id="editPackageName" class="dash-input">
+              <option value="Araku 1-Day Tour">Araku 1-Day Tour</option>
+              <option value="Araku 1N/2D Tour">Araku 1 Night / 2 Days</option>
+              <option value="Vizag & Araku 2N/3D">Vizag &amp; Araku 2N/3D</option>
+              <option value="Lambasingi & Vanjangi">Lambasingi &amp; Vanjangi Tour</option>
+              <option value="Vizag, Araku & Lambasingi 3N/4D">Vizag, Araku &amp; Lambasingi 3N/4D</option>
+              <option value="Hot Air Balloon">Hot Air Balloon</option>
+              <option value="Rope Cycling & Zipline">Rope Cycling &amp; Zipline</option>
+              <option value="Tent Camping & Bonfire">Tent Camping &amp; Bonfire</option>
+              <option value="Trekking & Waterfalls">Trekking &amp; Waterfalls</option>
+              <option value="Custom Valley Tour">Custom Valley Tour</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-form-grid-2">
+          <div class="admin-input-group">
+            <label for="editBookingStatus"><i class="fa-solid fa-signal"></i> Booking Status</label>
+            <select id="editBookingStatus" class="dash-input">
+              <option value="New">New / Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
+            </select>
+          </div>
+          <div class="admin-input-group">
+            <label for="editBookingChannel"><i class="fa-solid fa-share-nodes"></i> Channel</label>
+            <select id="editBookingChannel" class="dash-input">
+              <option value="WhatsApp">WhatsApp</option>
+              <option value="Web Form">Web Form</option>
+              <option value="Direct Call">Direct Call</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="admin-input-group">
+          <label for="editBookingNotes"><i class="fa-solid fa-comment-dots"></i> Notes / Hotel &amp; Cab Remarks</label>
+          <textarea id="editBookingNotes" class="dash-input" rows="2" style="resize: vertical;"
+            placeholder="Cab assigned, room booked, special tribal food requests..."></textarea>
+        </div>
+
+        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
+          <i class="fa-solid fa-floppy-disk"></i> Save Booking Record
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let currentBookings = [];
+
+    // Initialize Dashboard
+    document.addEventListener('DOMContentLoaded', () => {
+      fetchBookings();
+
+      // Search & Filters
+      document.getElementById('adminSearchInput').addEventListener('input', renderAdminBookingsTable);
+      document.getElementById('adminStatusFilter').addEventListener('change', renderAdminBookingsTable);
+      document.getElementById('adminChannelFilter').addEventListener('change', renderAdminBookingsTable);
+
+      // Buttons
+      document.getElementById('btnAddBooking').addEventListener('click', openAddBookingModal);
+      document.getElementById('btnExportCSV').addEventListener('click', exportBookingsToCSV);
+      document.getElementById('btnEditModalClose').addEventListener('click', closeEditModal);
+
+      // Edit Form
+      document.getElementById('adminBookingEditForm').addEventListener('submit', handleSaveBookingRecord);
+
+      // Overlay click to close
+      const modal = document.getElementById('adminEditBookingOverlay');
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeEditModal();
+      });
+
+      // Escape key to close modal
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeEditModal();
+      });
+
+      // Table Event Delegation (Safe XSS-free handler)
+      document.getElementById('adminBookingsTableBody').addEventListener('click', (e) => {
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+
+        const action = btn.getAttribute('data-action');
+        const id = btn.getAttribute('data-id');
+
+        if (action === 'whatsapp') {
+          const phone = btn.getAttribute('data-phone') || '';
+          const name = btn.getAttribute('data-name') || '';
+          const pkg = btn.getAttribute('data-pkg') || '';
+          openCustomerWhatsApp(phone, name, pkg);
+        } else if (action === 'edit') {
+          openEditBookingModal(id);
+        } else if (action === 'delete') {
+          deleteBookingRecord(id);
+        }
+      });
+    });
+
+    async function fetchBookings() {
+      try {
+        const res = await fetch('/api/bookings', {
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+        if (!res.ok) {
+          throw new Error(`Failed to load bookings (${res.status})`);
+        }
+        const data = await res.json();
+        if (data.success && Array.isArray(data.bookings)) {
+          currentBookings = data.bookings;
+          renderAdminBookingsTable();
+        } else {
+          showNotice(data.error || 'Failed to retrieve bookings.');
+        }
+      } catch (err) {
+        console.error('Fetch error:', err);
+        showNotice('Could not connect to Cloudflare D1. ' + err.message);
+      }
+    }
+
+    function showNotice(msg) {
+      const box = document.getElementById('adminNoticeBox');
+      if (box) {
+        box.textContent = msg;
+        box.style.display = 'block';
+      }
+    }
+
+    function renderAdminBookingsTable() {
+      const tbody = document.getElementById('adminBookingsTableBody');
+      if (!tbody) return;
+
+      tbody.replaceChildren();
+
+      const searchQuery = (document.getElementById('adminSearchInput').value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('adminStatusFilter').value;
+      const channelFilter = document.getElementById('adminChannelFilter').value;
+
+      // Update metrics
+      const totalCount = currentBookings.length;
+      const newCount = currentBookings.filter(b => b.status === 'New').length;
+      const confCount = currentBookings.filter(b => b.status === 'Confirmed').length;
+      const waCount = currentBookings.filter(b => b.channel === 'WhatsApp').length;
+
+      document.getElementById('statTotalBookings').textContent = totalCount;
+      document.getElementById('statNewBookings').textContent = newCount;
+      document.getElementById('statConfirmedBookings').textContent = confCount;
+      document.getElementById('statWhatsappBookings').textContent = waCount;
+
+      const filtered = currentBookings.filter(b => {
+        const matchesStatus = (statusFilter === 'ALL' || b.status === statusFilter);
+        const matchesChannel = (channelFilter === 'ALL' || b.channel === channelFilter);
+        const searchPool = `${b.id || ''} ${b.name || ''} ${b.phone || ''} ${b.package || ''} ${b.travel_date || b.date || ''} ${b.notes || ''}`.toLowerCase();
+        const matchesSearch = !searchQuery || searchPool.includes(searchQuery);
+        return matchesStatus && matchesChannel && matchesSearch;
+      });
+
+      if (!filtered.length) {
+        const emptyRow = document.createElement('tr');
+        const emptyTd = document.createElement('td');
+        emptyTd.colSpan = 9;
+        emptyTd.className = 'loading-notice';
+        emptyTd.textContent = 'No matching reservations found.';
+        emptyRow.appendChild(emptyTd);
+        tbody.appendChild(emptyRow);
+        return;
+      }
+
+      filtered.forEach(b => {
+        const tr = document.createElement('tr');
+
+        // 1. ID & Date
+        const tdId = document.createElement('td');
+        const idBadge = document.createElement('span');
+        idBadge.className = 'id-badge';
+        idBadge.textContent = b.id || 'ARK-B000';
+        tdId.appendChild(idBadge);
+        if (b.created_at || b.timestamp) {
+          const smallTime = document.createElement('div');
+          smallTime.style.cssText = 'font-size: 0.72rem; color: #64748b; margin-top: 4px;';
+          smallTime.textContent = (b.created_at || b.timestamp).split('T')[0];
+          tdId.appendChild(smallTime);
+        }
+        tr.appendChild(tdId);
+
+        // 2. Name
+        const tdName = document.createElement('td');
+        const nameStrong = document.createElement('strong');
+        nameStrong.style.color = '#fff';
+        nameStrong.textContent = b.name || 'Guest';
+        tdName.appendChild(nameStrong);
+        tr.appendChild(tdName);
+
+        // 3. Phone
+        const tdPhone = document.createElement('td');
+        const phoneSpan = document.createElement('span');
+        phoneSpan.style.cssText = 'font-family: var(--font-mono); font-size: 0.85rem; color: #e2e8f0;';
+        phoneSpan.textContent = b.phone || '—';
+        tdPhone.appendChild(phoneSpan);
+        tr.appendChild(tdPhone);
+
+        // 4. Package
+        const tdPkg = document.createElement('td');
+        const pkgDiv = document.createElement('div');
+        pkgDiv.style.fontWeight = '500';
+        pkgDiv.textContent = b.package || 'Custom Tour';
+        tdPkg.appendChild(pkgDiv);
+        tr.appendChild(tdPkg);
+
+        // 5. Travel Date
+        const tdDate = document.createElement('td');
+        const dateSpan = document.createElement('span');
+        dateSpan.style.cssText = 'font-family: var(--font-mono); font-size: 0.8rem; color: #cbd5e1;';
+        dateSpan.textContent = b.travel_date || b.date || '—';
+        tdDate.appendChild(dateSpan);
+        tr.appendChild(tdDate);
+
+        // 6. Channel
+        const tdChannel = document.createElement('td');
+        const channelChip = document.createElement('span');
+        const ch = b.channel || 'Web Form';
+        channelChip.className = `channel-chip ${ch === 'WhatsApp' ? 'channel-wa' : (ch === 'Direct Call' ? 'channel-call' : 'channel-web')}`;
+        channelChip.textContent = ch;
+        tdChannel.appendChild(channelChip);
+        tr.appendChild(tdChannel);
+
+        // 7. Status
+        const tdStatus = document.createElement('td');
+        const statusChip = document.createElement('span');
+        const st = b.status || 'New';
+        statusChip.className = `status-chip ${st === 'Confirmed' ? 'status-confirmed' : (st === 'Completed' ? 'status-completed' : (st === 'Cancelled' ? 'status-cancelled' : 'status-new'))}`;
+        statusChip.textContent = st;
+        tdStatus.appendChild(statusChip);
+        tr.appendChild(tdStatus);
+
+        // 8. Notes
+        const tdNotes = document.createElement('td');
+        const notesDiv = document.createElement('div');
+        notesDiv.style.cssText = 'max-width: 200px; font-size: 0.78rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;';
+        notesDiv.title = b.notes || '';
+        notesDiv.textContent = b.notes || '—';
+        tdNotes.appendChild(notesDiv);
+        tr.appendChild(tdNotes);
+
+        // 9. Actions (Created safely using createElement)
+        const tdActions = document.createElement('td');
+        const actionWrap = document.createElement('div');
+        actionWrap.className = 'admin-actions-cell';
+        actionWrap.style.justifyContent = 'flex-end';
+
+        // WhatsApp button
+        const btnWa = document.createElement('button');
+        btnWa.type = 'button';
+        btnWa.className = 'action-icon-btn whatsapp';
+        btnWa.title = 'Chat on WhatsApp';
+        btnWa.setAttribute('data-action', 'whatsapp');
+        btnWa.setAttribute('data-phone', b.phone || '');
+        btnWa.setAttribute('data-name', b.name || '');
+        btnWa.setAttribute('data-pkg', b.package || '');
+        const waIcon = document.createElement('i');
+        waIcon.className = 'fa-brands fa-whatsapp';
+        btnWa.appendChild(waIcon);
+        actionWrap.appendChild(btnWa);
+
+        // Edit button
+        const btnEdit = document.createElement('button');
+        btnEdit.type = 'button';
+        btnEdit.className = 'action-icon-btn';
+        btnEdit.title = 'Edit Booking';
+        btnEdit.setAttribute('data-action', 'edit');
+        btnEdit.setAttribute('data-id', b.id);
+        const editIcon = document.createElement('i');
+        editIcon.className = 'fa-solid fa-pen';
+        btnEdit.appendChild(editIcon);
+        actionWrap.appendChild(btnEdit);
+
+        // Delete button
+        const btnDel = document.createElement('button');
+        btnDel.type = 'button';
+        btnDel.className = 'action-icon-btn delete';
+        btnDel.title = 'Delete Booking';
+        btnDel.setAttribute('data-action', 'delete');
+        btnDel.setAttribute('data-id', b.id);
+        const delIcon = document.createElement('i');
+        delIcon.className = 'fa-solid fa-trash-can';
+        btnDel.appendChild(delIcon);
+        actionWrap.appendChild(btnDel);
+
+        tdActions.appendChild(actionWrap);
+        tr.appendChild(tdActions);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openCustomerWhatsApp(phone, name, pkg) {
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      const msg = `Hello ${name}, greetings from Araku Trails! We are following up regarding your booking request for "${pkg}". How can we assist you with cab details, hotel stays, or itinerary adjustments?`;
+      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function openAddBookingModal() {
+      document.getElementById('adminBookingEditForm').reset();
+      document.getElementById('editBookingId').value = '';
+      document.getElementById('adminEditModalTitle').textContent = 'Add New Booking';
+      document.getElementById('editTravelDate').value = new Date().toISOString().split('T')[0];
+      document.getElementById('adminEditBookingOverlay').classList.add('active');
+    }
+
+    function openEditBookingModal(bookingId) {
+      const record = currentBookings.find(b => b.id === bookingId);
+      if (!record) return;
+
+      document.getElementById('editBookingId').value = record.id;
+      document.getElementById('editCustomerName').value = record.name || '';
+      document.getElementById('editCustomerPhone').value = record.phone || '';
+      document.getElementById('editTravelDate').value = record.travel_date || record.date || '';
+      document.getElementById('editPackageName').value = record.package || 'Araku 1-Day Tour';
+      document.getElementById('editBookingStatus').value = record.status || 'New';
+      document.getElementById('editBookingChannel').value = record.channel || 'Web Form';
+      document.getElementById('editBookingNotes').value = record.notes || '';
+
+      document.getElementById('adminEditModalTitle').textContent = `Edit Booking: ${record.id}`;
+      document.getElementById('adminEditBookingOverlay').classList.add('active');
+    }
+
+    function closeEditModal() {
+      document.getElementById('adminEditBookingOverlay').classList.remove('active');
+    }
+
+    async function handleSaveBookingRecord(e) {
+      e.preventDefault();
+      const id = document.getElementById('editBookingId').value;
+      const recordData = {
+        name: document.getElementById('editCustomerName').value.trim(),
+        phone: document.getElementById('editCustomerPhone').value.trim(),
+        date: document.getElementById('editTravelDate').value,
+        package: document.getElementById('editPackageName').value,
+        status: document.getElementById('editBookingStatus').value,
+        channel: document.getElementById('editBookingChannel').value,
+        notes: document.getElementById('editBookingNotes').value.trim()
+      };
+
+      try {
+        if (id) {
+          // PUT update
+          const res = await fetch('/api/bookings', {
+            method: 'PUT',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, ...recordData })
+          });
+          const result = await res.json();
+          if (!result.success) throw new Error(result.error || 'Failed to update');
+        } else {
+          // POST create
+          const res = await fetch('/api/bookings', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(recordData)
+          });
+          const result = await res.json();
+          if (!result.success) throw new Error(result.error || 'Failed to create');
+        }
+
+        closeEditModal();
+        await fetchBookings();
+      } catch (err) {
+        alert('Error saving record: ' + err.message);
+      }
+    }
+
+    async function deleteBookingRecord(bookingId) {
+      if (!confirm(`Are you sure you want to delete booking ${bookingId}? This cannot be undone.`)) return;
+      try {
+        const res = await fetch(`/api/bookings?id=${encodeURIComponent(bookingId)}`, {
+          method: 'DELETE',
+          credentials: 'same-origin'
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.error || 'Failed to delete');
+        await fetchBookings();
+      } catch (err) {
+        alert('Error deleting record: ' + err.message);
+      }
+    }
+
+    function exportBookingsToCSV() {
+      if (!currentBookings.length) {
+        alert('No bookings to export.');
+        return;
+      }
+      const headers = ['Booking ID', 'Customer Name', 'Phone', 'Package', 'Travel Date', 'Channel', 'Status', 'Notes', 'Created At'];
+      const rows = currentBookings.map(b => [
+        `"${b.id || ''}"`,
+        `"${(b.name || '').replace(/"/g, '""')}"`,
+        `"${(b.phone || '').replace(/"/g, '""')}"`,
+        `"${(b.package || '').replace(/"/g, '""')}"`,
+        `"${b.travel_date || b.date || ''}"`,
+        `"${b.channel || ''}"`,
+        `"${b.status || ''}"`,
+        `"${(b.notes || '').replace(/"/g, '""')}"`,
+        `"${b.created_at || b.timestamp || ''}"`
+      ]);
+
+      const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', `araku_trails_bookings_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
+</body>
+</html>
