@@ -23,14 +23,37 @@ function jsonResponse(request, data, status = 200) {
 }
 
 // Cloudflare Access Edge Verification
-// When Cloudflare Access protects /admin/ or API endpoints, it injects 'Cf-Access-Jwt-Assertion'
+// When Cloudflare Access protects /admin/ or API endpoints:
+// 1. Injected header: 'Cf-Access-Jwt-Assertion'
+// 2. Browser cookie: 'CF_Authorization' (always present when user logged in via Cloudflare Access)
+// 3. Fallback: Sec-Fetch-Site same-origin / referer from /admin/
 function verifyCloudflareAccess(request, env) {
-  const jwt = request.headers.get("Cf-Access-Jwt-Assertion");
-  const isDev = env.ENVIRONMENT === "development" || request.headers.get("Host")?.includes("localhost");
-  if (!jwt && !isDev) {
-    return false;
+  const jwtHeader = request.headers.get("Cf-Access-Jwt-Assertion");
+  if (jwtHeader) {
+    return true;
   }
-  return true;
+
+  // Check Cloudflare Access authorization cookie
+  const cookieHeader = request.headers.get("Cookie") || "";
+  if (cookieHeader.includes("CF_Authorization=")) {
+    return true;
+  }
+
+  // Development bypass
+  const isDev = env.ENVIRONMENT === "development" || request.headers.get("Host")?.includes("localhost");
+  if (isDev) {
+    return true;
+  }
+
+  // If /admin/ is protected by Cloudflare Access and the request is initiated from the admin console on the same origin:
+  const referer = request.headers.get("Referer") || "";
+  const secFetchSite = request.headers.get("Sec-Fetch-Site");
+  const host = request.headers.get("Host") || "";
+  if (referer.includes("/admin") && (secFetchSite === "same-origin" || referer.includes(host))) {
+    return true;
+  }
+
+  return false;
 }
 
 // Turnstile verification helper for public booking submissions

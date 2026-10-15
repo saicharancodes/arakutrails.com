@@ -277,7 +277,12 @@
 
     async function fetchBookings() {
       try {
-        const res = await fetch('/api/bookings');
+        const res = await fetch('/api/bookings', {
+          credentials: 'same-origin',
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
         if (!res.ok) {
           throw new Error(`Failed to load bookings (${res.status})`);
         }
@@ -522,6 +527,7 @@
           // PUT update
           const res = await fetch('/api/bookings', {
             method: 'PUT',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id, ...recordData })
           });
@@ -531,6 +537,7 @@
           // POST create
           const res = await fetch('/api/bookings', {
             method: 'POST',
+            credentials: 'same-origin',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(recordData)
           });
@@ -549,7 +556,8 @@
       if (!confirm(`Are you sure you want to delete booking ${bookingId}? This cannot be undone.`)) return;
       try {
         const res = await fetch(`/api/bookings?id=${encodeURIComponent(bookingId)}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          credentials: 'same-origin'
         });
         const result = await res.json();
         if (!result.success) throw new Error(result.error || 'Failed to delete');
