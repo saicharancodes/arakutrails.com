@@ -6,13 +6,92 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Araku Trails - Interactive Travel Portal | Tour Packages, Hotels & Adventures</title>
   <meta name="description"
-    content="Explore the breathtaking hills and valleys of Araku, Vizag, Vanjangi & Lambasingi with Araku Trails. Best tour packages, hotel bookings, cab rentals and adventure activities.">
+    content="Discover Araku Valley, Vizag, Vanjangi and Lambasingi with Araku Trails. Book verified private cab packages, resort stays, and Eastern Ghats adventures.">
+  <link rel="canonical" href="https://arakutrails.com/">
+  <meta name="theme-color" content="#10b981">
+
+  <!-- Open Graph / WhatsApp Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Araku Trails">
+  <meta property="og:title" content="Araku Trails — Premium Araku Valley & Vizag Tour Packages">
+  <meta property="og:description" content="Discover misty waterfalls, coffee estates, Vanjangi clouds, and tribal heritage. Book verified private cab packages, resort stays, and adventure activities across Araku Valley.">
+  <meta property="og:url" content="https://arakutrails.com/">
+  <meta property="og:image" content="https://arakutrails.com/images/og-index.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Araku Trails — Premium Araku Valley & Vizag Tour Packages">
+  <meta name="twitter:description" content="Discover misty waterfalls, coffee estates, Vanjangi clouds, and tribal heritage. Book verified private cab packages, resort stays, and adventure activities.">
+  <meta name="twitter:image" content="https://arakutrails.com/images/og-index.jpg">
+
+  <!-- JSON-LD Structured Data: TravelAgency -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "@id": "https://arakutrails.com/#organization",
+    "name": "Araku Trails",
+    "url": "https://arakutrails.com/",
+    "logo": "https://arakutrails.com/images/arakutrails-logo-128.png",
+    "image": "https://arakutrails.com/images/og-index.jpg",
+    "description": "Premier tour operator for Araku Valley, Visakhapatnam, Vanjangi and Lambasingi. Offering private cab tours, hill resort stays, tribal culture experiences, and sightseeing packages.",
+    "telephone": "+91-9494177921",
+    "email": "krsh2852@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Kurmannapalem",
+      "addressLocality": "Visakhapatnam",
+      "addressRegion": "Andhra Pradesh",
+      "postalCode": "530046",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 17.6868,
+      "longitude": 83.2185
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "06:00",
+        "closes": "22:00"
+      }
+    ],
+    "areaServed": [
+      {
+        "@type": "AdministrativeArea",
+        "name": "Araku Valley"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Visakhapatnam"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Lambasingi"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Vanjangi"
+      }
+    ],
+    "priceRange": "₹₹",
+    "currenciesAccepted": "INR",
+    "paymentAccepted": "Cash, UPI, Net Banking",
+    "sameAs": [
+      "https://wa.me/919494177921"
+    ]
+  }
+  </script>
 
   <!-- Google Fonts & Font Awesome Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- Favicon & Touch Icons -->
@@ -21,13 +100,15 @@
   <link rel="apple-touch-icon" href="images/arakutrails-logo-128.png">
 
   <!-- Preload First Hero Image for Zero Latency First Paint -->
-  <link rel="preload" as="image" href="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg">
+  <link rel="preload" as="image" href="images/araku-vanjangi-clouds.webp">
 
   <!-- Consolidated Optimized Stylesheet -->
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- Floating Pekoe-Style Navigation Header -->
   <header class="pekoe-header" id="pekoeHeader">
@@ -39,10 +120,38 @@
       </a>
 
       <div class="pekoe-header-right">
-        <nav class="pekoe-nav-pill">
+        <nav class="pekoe-nav-pill" aria-label="Main Navigation">
           <ul class="pekoe-nav-links">
             <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#packages">Tour Packages</a></li>
+            <li class="pekoe-nav-dropdown">
+              <a href="#packages">Tour Packages <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i></a>
+              <ul class="pekoe-dropdown-menu">
+                <li>
+                  <a href="araku-1-day-tour.html">
+                    <strong>Araku 1-Day Sightseeing</strong>
+                    <span>₹2,499 &bull; Borra Caves &amp; Valley</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="araku-1n-2d-tour.html">
+                    <strong>Araku 1 Night / 2 Days</strong>
+                    <span>₹4,999 &bull; Resort Stay &amp; Bonfire</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="vizag-araku-2n-3d-tour.html">
+                    <strong>Vizag &amp; Araku 2N / 3D</strong>
+                    <span>₹7,499 &bull; Beach &amp; Hills Combo</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="vizag-araku-lambasingi-3n-4d-tour.html">
+                    <strong>Vizag, Araku &amp; Lambasingi 3N / 4D</strong>
+                    <span>₹9,999 &bull; Vanjangi Cloud Sunrise</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
             <li><a href="#specialties">Special Tours</a></li>
             <li><a href="#activities">Activities</a></li>
             <li><a href="#about">Why Us</a></li>
@@ -89,13 +198,14 @@
       <li><a href="#home" data-action="close-drawer"><i class="fa-solid fa-compass"></i> Home</a></li>
       <li><a href="javascript:void(0)" id="btnDrawerBookTour"><i
             class="fa-solid fa-calendar-check"></i> Book Tour</a></li>
-      <li><a href="#packages" data-action="close-drawer"><i class="fa-solid fa-layer-group"></i> Tour Packages</a>
-      </li>
+      <li><a href="#packages" data-action="close-drawer"><i class="fa-solid fa-layer-group"></i> All Tour Packages</a></li>
+      <li style="padding-left: 1.25rem;"><a href="araku-1-day-tour.html" style="font-size: 0.85rem; color: var(--emerald-bright);"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 1-Day Sightseeing (₹2,499)</a></li>
+      <li style="padding-left: 1.25rem;"><a href="araku-1n-2d-tour.html" style="font-size: 0.85rem; color: var(--emerald-bright);"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 1N / 2D Serenity (₹4,999)</a></li>
+      <li style="padding-left: 1.25rem;"><a href="vizag-araku-2n-3d-tour.html" style="font-size: 0.85rem; color: var(--emerald-bright);"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 2N / 3D Beach &amp; Hills (₹7,499)</a></li>
+      <li style="padding-left: 1.25rem;"><a href="vizag-araku-lambasingi-3n-4d-tour.html" style="font-size: 0.85rem; color: var(--emerald-bright);"><i class="fa-solid fa-chevron-right" style="font-size: 0.7rem;"></i> 3N / 4D Kashmir of AP (₹9,999)</a></li>
       <li><a href="#specialties" data-action="close-drawer"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
-      <li><a href="#activities" data-action="close-drawer"><i class="fa-solid fa-parachute-box"></i> Activities</a>
-      </li>
-      <li><a href="#about" data-action="close-drawer"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a>
-      </li>
+      <li><a href="#activities" data-action="close-drawer"><i class="fa-solid fa-parachute-box"></i> Activities</a></li>
+      <li><a href="#about" data-action="close-drawer"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a></li>
       <li><a href="#contact" data-action="close-drawer"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
     </ul>
 
@@ -118,13 +228,13 @@
     <!-- Background Photography Slides -->
     <div class="pekoe-hero-slides">
       <div class="pekoe-slide active"
-        style="background-image: url('images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg'); background-position: center 40%;">
+        style="background-image: url('images/araku-vanjangi-clouds.webp'); background-position: center 40%;">
       </div>
       <div class="pekoe-slide"
-        style="background-image: url('images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg'); background-position: center 30%;">
+        style="background-image: url('images/araku-borra-caves-tour.webp'); background-position: center 30%;">
       </div>
       <div class="pekoe-slide"
-        style="background-image: url('images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg'); background-position: center 50%;">
+        style="background-image: url('images/araku-resort-bonfire.webp'); background-position: center 50%;">
       </div>
     </div>
     <div class="pekoe-overlay"></div>
@@ -135,7 +245,7 @@
         Premier Valley Trails &bull; Eastern Ghats
       </div>
       <h1 class="pekoe-title" id="heroTitle">
-        Discover the Serene Beauty of Araku Valley
+        Discover the Serene Beauty of Araku Valley, Andhra Pradesh
       </h1>
       <p class="pekoe-desc" id="heroDesc">
         Lush coffee plantations, mist-covered valleys, breathtaking waterfalls, tribal heritage, and thrilling adventure
@@ -157,7 +267,7 @@
   </section>
 
   <!-- Main Website Content (Flowing naturally below the hero) -->
-  <main class="pekoe-main-content">
+  <main class="pekoe-main-content" id="main-content">
     <div class="pekoe-container">
 
 
@@ -179,8 +289,8 @@
           <!-- Package 1 -->
           <div class="dash-pack-card" data-tour-url="araku-1-day-tour.html">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg" alt="Araku 1 Day Tour"
-                loading="lazy" decoding="async">
+              <img src="images/araku-borra-caves-tour.webp" alt="Borra Caves stalactite formations illuminated by colorful cave lighting in Araku Valley"
+                width="1400" height="1050" loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 1 Day Tour</span>
             </div>
             <div class="pack-card-content">
@@ -209,8 +319,8 @@
           <!-- Package 2 -->
           <div class="dash-pack-card" data-tour-url="araku-1n-2d-tour.html">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" alt="Araku 1N/2D Tour"
-                loading="lazy" decoding="async">
+              <img src="images/araku-resort-bonfire.webp" alt="Night campfire with traditional tribal Dhimsa folk dance gathering in Araku Valley resort"
+                width="1400" height="1050" loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 1N / 2D</span>
             </div>
             <div class="pack-card-content">
@@ -239,8 +349,8 @@
           <!-- Package 3 -->
           <div class="dash-pack-card" data-tour-url="vizag-araku-2n-3d-tour.html">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" alt="Vizag & Araku 2N/3D"
-                loading="lazy" decoding="async">
+              <img src="images/vizag-beach-kailasagiri.webp" alt="Scenic view of Visakhapatnam coastline Rishikonda beach and Kailasagiri ropeway viewpoint"
+                width="1400" height="787" loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 2N / 3D</span>
             </div>
             <div class="pack-card-content">
@@ -269,8 +379,8 @@
           <!-- Package 4 -->
           <div class="dash-pack-card" data-tour-url="vizag-araku-lambasingi-3n-4d-tour.html">
             <div class="pack-thumb-box">
-              <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg" alt="Lambasingi & Vanjangi"
-                loading="lazy" decoding="async">
+              <img src="images/araku-vanjangi-clouds.webp" alt="Endless ocean of morning clouds and golden sunrise over Vanjangi Hills 3400 feet high"
+                width="1400" height="787" loading="lazy" decoding="async">
               <span class="pack-duration-chip"><i class="fa-regular fa-clock"></i> 3N / 4D</span>
             </div>
             <div class="pack-card-content">
@@ -350,7 +460,7 @@
 
         <div class="dash-activity-grid">
           <div class="activity-deck-card" data-book-pkg="Hot Air Balloon">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.43.jpeg" loading="lazy"
+            <img class="act-bg-img" src="images/araku-hot-air-balloon.webp" loading="lazy"
               decoding="async" alt="Hot Air Balloon">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Aero Adventure</span>
@@ -359,7 +469,7 @@
           </div>
 
           <div class="activity-deck-card" data-book-pkg="Rope Cycling & Zipline">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" loading="lazy"
+            <img class="act-bg-img" src="images/araku-resort-bonfire.webp" loading="lazy"
               decoding="async" alt="Rope Cycling">
             <div class="act-gradient-overlay">
               <span class="act-category-code">High Altitude Thrill</span>
@@ -368,7 +478,7 @@
           </div>
 
           <div class="activity-deck-card" data-book-pkg="Tent Camping & Bonfire">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" loading="lazy"
+            <img class="act-bg-img" src="images/vizag-beach-kailasagiri.webp" loading="lazy"
               decoding="async" alt="Campfire Stay">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Stargazing &amp; Night Life</span>
@@ -377,7 +487,7 @@
           </div>
 
           <div class="activity-deck-card" data-book-pkg="Trekking & Waterfalls">
-            <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.39%20AM%20(1).jpeg"
+            <img class="act-bg-img" src="images/araku-trekking-waterfalls.webp"
               loading="lazy" decoding="async" alt="Trekking">
             <div class="act-gradient-overlay">
               <span class="act-category-code">Nature Trails</span>
@@ -468,10 +578,9 @@
   </main>
 
   <!-- Quick Booking Modal Popup -->
-  <!-- Quick Booking Modal Popup -->
-  <div class="modal" id="bookingModal">
+  <div class="modal" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalPackageTitle" aria-hidden="true">
     <div class="modal-box">
-      <button class="modal-close" data-action="close-booking-modal">&times;</button>
+      <button class="modal-close" data-action="close-booking-modal" aria-label="Close dialog">&times;</button>
       <div id="bookingModalContent">
         <h3 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;"
           id="modalPackageTitle">Book Your Tour</h3>
@@ -697,7 +806,10 @@
     const bookingModalAlert = document.getElementById('bookingModalAlert');
     const btnBookingSubmit = document.getElementById('btnBookingSubmit');
 
+    let lastActiveElement = null;
+
     function openBookingModal(pkgName) {
+      lastActiveElement = document.activeElement;
       if (modalPackageTitle) {
         modalPackageTitle.textContent = pkgName && pkgName !== 'General' && pkgName !== 'General Booking' ? `Book: ${pkgName}` : "Book Your Tour";
       }
@@ -722,24 +834,60 @@
         btnBookingSubmit.disabled = false;
         btnBookingSubmit.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Submit Booking Request`;
       }
-      if (bookingModal) bookingModal.classList.add('active');
+      if (bookingModal) {
+        bookingModal.classList.add('active');
+        bookingModal.setAttribute('aria-hidden', 'false');
+      }
       document.body.style.overflow = 'hidden';
+
+      const firstInput = bookingModal ? bookingModal.querySelector('input:not([type="hidden"]), button, select') : null;
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 50);
+      }
     }
 
     function closeBookingModal() {
-      if (bookingModal) bookingModal.classList.remove('active');
+      if (bookingModal) {
+        bookingModal.classList.remove('active');
+        bookingModal.setAttribute('aria-hidden', 'true');
+      }
       document.body.style.overflow = '';
       const form = document.getElementById('bookingModalForm');
       if (form) form.reset();
       if (bookingModalContent) bookingModalContent.style.display = 'block';
       if (bookingSuccessBox) bookingSuccessBox.style.display = 'none';
       if (bookingModalAlert) bookingModalAlert.innerHTML = '';
+      if (lastActiveElement && typeof lastActiveElement.focus === 'function') {
+        lastActiveElement.focus();
+      }
     }
 
     if (bookingModal) {
       bookingModal.addEventListener('click', (e) => {
         if (e.target === bookingModal) {
           closeBookingModal();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!bookingModal.classList.contains('active')) return;
+        if (e.key === 'Escape' || e.key === 'Esc') {
+          e.preventDefault();
+          closeBookingModal();
+          return;
+        }
+        if (e.key === 'Tab') {
+          const focusables = bookingModal.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), select:not([disabled]), [tabindex]:not([tabindex="-1"])');
+          if (focusables.length === 0) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+          }
         }
       });
     }

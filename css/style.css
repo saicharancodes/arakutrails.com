@@ -16,7 +16,7 @@
   --text-body: #94a3b8;
   --text-bright: #e2e8f0;
 
-  --font-brand: 'Cabinet Grotesk', 'Plus Jakarta Sans', sans-serif;
+  --font-brand: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
@@ -305,11 +305,24 @@ body {
 .topbar-breadcrumbs {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--text-body);
-  margin-bottom: 1.5rem;
+}
+
+.topbar-breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.topbar-breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
 }
 
 .topbar-breadcrumbs a {
@@ -3089,5 +3102,311 @@ body {
   color: #94a3b8;
   line-height: 1.4;
   margin: 0;
+}
+
+/* ==========================================================================
+   Accessibility & SEO Enhancements (Phase 3)
+   ========================================================================== */
+
+/* Skip Link for Screen Readers and Keyboard Navigation */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--emerald-bright);
+  color: #022c22;
+  font-family: var(--font-brand);
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  z-index: 99999;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  outline: 3px solid #ffffff;
+}
+
+/* Tour Page Detail Sections & Accordions */
+.tour-policy-box {
+  background: var(--card-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-top: 2rem;
+}
+
+.tour-policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.tour-policy-col h4 {
+  font-family: var(--font-brand);
+  font-size: 1.05rem;
+  color: #f8fafc;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tour-policy-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tour-policy-col li {
+  font-size: 0.88rem;
+  color: var(--text-bright);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+
+.tour-policy-col li i {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+/* Tour FAQ Accordion */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.25rem;
+}
+
+.faq-item {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faq-item[open] {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(15, 23, 42, 0.85);
+}
+
+.faq-summary {
+  padding: 1.1rem 1.25rem;
+  font-family: var(--font-brand);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #f8fafc;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+.faq-summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-summary::after {
+  content: '+';
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: var(--emerald-bright);
+  transition: transform 0.25s ease;
+}
+
+.faq-item[open] .faq-summary::after {
+  transform: rotate(45deg);
+}
+
+.faq-content {
+  padding: 0 1.25rem 1.15rem 1.25rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-body);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+}
+
+/* Related Tour Cross-Sell Grid */
+.related-tours-section {
+  margin-top: 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--panel-border);
+}
+
+.related-tours-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.related-tour-card {
+  background: var(--card-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.related-tour-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.related-tour-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+
+.related-tour-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.related-tour-card:hover .related-tour-thumb img {
+  transform: scale(1.05);
+}
+
+.related-tour-body {
+  padding: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.related-tour-body h4 {
+  font-family: var(--font-brand);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 0.4rem;
+}
+
+.related-tour-body p {
+  font-size: 0.8rem;
+  color: var(--text-body);
+  line-height: 1.45;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.related-tour-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.75rem;
+}
+
+.related-tour-price {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  color: var(--emerald-bright);
+  font-size: 0.95rem;
+}
+
+.related-tour-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Nav Dropdown for Tour Packages in Desktop Pekoe Bar */
+.pekoe-nav-dropdown {
+  position: relative;
+}
+
+.pekoe-nav-dropdown > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pekoe-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.75rem;
+  background: rgba(6, 26, 18, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0;
+  min-width: 250px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  list-style: none;
+}
+
+.pekoe-nav-dropdown:hover .pekoe-dropdown-menu,
+.pekoe-nav-dropdown:focus-within .pekoe-dropdown-menu {
+  display: block;
+}
+
+.pekoe-dropdown-menu li a {
+  display: flex;
+  flex-direction: column;
+  padding: 0.6rem 1.2rem;
+  color: #e2e8f0;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
+}
+
+.pekoe-dropdown-menu li a strong {
+  color: #f8fafc;
+  font-size: 0.88rem;
+}
+
+.pekoe-dropdown-menu li a span {
+  font-size: 0.75rem;
+  color: var(--emerald-bright);
+  font-family: var(--font-mono);
+  margin-top: 0.15rem;
+}
+
+.pekoe-dropdown-menu li a:hover {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-bright);
+}
+
+/* Accessibility: prefers-reduced-motion media query */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
