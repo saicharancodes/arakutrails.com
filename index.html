@@ -155,6 +155,7 @@
             <li><a href="#specialties">Special Tours</a></li>
             <li><a href="#activities">Activities</a></li>
             <li><a href="#about">Why Us</a></li>
+            <li><a href="#blog">Travel Blog</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
           <button type="button" class="pekoe-nav-cta" id="btnNavBookTour"
@@ -164,10 +165,16 @@
         </nav>
       </div>
 
-      <!-- Mobile Menu Button -->
-      <button class="pekoe-mobile-menu-btn" id="pekoeMenuBtn" aria-label="Open Navigation">
-        <i class="fa-solid fa-bars"></i> <span>MENU</span>
-      </button>
+      <!-- Mobile Clean Actions -->
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button type="button" class="pekoe-nav-cta" id="btnMobileBookTour"
+          style="border: none; cursor: pointer; text-decoration: none; padding: 0.45rem 0.85rem; font-size: 0.8rem; margin: 0;">
+          <i class="fa-solid fa-calendar-check"></i> Book
+        </button>
+        <button class="pekoe-mobile-menu-btn" id="pekoeMenuBtn" aria-label="Open Navigation">
+          <i class="fa-solid fa-bars"></i> <span>MENU</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -206,6 +213,7 @@
       <li><a href="#specialties" data-action="close-drawer"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
       <li><a href="#activities" data-action="close-drawer"><i class="fa-solid fa-parachute-box"></i> Activities</a></li>
       <li><a href="#about" data-action="close-drawer"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a></li>
+      <li><a href="/blog/" data-action="close-drawer"><i class="fa-solid fa-book-open"></i> Travel Blog &amp; Guides</a></li>
       <li><a href="#contact" data-action="close-drawer"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
     </ul>
 
@@ -536,6 +544,55 @@
         </div>
       </section>
 
+      <!-- Travel Blog & Local Guides Section -->
+      <section id="blog" style="margin-top: 3.5rem;">
+        <div class="section-portal-header">
+          <div class="portal-heading">
+            <h2>Travel Blog &amp; <span>Valley Guides</span></h2>
+            <p>Insider route tips, season breakdowns, and cultural highlights curated by local chauffeurs.</p>
+          </div>
+          <div class="portal-stats-pills">
+            <a href="/blog/" style="color: var(--emerald-bright); font-size: 0.88rem; font-weight: 700; text-decoration: none;">
+              Explore All Articles &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+          <!-- Blog Card 1 -->
+          <a href="/blog/best-time-to-visit-araku-valley.html" class="related-tour-card" style="text-decoration: none;">
+            <div class="related-tour-thumb">
+              <img src="images/araku-vanjangi-clouds.webp" alt="Sunrise over Vanjangi cloud hills in winter" width="600" height="338" loading="lazy" decoding="async">
+            </div>
+            <div class="related-tour-body">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--emerald-bright); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; display: block;">Seasonal Guide</span>
+              <h4 style="font-size: 1.05rem; line-height: 1.4;">Best Time to Visit Araku Valley: Month-by-Month Weather &amp; Highlights</h4>
+              <p style="font-size: 0.82rem;">From winter cloud beds at Vanjangi (Oct–March) to monsoon waterfall streams, discover the ideal season for your trip.</p>
+              <div class="related-tour-foot">
+                <span style="font-size: 0.8rem; color: var(--text-body);"><i class="fa-regular fa-clock"></i> 5 min read</span>
+                <span class="related-tour-link">Read Guide &rarr;</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Blog Card 2 -->
+          <a href="/blog/" class="related-tour-card" style="text-decoration: none;">
+            <div class="related-tour-thumb">
+              <img src="images/araku-coffee-plantations.webp" alt="Coffee plantations along Ananthagiri ghat road" width="600" height="338" loading="lazy" decoding="async">
+            </div>
+            <div class="related-tour-body">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--emerald-bright); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.35rem; display: block;">Road Trip &amp; Logistics</span>
+              <h4 style="font-size: 1.05rem; line-height: 1.4;">Visakhapatnam to Araku Valley: Ghat Road Route, Distance &amp; Stopovers</h4>
+              <p style="font-size: 0.82rem;">Everything you need to know about navigating the 115 km Ananthagiri Ghats, viewpoints, and Borra Caves timing.</p>
+              <div class="related-tour-foot">
+                <span style="font-size: 0.8rem; color: var(--text-body);"><i class="fa-regular fa-clock"></i> 6 min read</span>
+                <span class="related-tour-link">Read Guide &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
       <!-- CTA Callout Banner -->
       <section class="dash-callout-panel" id="contact">
         <div class="callout-text">
@@ -570,6 +627,7 @@
         <div class="footer-quick-contacts">
           <a href="tel:+919494177921"><i class="fa-solid fa-phone"></i> +91 9494177921</a>
           <a href="mailto:krsh2852@gmail.com"><i class="fa-solid fa-envelope"></i> krsh2852@gmail.com</a>
+          <a href="/blog/"><i class="fa-solid fa-book-open"></i> Travel Blog</a>
           <a href="/privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
         </div>
       </footer>
@@ -997,6 +1055,10 @@
       // Book tour navigation button
       const navBtn = document.getElementById("btnNavBookTour");
       if (navBtn) navBtn.addEventListener("click", () => openBookingModal("General Booking"));
+
+      // Mobile top bar book button
+      const mobileBookBtn = document.getElementById("btnMobileBookTour");
+      if (mobileBookBtn) mobileBookBtn.addEventListener("click", () => openBookingModal("General Booking"));
 
       // Drawer book button
       const drawerBtn = document.getElementById("btnDrawerBookTour");

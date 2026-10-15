@@ -849,62 +849,32 @@ body {
     font-size: 1.05rem;
   }
 
-  /* All top navigation menu options displayed simultaneously without box-style, scrolling or swiping */
+  /* Mobile: Clean Header with Brand + Quick Book CTA + Hamburger Menu */
   .pekoe-header-right {
-    display: flex !important;
-    flex-direction: row;
-    align-items: center;
-    flex: 1 1 auto;
-    justify-content: flex-end;
-    overflow: visible;
-  }
-
-  .pekoe-nav-pill {
-    display: flex !important;
-    align-items: center;
-    justify-content: flex-end;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    padding: 0;
-    margin: 0;
-    gap: 0.45rem;
-    overflow: visible;
-    flex-wrap: wrap;
-  }
-
-  .pekoe-nav-links {
-    display: flex !important;
-    align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .pekoe-nav-links a {
-    font-size: clamp(0.68rem, 2.2vw, 0.82rem);
-    font-weight: 600;
-    color: #e2e8f0;
-    padding: 0.15rem 0.2rem;
-    white-space: nowrap;
-  }
-
-  .pekoe-nav-cta {
-    padding: 0.32rem 0.65rem;
-    font-size: clamp(0.68rem, 2.1vw, 0.78rem);
-    margin-left: 0.25rem;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  /* Strictly hide the 3 lines hamburger menu button on all mobile zoom levels */
-  .pekoe-mobile-menu-btn {
     display: none !important;
+  }
+
+  .pekoe-mobile-menu-btn {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.45rem;
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #ffffff;
+    font-family: var(--font-brand);
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 0.5rem 0.85rem;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: var(--transition);
+  }
+
+  .pekoe-mobile-menu-btn:hover {
+    background: rgba(16, 185, 129, 0.25);
+    color: var(--emerald-bright);
+    border-color: var(--emerald-bright);
   }
 
   .pekoe-hero {
