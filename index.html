@@ -48,7 +48,7 @@
             <li><a href="#about">Why Us</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <button type="button" class="pekoe-nav-cta" onclick="openBookingModal('General Booking')"
+          <button type="button" class="pekoe-nav-cta" id="btnNavBookTour"
             style="border: none; cursor: pointer; text-decoration: none;">
             <i class="fa-solid fa-calendar-check"></i> Book Tour
           </button>
@@ -65,12 +65,12 @@
   <!-- Mobile Drawer Menu -->
   <div class="pekoe-mobile-drawer" id="pekoeMobileDrawer">
     <div class="pekoe-drawer-header">
-      <a href="index.html" class="pekoe-brand" onclick="closeMobileDrawer()">
+      <a href="index.html" class="pekoe-brand" data-action="close-drawer">
         <img src="images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="pekoe-logo-img" width="40"
           height="40">
         <div class="pekoe-brand-text">Araku <span>Trails</span></div>
       </a>
-      <button class="pekoe-drawer-close" onclick="closeMobileDrawer()" aria-label="Close Navigation">&times;</button>
+      <button class="pekoe-drawer-close" data-action="close-drawer" aria-label="Close Navigation">&times;</button>
     </div>
 
     <!-- Weather & Region Info in Drawer -->
@@ -86,17 +86,17 @@
     </div>
 
     <ul class="pekoe-drawer-links">
-      <li><a href="#home" onclick="closeMobileDrawer()"><i class="fa-solid fa-compass"></i> Home</a></li>
-      <li><a href="javascript:void(0)" onclick="closeMobileDrawer(); openBookingModal('General Booking');"><i
+      <li><a href="#home" data-action="close-drawer"><i class="fa-solid fa-compass"></i> Home</a></li>
+      <li><a href="javascript:void(0)" id="btnDrawerBookTour"><i
             class="fa-solid fa-calendar-check"></i> Book Tour</a></li>
-      <li><a href="#packages" onclick="closeMobileDrawer()"><i class="fa-solid fa-layer-group"></i> Tour Packages</a>
+      <li><a href="#packages" data-action="close-drawer"><i class="fa-solid fa-layer-group"></i> Tour Packages</a>
       </li>
-      <li><a href="#specialties" onclick="closeMobileDrawer()"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
-      <li><a href="#activities" onclick="closeMobileDrawer()"><i class="fa-solid fa-parachute-box"></i> Activities</a>
+      <li><a href="#specialties" data-action="close-drawer"><i class="fa-solid fa-crown"></i> Special Tours</a></li>
+      <li><a href="#activities" data-action="close-drawer"><i class="fa-solid fa-parachute-box"></i> Activities</a>
       </li>
-      <li><a href="#about" onclick="closeMobileDrawer()"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a>
+      <li><a href="#about" data-action="close-drawer"><i class="fa-solid fa-shield-halved"></i> Why Araku Trails</a>
       </li>
-      <li><a href="#contact" onclick="closeMobileDrawer()"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
+      <li><a href="#contact" data-action="close-drawer"><i class="fa-solid fa-headset"></i> Contact Support</a></li>
     </ul>
 
     <!-- 24/7 Priority Desk in Drawer -->
@@ -107,7 +107,7 @@
       <a href="tel:+919494177921" class="hotline-num">+91 9494177921</a>
       <a href="mailto:krsh2852@gmail.com" class="hotline-email">krsh2852@gmail.com</a>
       <a href="https://wa.me/919494177921?text=Hello%20Araku%20Trails,%20I%20want%20to%20plan%20a%20trip"
-        target="_blank" class="hotline-whatsapp-btn">
+        target="_blank" rel="noopener noreferrer" class="hotline-whatsapp-btn">
         <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
       </a>
     </div>
@@ -150,9 +150,9 @@
 
     <!-- Subtle Centered Slide Indicators -->
     <div class="pekoe-dots-bar" id="pekoeDotsBar">
-      <button class="pekoe-dot active" onclick="setSlide(0)" aria-label="Slide 1: Araku Valley"></button>
-      <button class="pekoe-dot" onclick="setSlide(1)" aria-label="Slide 2: Vanjangi Clouds"></button>
-      <button class="pekoe-dot" onclick="setSlide(2)" aria-label="Slide 3: Bonfire &amp; Dhimsa"></button>
+      <button class="pekoe-dot active" data-slide="0" aria-label="Slide 1: Araku Valley"></button>
+      <button class="pekoe-dot" data-slide="1" aria-label="Slide 2: Vanjangi Clouds"></button>
+      <button class="pekoe-dot" data-slide="2" aria-label="Slide 3: Bonfire &amp; Dhimsa"></button>
     </div>
   </section>
 
@@ -177,7 +177,7 @@
 
         <div class="dash-packages-grid">
           <!-- Package 1 -->
-          <div class="dash-pack-card" onclick="window.location.href='araku-1-day-tour.html'">
+          <div class="dash-pack-card" data-tour-url="araku-1-day-tour.html">
             <div class="pack-thumb-box">
               <img src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.40%20AM.jpeg" alt="Araku 1 Day Tour"
                 loading="lazy" decoding="async">
@@ -197,17 +197,17 @@
                   <span class="rate-amount">₹2,499</span>
                 </div>
                 <div class="pack-actions-foot">
-                  <a href="araku-1-day-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                  <a href="araku-1-day-tour.html" class="btn-pack-view" data-action="stop">View
                     Details</a>
                   <button class="btn-pack-select"
-                    onclick="event.stopPropagation(); openBookingModal('Araku Valley 1-Day Tour')">Book Now</button>
+                    data-book-pkg="Araku Valley 1-Day Sightseeing">Book Now</button>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Package 2 -->
-          <div class="dash-pack-card" onclick="window.location.href='araku-1n-2d-tour.html'">
+          <div class="dash-pack-card" data-tour-url="araku-1n-2d-tour.html">
             <div class="pack-thumb-box">
               <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" alt="Araku 1N/2D Tour"
                 loading="lazy" decoding="async">
@@ -227,17 +227,17 @@
                   <span class="rate-amount">₹4,999</span>
                 </div>
                 <div class="pack-actions-foot">
-                  <a href="araku-1n-2d-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                  <a href="araku-1n-2d-tour.html" class="btn-pack-view" data-action="stop">View
                     Details</a>
                   <button class="btn-pack-select"
-                    onclick="event.stopPropagation(); openBookingModal('Araku Serenity 1N/2D')">Book Now</button>
+                    data-book-pkg="Araku Serenity 1 Night / 2 Days">Book Now</button>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Package 3 -->
-          <div class="dash-pack-card" onclick="window.location.href='vizag-araku-2n-3d-tour.html'">
+          <div class="dash-pack-card" data-tour-url="vizag-araku-2n-3d-tour.html">
             <div class="pack-thumb-box">
               <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" alt="Vizag & Araku 2N/3D"
                 loading="lazy" decoding="async">
@@ -257,17 +257,17 @@
                   <span class="rate-amount">₹7,499</span>
                 </div>
                 <div class="pack-actions-foot">
-                  <a href="vizag-araku-2n-3d-tour.html" class="btn-pack-view" onclick="event.stopPropagation()">View
+                  <a href="vizag-araku-2n-3d-tour.html" class="btn-pack-view" data-action="stop">View
                     Details</a>
                   <button class="btn-pack-select"
-                    onclick="event.stopPropagation(); openBookingModal('Vizag & Araku 2N/3D')">Book Now</button>
+                    data-book-pkg="Vizag & Araku Highlights 2N/3D">Book Now</button>
                 </div>
               </div>
             </div>
           </div>
 
           <!-- Package 4 -->
-          <div class="dash-pack-card" onclick="window.location.href='vizag-araku-lambasingi-3n-4d-tour.html'">
+          <div class="dash-pack-card" data-tour-url="vizag-araku-lambasingi-3n-4d-tour.html">
             <div class="pack-thumb-box">
               <img src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45.jpeg" alt="Lambasingi & Vanjangi"
                 loading="lazy" decoding="async">
@@ -289,9 +289,9 @@
                 </div>
                 <div class="pack-actions-foot">
                   <a href="vizag-araku-lambasingi-3n-4d-tour.html" class="btn-pack-view"
-                    onclick="event.stopPropagation()">View Details</a>
+                    data-action="stop">View Details</a>
                   <button class="btn-pack-select"
-                    onclick="event.stopPropagation(); openBookingModal('Vizag, Araku & Lambasingi 3N/4D')">Book
+                    data-book-pkg="Vizag, Araku & Lambasingi 3N/4D">Book
                     Now</button>
                 </div>
               </div>
@@ -349,7 +349,7 @@
         </div>
 
         <div class="dash-activity-grid">
-          <div class="activity-deck-card" onclick="openBookingModal('Hot Air Balloon')">
+          <div class="activity-deck-card" data-book-pkg="Hot Air Balloon">
             <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.43.jpeg" loading="lazy"
               decoding="async" alt="Hot Air Balloon">
             <div class="act-gradient-overlay">
@@ -358,7 +358,7 @@
             </div>
           </div>
 
-          <div class="activity-deck-card" onclick="openBookingModal('Rope Cycling')">
+          <div class="activity-deck-card" data-book-pkg="Rope Cycling & Zipline">
             <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(1).jpeg" loading="lazy"
               decoding="async" alt="Rope Cycling">
             <div class="act-gradient-overlay">
@@ -367,7 +367,7 @@
             </div>
           </div>
 
-          <div class="activity-deck-card" onclick="openBookingModal('Tent Camping & Bonfire')">
+          <div class="activity-deck-card" data-book-pkg="Tent Camping & Bonfire">
             <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-12%20at%2020.30.45%20(2).jpeg" loading="lazy"
               decoding="async" alt="Campfire Stay">
             <div class="act-gradient-overlay">
@@ -376,7 +376,7 @@
             </div>
           </div>
 
-          <div class="activity-deck-card" onclick="openBookingModal('Trekking & Waterfalls')">
+          <div class="activity-deck-card" data-book-pkg="Trekking & Waterfalls">
             <img class="act-bg-img" src="images/WhatsApp%20Image%202026-10-13%20at%2012.46.39%20AM%20(1).jpeg"
               loading="lazy" decoding="async" alt="Trekking">
             <div class="act-gradient-overlay">
@@ -438,7 +438,7 @@
             <i class="fa-solid fa-phone"></i> Call +91 9494177921
           </a>
           <a href="https://wa.me/919494177921?text=Hello%20Araku%20Trails,%20I%20want%20to%20plan%20a%20trip"
-            target="_blank" class="btn-callout-chat">
+            target="_blank" rel="noopener noreferrer" class="btn-callout-chat">
             <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
           </a>
           <a href="mailto:krsh2852@gmail.com" class="btn-callout-email">
@@ -460,6 +460,7 @@
         <div class="footer-quick-contacts">
           <a href="tel:+919494177921"><i class="fa-solid fa-phone"></i> +91 9494177921</a>
           <a href="mailto:krsh2852@gmail.com"><i class="fa-solid fa-envelope"></i> krsh2852@gmail.com</a>
+          <a href="/privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
         </div>
       </footer>
 
@@ -470,7 +471,7 @@
   <!-- Quick Booking Modal Popup -->
   <div class="modal" id="bookingModal">
     <div class="modal-box">
-      <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+      <button class="modal-close" data-action="close-booking-modal">&times;</button>
       <div id="bookingModalContent">
         <h3 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;"
           id="modalPackageTitle">Book Your Tour</h3>
@@ -480,7 +481,7 @@
 
         <div id="bookingModalAlert" style="margin-bottom: 1rem;"></div>
 
-        <form id="bookingModalForm" onsubmit="handleModalSubmit(event)"
+        <form id="bookingModalForm" 
           style="display: flex; flex-direction: column; gap: 1rem;">
           <input type="hidden" id="modalSelectedPackage" value="">
           <div class="field-wrapper">
@@ -527,406 +528,10 @@
           Your request has been sent successfully. Our reservations team has received your application via email and
           will reach out shortly.
         </p>
-        <button type="button" class="btn-exec-booking" onclick="closeBookingModal()" style="width: 100%;">
+        <button type="button" class="btn-exec-booking" data-action="close-booking-modal" style="width: 100%;">
           <i class="fa-solid fa-check"></i> Done
         </button>
       </div>
-    </div>
-  </div>
-
-  <!-- ========================================================
-       ADMIN PORTAL MODALS (LOGIN, FORGOT/RESET PW, DASHBOARD, EDIT)
-  ======================================================== -->
-  <!-- 1. Admin Login Modal -->
-  <div class="admin-modal-overlay" id="adminLoginOverlay">
-    <div class="admin-auth-card">
-      <!-- Separate Top Action Bar with Prominent Close Button -->
-      <div class="admin-auth-top-bar">
-        <div class="admin-badge-pill" style="margin-bottom: 0;">
-          <i class="fa-solid fa-lock"></i> Protected Console
-        </div>
-        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminLoginOverlay')"
-          aria-label="Close Admin Console">
-          <i class="fa-solid fa-xmark"></i> <span>Close</span>
-        </button>
-      </div>
-
-      <h3 class="admin-card-title">Admin Sign In</h3>
-      <p class="admin-card-sub">Access Araku Trails reservation dispatch and customer records securely.</p>
-
-      <div id="adminLoginNotice"></div>
-
-      <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
-        <div class="admin-input-group">
-          <label for="adminUsername"><i class="fa-solid fa-user-shield"></i> User ID / Name</label>
-          <input type="text" id="adminUsername" class="dash-input" placeholder="Enter User ID" autocomplete="username"
-            required>
-        </div>
-        <div class="admin-input-group">
-          <label for="adminPassword"><i class="fa-solid fa-key"></i> Password</label>
-          <div class="admin-password-wrap">
-            <input type="password" id="adminPassword" class="dash-input" placeholder="Enter Password"
-              autocomplete="current-password" required>
-            <button type="button" class="admin-password-toggle"
-              onclick="togglePasswordVisibility('adminPassword', this)" aria-label="Toggle password visibility">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
-        </div>
-        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Console
-        </button>
-        <div style="text-align: center; margin-top: 1.15rem;">
-          <button type="button" class="admin-secondary-link" onclick="openAdminModal('forgot')">
-            Forgot Password?
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 2. Forgot Password Recovery Choice Modal -->
-  <div class="admin-modal-overlay" id="adminForgotOverlay">
-    <div class="admin-auth-card">
-      <div class="admin-auth-top-bar">
-        <div class="admin-badge-pill" style="margin-bottom: 0;">
-          <i class="fa-solid fa-shield-halved"></i> Account Recovery
-        </div>
-        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminForgotOverlay')"
-          aria-label="Close Admin Recovery">
-          <i class="fa-solid fa-xmark"></i> <span>Close</span>
-        </button>
-      </div>
-      <h3 class="admin-card-title">Forgot Password?</h3>
-      <p class="admin-card-sub">
-        Choose your preferred recovery method below to regain access to your administrator account.
-      </p>
-
-      <div id="adminForgotNotice"></div>
-
-      <div class="recovery-choice-grid">
-        <button type="button" class="recovery-option-card" id="btnChooseMailRecovery"
-          onclick="handleSendCredentialsMail()">
-          <div class="recovery-option-icon">
-            <i class="fa-solid fa-paper-plane"></i>
-          </div>
-          <div class="recovery-option-info">
-            <h4>Send Current ID &amp; Password to Mail</h4>
-            <p>Directly sends your running Admin User ID and Password to the registered administrator email.</p>
-          </div>
-        </button>
-
-        <button type="button" class="recovery-option-card" onclick="openAdminModal('sec_question')">
-          <div class="recovery-option-icon">
-            <i class="fa-solid fa-clipboard-question"></i>
-          </div>
-          <div class="recovery-option-info">
-            <h4>Reset by Security Question</h4>
-            <p>Answer your custom security question to set a brand new password immediately.</p>
-          </div>
-        </button>
-      </div>
-
-      <div style="text-align: center; margin-top: 1.15rem;">
-        <button type="button" class="admin-secondary-link" onclick="openAdminModal('login')">
-          &larr; Back to Sign In
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 2B. Reset by Security Question Modal -->
-  <div class="admin-modal-overlay" id="adminSecQuestionOverlay">
-    <div class="admin-auth-card">
-      <div class="admin-auth-top-bar">
-        <div class="admin-badge-pill" style="margin-bottom: 0;">
-          <i class="fa-solid fa-shield-cat"></i> Identity Verification
-        </div>
-        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminSecQuestionOverlay')"
-          aria-label="Close Security Verification">
-          <i class="fa-solid fa-xmark"></i> <span>Close</span>
-        </button>
-      </div>
-      <h3 class="admin-card-title">Security Question Verification</h3>
-      <p class="admin-card-sub">
-        Answer your custom security question correctly to proceed with setting a new password.
-      </p>
-
-      <div id="adminSecQuestionNotice"></div>
-
-      <form id="adminSecQuestionForm" onsubmit="handleVerifySecurityQuestion(event)">
-        <div class="admin-input-group">
-          <label><i class="fa-solid fa-circle-question"></i> Your Registered Security Question</label>
-          <div id="displayRegisteredQuestion"
-            style="background: rgba(16, 28, 23, 0.75); border: 1px solid rgba(16, 185, 129, 0.35); padding: 0.75rem 1rem; border-radius: var(--radius-sm); font-size: 0.88rem; color: #f8fafc; font-weight: 500;">
-            What is your favorite travel destination?
-          </div>
-        </div>
-        <div class="admin-input-group">
-          <label for="adminSecAnswerInput"><i class="fa-solid fa-key"></i> Your Security Answer</label>
-          <input type="text" id="adminSecAnswerInput" class="dash-input" placeholder="Enter your secret answer"
-            required>
-        </div>
-        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-circle-check"></i> Verify &amp; Reset Password
-        </button>
-        <div style="text-align: center; margin-top: 1.1rem;">
-          <button type="button" class="admin-secondary-link" onclick="openAdminModal('forgot')">
-            &larr; Back to Recovery Options
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 3. Password Reset / Change Password Form Modal -->
-  <div class="admin-modal-overlay" id="adminResetOverlay">
-    <div class="admin-auth-card">
-      <div class="admin-auth-top-bar">
-        <div class="admin-badge-pill" style="margin-bottom: 0;">
-          <i class="fa-solid fa-key"></i> <span id="adminResetBadgeTitle">Set New Credentials</span>
-        </div>
-        <button type="button" class="admin-separate-close-btn" onclick="closeAdminModal('adminResetOverlay')"
-          aria-label="Close Credentials Modal">
-          <i class="fa-solid fa-xmark"></i> <span>Close</span>
-        </button>
-      </div>
-      <h3 class="admin-card-title" id="adminResetHeading">Update Credentials</h3>
-      <p class="admin-card-sub" id="adminResetSub">Choose your User ID and enter a new password. You can also configure
-        your custom security question below.</p>
-
-      <div id="adminResetNotice"></div>
-
-      <form id="adminResetForm" onsubmit="handleAdminResetSubmit(event)">
-        <div class="admin-input-group">
-          <label for="adminNewUsername"><i class="fa-solid fa-user-tag"></i> Admin User ID</label>
-          <input type="text" id="adminNewUsername" class="dash-input" placeholder="Enter User ID" required>
-        </div>
-        <div class="admin-input-group">
-          <label for="adminNewPassword"><i class="fa-solid fa-lock"></i> New Password</label>
-          <div class="admin-password-wrap">
-            <input type="password" id="adminNewPassword" class="dash-input" placeholder="Enter New Password" required>
-            <button type="button" class="admin-password-toggle"
-              onclick="togglePasswordVisibility('adminNewPassword', this)" aria-label="Toggle password visibility">
-              <i class="fa-solid fa-eye"></i>
-            </button>
-          </div>
-        </div>
-        <div class="admin-input-group">
-          <label for="adminConfirmPassword"><i class="fa-solid fa-circle-check"></i> Confirm New Password</label>
-          <input type="password" id="adminConfirmPassword" class="dash-input" placeholder="••••••••••••" required>
-        </div>
-
-        <!-- Custom Security Question Settings -->
-        <div style="margin-top: 1.25rem; padding-top: 1.1rem; border-top: 1px solid rgba(255, 255, 255, 0.08);">
-          <div
-            style="font-size: 0.8rem; font-family: var(--font-mono); color: var(--emerald-bright); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">
-            <i class="fa-solid fa-shield-heart"></i> Custom Security Question &amp; Answer
-          </div>
-          <div class="admin-input-group">
-            <label for="adminCustomQuestion"><i class="fa-solid fa-circle-question"></i> Security Question</label>
-            <input type="text" id="adminCustomQuestion" class="dash-input"
-              placeholder="e.g. What is your favorite hill station?" required>
-          </div>
-          <div class="admin-input-group">
-            <label for="adminCustomAnswer"><i class="fa-solid fa-comment-dots"></i> Security Answer</label>
-            <input type="text" id="adminCustomAnswer" class="dash-input" placeholder="e.g. Araku Valley" required>
-          </div>
-        </div>
-
-        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-floppy-disk"></i> Save &amp; Update Credentials
-        </button>
-        <div style="text-align: center; margin-top: 1.1rem;">
-          <button type="button" class="admin-secondary-link" id="adminResetBackLink" onclick="handleResetBackClick()">
-            &larr; Back
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- 4. Admin Dashboard Modal (Live Booked Persons Management) -->
-  <div class="admin-modal-overlay" id="adminDashboardOverlay">
-    <div class="admin-dashboard-card">
-
-      <!-- Top Bar -->
-      <div class="admin-dash-head">
-        <div class="admin-dash-head-left">
-          <div class="admin-dash-title">
-            <i class="fa-solid fa-shield-halved" style="color: var(--emerald-bright);"></i>
-            <span>Araku Trails &bull; Reservation Dispatch</span>
-          </div>
-          <span class="admin-badge-pill" style="margin-bottom: 0;">
-            <i class="fa-solid fa-user-check"></i> <span id="adminLoggedAs">Admin</span>
-          </span>
-        </div>
-        <div class="admin-dash-actions">
-          <button type="button" class="admin-pill-btn" onclick="openAdminModal('reset')"
-            title="Change / Update Password">
-            <i class="fa-solid fa-key"></i> Change Password
-          </button>
-          <button type="button" class="admin-pill-btn" onclick="openAddBookingModal()">
-            <i class="fa-solid fa-plus"></i> Add Booking
-          </button>
-          <button type="button" class="admin-pill-btn" onclick="exportBookingsToCSV()">
-            <i class="fa-solid fa-file-csv"></i> Export CSV
-          </button>
-          <button type="button" class="admin-pill-btn danger" onclick="handleAdminLogout()">
-            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
-          </button>
-          <button type="button" class="admin-pill-btn close-dash-btn" onclick="closeAdminModal('adminDashboardOverlay')"
-            title="Close Dashboard and Return to Website">
-            <i class="fa-solid fa-xmark"></i> Close
-          </button>
-        </div>
-      </div>
-
-      <!-- Metrics Ribbon -->
-      <div class="admin-metrics-ribbon">
-        <div class="admin-stat-card">
-          <div class="admin-stat-label">Total Bookings</div>
-          <div class="admin-stat-val emerald" id="statTotalBookings">0</div>
-        </div>
-        <div class="admin-stat-card">
-          <div class="admin-stat-label">Pending / New</div>
-          <div class="admin-stat-val" id="statNewBookings" style="color: #38bdf8;">0</div>
-        </div>
-        <div class="admin-stat-card">
-          <div class="admin-stat-label">Confirmed</div>
-          <div class="admin-stat-val" id="statConfirmedBookings" style="color: #34d399;">0</div>
-        </div>
-        <div class="admin-stat-card">
-          <div class="admin-stat-label">WhatsApp Dispatched</div>
-          <div class="admin-stat-val" id="statWhatsappBookings" style="color: #25d366;">0</div>
-        </div>
-      </div>
-
-      <!-- Controls & Filter Bar -->
-      <div class="admin-controls-bar">
-        <div class="admin-search-wrap">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="adminSearchInput" class="admin-search-input"
-            placeholder="Search by name, phone, package, date..." oninput="renderAdminBookingsTable()">
-        </div>
-        <div class="admin-filter-group">
-          <select id="adminStatusFilter" class="admin-filter-select" onchange="renderAdminBookingsTable()">
-            <option value="ALL">All Statuses</option>
-            <option value="New">Status: New</option>
-            <option value="Confirmed">Status: Confirmed</option>
-            <option value="Completed">Status: Completed</option>
-            <option value="Cancelled">Status: Cancelled</option>
-          </select>
-          <select id="adminChannelFilter" class="admin-filter-select" onchange="renderAdminBookingsTable()">
-            <option value="ALL">All Channels</option>
-            <option value="WhatsApp">Channel: WhatsApp</option>
-            <option value="Web Form">Channel: Web Form</option>
-            <option value="Direct Call">Channel: Direct Call</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Table Area -->
-      <div class="admin-table-container">
-        <table class="admin-table" id="adminBookingsTable">
-          <thead>
-            <tr>
-              <th>ID &amp; Date</th>
-              <th>Customer Name</th>
-              <th>Phone / WhatsApp</th>
-              <th>Package / Category</th>
-              <th>Travel Date</th>
-              <th>Channel</th>
-              <th>Status</th>
-              <th>Notes / Remarks</th>
-              <th style="text-align: right;">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="adminBookingsTableBody">
-            <!-- Dynamic rows will render here -->
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Edit / Add Booking Modal -->
-  <div class="admin-modal-overlay" id="adminEditBookingOverlay">
-    <div class="admin-auth-card admin-sub-modal">
-      <button class="admin-modal-close-btn" onclick="closeAdminModal('adminEditBookingOverlay')"
-        aria-label="Close">&times;</button>
-      <div class="admin-badge-pill">
-        <i class="fa-solid fa-pen-to-square"></i> Record Manager
-      </div>
-      <h3 class="admin-card-title" id="adminEditModalTitle">Edit Booking Details</h3>
-      <p class="admin-card-sub">Modify customer booking information, tour category, status, and remarks.</p>
-
-      <form id="adminBookingEditForm" onsubmit="handleSaveBookingRecord(event)">
-        <input type="hidden" id="editBookingId">
-
-        <div class="admin-form-grid-2">
-          <div class="admin-input-group">
-            <label for="editCustomerName"><i class="fa-solid fa-user"></i> Customer Name</label>
-            <input type="text" id="editCustomerName" class="dash-input" required>
-          </div>
-          <div class="admin-input-group">
-            <label for="editCustomerPhone"><i class="fa-solid fa-phone"></i> Mobile / WhatsApp</label>
-            <input type="tel" id="editCustomerPhone" class="dash-input" required>
-          </div>
-        </div>
-
-        <div class="admin-form-grid-2">
-          <div class="admin-input-group">
-            <label for="editTravelDate"><i class="fa-solid fa-calendar-day"></i> Travel Date</label>
-            <input type="date" id="editTravelDate" class="dash-input" required>
-          </div>
-          <div class="admin-input-group">
-            <label for="editPackageName"><i class="fa-solid fa-map-location-dot"></i> Tour Package</label>
-            <select id="editPackageName" class="dash-input">
-              <option value="Araku 1-Day Tour">Araku 1-Day Tour</option>
-              <option value="Araku 1N/2D Tour">Araku 1 Night / 2 Days</option>
-              <option value="Vizag & Araku 2N/3D">Vizag &amp; Araku 2N/3D</option>
-              <option value="Lambasingi & Vanjangi">Lambasingi &amp; Vanjangi Tour</option>
-              <option value="Vizag, Araku & Lambasingi 3N/4D">Vizag, Araku &amp; Lambasingi 3N/4D</option>
-              <option value="Hot Air Balloon">Hot Air Balloon</option>
-              <option value="Rope Cycling & Zipline">Rope Cycling &amp; Zipline</option>
-              <option value="Tent Camping & Bonfire">Tent Camping &amp; Bonfire</option>
-              <option value="Trekking & Waterfalls">Trekking &amp; Waterfalls</option>
-              <option value="Custom Valley Tour">Custom Valley Tour</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="admin-form-grid-2">
-          <div class="admin-input-group">
-            <label for="editBookingStatus"><i class="fa-solid fa-signal"></i> Booking Status</label>
-            <select id="editBookingStatus" class="dash-input">
-              <option value="New">New / Pending</option>
-              <option value="Confirmed">Confirmed</option>
-              <option value="Completed">Completed</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
-          </div>
-          <div class="admin-input-group">
-            <label for="editBookingChannel"><i class="fa-solid fa-share-nodes"></i> Channel</label>
-            <select id="editBookingChannel" class="dash-input">
-              <option value="WhatsApp">WhatsApp</option>
-              <option value="Web Form">Web Form</option>
-              <option value="Direct Call">Direct Call</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="admin-input-group">
-          <label for="editBookingNotes"><i class="fa-solid fa-comment-dots"></i> Notes / Hotel &amp; Cab Remarks</label>
-          <textarea id="editBookingNotes" class="dash-input" rows="2" style="resize: vertical;"
-            placeholder="Cab assigned, room booked, special tribal food requests..."></textarea>
-        </div>
-
-        <button type="submit" class="admin-submit-btn" style="margin-top: 0.5rem;">
-          <i class="fa-solid fa-floppy-disk"></i> Save Booking Record
-        </button>
-      </form>
     </div>
   </div>
 
@@ -1143,25 +748,33 @@
     async function processBookingNotification(name, mobile, date, packageChoice) {
       const emailRecipient = "krsh2852@gmail.com";
 
-      // 1. Immediately record in Admin Booked Persons Database (Web Form Channel, instantly appended to top)
-      saveCustomerBookingRecord({
-        name: name,
-        phone: mobile,
-        date: date,
-        package: packageChoice,
-        channel: "Web Form",
-        status: "New",
-        notes: `Application received via online booking popup for ${packageChoice}`
-      });
+      // 1. Immediately record in Cloudflare D1 via API
+      try {
+        await fetch("/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: name,
+            phone: mobile,
+            date: date,
+            package: packageChoice,
+            channel: "Web Form",
+            status: "New",
+            notes: "Application received via online booking popup for " + packageChoice
+          })
+        });
+      } catch (err) {
+        console.warn("D1 booking submission warning:", err);
+      }
 
-      // 2. Send Email Notification quickly to krsh2852@gmail.com via AJAX formsubmit with 4-second timeout guarantee
+      // 2. Send Email Notification quickly via AJAX formsubmit with timeout guarantee
       const emailPayload = {
         name: name,
         phone: mobile,
         travel_date: date,
         package: packageChoice,
         channel: "Web Application Form",
-        _subject: `[Araku Trails Booking] New Customer Request: ${name} (${packageChoice})`,
+        _subject: "[Araku Trails Booking] New Customer Request: " + name + " (" + packageChoice + ")",
         _template: "table"
       };
 
@@ -1184,10 +797,10 @@
 
     async function handleModalSubmit(e) {
       e.preventDefault();
-      const name = document.getElementById('modalName').value.trim();
-      const mobile = document.getElementById('modalPhone').value.trim();
-      const date = document.getElementById('modalDate').value;
-      const categorySelect = document.getElementById('modalTourCategory');
+      const name = document.getElementById("modalName").value.trim();
+      const mobile = document.getElementById("modalPhone").value.trim();
+      const date = document.getElementById("modalDate").value;
+      const categorySelect = document.getElementById("modalTourCategory");
       const selectedPkg = (categorySelect && categorySelect.value) ? categorySelect.value : (modalSelectedPackage.value || "General Tour");
 
       if (btnBookingSubmit) {
@@ -1195,812 +808,97 @@
         btnBookingSubmit.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Sending Request...`;
       }
 
-      // Process booking: records to admin list immediately and triggers FormSubmit email
       await processBookingNotification(name, mobile, date, selectedPkg);
 
-      // Show in-popup confirmation view
-      if (bookingModalContent) bookingModalContent.style.display = 'none';
+      // Show in-popup confirmation view with XSS-safe DOM elements
+      if (bookingModalContent) bookingModalContent.style.display = "none";
       if (bookingSuccessBox) {
-        const msgEl = document.getElementById('bookingSuccessMessage');
+        const msgEl = document.getElementById("bookingSuccessMessage");
         if (msgEl) {
-          msgEl.innerHTML = `Thank you, <strong>${name}</strong>! Your request for <strong>${selectedPkg}</strong> on <strong>${date}</strong> has been sent successfully. Our reservations team has received your application and will contact you directly on <strong>${mobile}</strong> shortly.`;
+          msgEl.replaceChildren();
+          msgEl.appendChild(document.createTextNode("Thank you, "));
+          const strongName = document.createElement("strong");
+          strongName.textContent = name;
+          msgEl.appendChild(strongName);
+          msgEl.appendChild(document.createTextNode("! Your request for "));
+          const strongPkg = document.createElement("strong");
+          strongPkg.textContent = selectedPkg;
+          msgEl.appendChild(strongPkg);
+          msgEl.appendChild(document.createTextNode(" on "));
+          const strongDate = document.createElement("strong");
+          strongDate.textContent = date;
+          msgEl.appendChild(strongDate);
+          msgEl.appendChild(document.createTextNode(" has been sent successfully. Our reservations team has received your application and will contact you directly on "));
+          const strongMobile = document.createElement("strong");
+          strongMobile.textContent = mobile;
+          msgEl.appendChild(strongMobile);
+          msgEl.appendChild(document.createTextNode(" shortly."));
         }
-        bookingSuccessBox.style.display = 'block';
+        bookingSuccessBox.style.display = "block";
       }
 
       e.target.reset();
     }
 
-    // ========================================================
-    // SECURE ADMIN PORTAL & BOOKED PERSONS MANAGEMENT SYSTEM
-    // ========================================================
+    // Attach Event Listeners for Buttons and Event Delegation
+    document.addEventListener("DOMContentLoaded", () => {
+      // Booking Form Submit
+      const bookingForm = document.getElementById("bookingModalForm");
+      if (bookingForm) bookingForm.addEventListener("submit", handleModalSubmit);
 
-    const ADMIN_CREDS_KEY = "araku_admin_creds_v2";
-    const ADMIN_SHADOW_KEY = "araku_admin_shadow_password_v2";
-    const ADMIN_SEC_KEY = "araku_admin_sec_qa_v1";
-    const ADMIN_SESSION_KEY = "araku_admin_session_active";
-    const ADMIN_BOOKINGS_KEY = "araku_booked_records_v1";
-    const RESET_TOKEN_KEY = "araku_active_reset_token";
-    const RESET_RECIPIENT_EMAIL = "krsh2852@gmail.com";
-    const DEFAULT_ADMIN_USER = "ARKT121100";
-    const MASTER_ADMIN_PASS = "Araku@2026##";
-    const DEFAULT_SEC_QUESTION = "What is your favorite travel destination in Araku?";
-    const DEFAULT_SEC_ANSWER = "Araku";
+      // Book tour navigation button
+      const navBtn = document.getElementById("btnNavBookTour");
+      if (navBtn) navBtn.addEventListener("click", () => openBookingModal("General Booking"));
 
-    // Security Question & Answer Storage Helpers
-    function getAdminSecurityQA() {
-      const stored = localStorage.getItem(ADMIN_SEC_KEY);
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (parsed && parsed.question && parsed.answer) {
-            return parsed;
-          }
-        } catch (e) {
-          console.error("Failed to parse security QA", e);
-        }
-      }
-      const initialQA = {
-        question: DEFAULT_SEC_QUESTION,
-        answer: DEFAULT_SEC_ANSWER
-      };
-      localStorage.setItem(ADMIN_SEC_KEY, JSON.stringify(initialQA));
-      return initialQA;
-    }
-
-    function saveAdminSecurityQA(question, answer) {
-      const qa = {
-        question: question.trim(),
-        answer: answer.trim()
-      };
-      localStorage.setItem(ADMIN_SEC_KEY, JSON.stringify(qa));
-      return qa;
-    }
-
-    // 1. Initialize & Retrieve Credentials securely with hidden password storage
-    function getAdminCredentials() {
-      // First check active credentials from local storage
-      const stored = localStorage.getItem(ADMIN_CREDS_KEY);
-      if (stored) {
-        try {
-          const parsed = JSON.parse(stored);
-          if (parsed && parsed.username && parsed.password) {
-            // Check if there is an updated hidden/shadow password to synchronize
-            const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY);
-            if (shadowPass && shadowPass.trim() && shadowPass !== parsed.password) {
-              parsed.password = shadowPass.trim();
-              localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(parsed));
-            }
-            return parsed;
-          }
-        } catch (e) {
-          console.error("Credentials parse error, checking shadow store", e);
-        }
-      }
-
-      // Check hidden shadow storage if primary key was missing or reset
-      const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY);
-      if (shadowPass && shadowPass.trim()) {
-        const restored = {
-          username: DEFAULT_ADMIN_USER,
-          password: shadowPass.trim(),
-          authorizedEmail: RESET_RECIPIENT_EMAIL,
-          lastUpdated: new Date().toISOString()
-        };
-        localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(restored));
-        return restored;
-      }
-
-      // Initial default setup: first save default password into hidden storage, then into active creds
-      localStorage.setItem(ADMIN_SHADOW_KEY, MASTER_ADMIN_PASS);
-      const initial = {
-        username: DEFAULT_ADMIN_USER,
-        password: MASTER_ADMIN_PASS,
-        authorizedEmail: RESET_RECIPIENT_EMAIL,
-        lastUpdated: new Date().toISOString()
-      };
-      localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(initial));
-      return initial;
-    }
-
-    // 2. Initial Sample Bookings (Seeds clean realistic data if database empty)
-    function getStoredBookings() {
-      const stored = localStorage.getItem(ADMIN_BOOKINGS_KEY);
-      if (stored) {
-        try {
-          return JSON.parse(stored);
-        } catch (e) {
-          console.error("Corrupt bookings, resetting", e);
-        }
-      }
-      const initialSeeds = [
-        {
-          id: "ARK-B001",
-          name: "Suresh Babu",
-          phone: "+91 9494177921",
-          date: "2026-10-18",
-          package: "Araku 1N/2D Tour",
-          channel: "WhatsApp",
-          status: "Confirmed",
-          notes: "Family of 4, requested Hill view resort and Chaparai stream halt",
-          timestamp: "2026-10-12T10:30:00Z"
-        },
-        {
-          id: "ARK-B002",
-          name: "Dr. Ananya Verma",
-          phone: "+91 9848022334",
-          date: "2026-10-22",
-          package: "Vizag, Araku & Lambasingi 3N/4D",
-          channel: "Web Form",
-          status: "New",
-          notes: "Tent stay at Lambasingi requested with early sunrise trek",
-          timestamp: "2026-10-13T08:15:00Z"
-        },
-        {
-          id: "ARK-B003",
-          name: "Rajesh Kumar",
-          phone: "+91 8886543210",
-          date: "2026-10-15",
-          package: "Araku 1-Day Tour",
-          channel: "WhatsApp",
-          status: "Completed",
-          notes: "AC Sedan cab arranged, Borra caves + Katiki waterfalls trip done",
-          timestamp: "2026-10-11T16:45:00Z"
-        }
-      ];
-      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(initialSeeds));
-      return initialSeeds;
-    }
-
-    function saveCustomerBookingRecord(record) {
-      const bookings = getStoredBookings();
-      const newId = "ARK-B" + String(Date.now()).slice(-4);
-      const newEntry = {
-        id: record.id || newId,
-        name: record.name,
-        phone: record.phone,
-        date: record.date,
-        package: record.package,
-        channel: record.channel || "Web Form",
-        status: record.status || "New",
-        notes: record.notes || "Dispatched via customer inquiry",
-        timestamp: new Date().toISOString()
-      };
-      // Immediately append newly submitted customer details to the top of the list
-      bookings.unshift(newEntry);
-      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
-      renderAdminBookingsTable();
-
-      // Sync booking record to Cloudflare D1
-      fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newEntry)
-      }).catch(err => console.warn('D1 booking sync notice:', err));
-    }
-
-    // Modal Display Management
-    function closeAllAdminModals() {
-      document.querySelectorAll('.admin-modal-overlay').forEach(modal => {
-        modal.classList.remove('active');
+      // Drawer book button
+      const drawerBtn = document.getElementById("btnDrawerBookTour");
+      if (drawerBtn) drawerBtn.addEventListener("click", () => {
+        closeMobileDrawer();
+        openBookingModal("General Booking");
       });
-      document.body.style.overflow = '';
-    }
 
-    function closeAdminModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) modal.classList.remove('active');
-      document.body.style.overflow = '';
-    }
+      // Global click delegation for interactive data attributes
+      document.body.addEventListener("click", (e) => {
+        const target = e.target;
 
-    function handleResetBackClick() {
-      if (isAdminLoggedIn()) {
-        openAdminModal('dashboard');
-      } else {
-        openAdminModal('login');
-      }
-    }
-
-    function openAdminModal(view) {
-      closeAllAdminModals();
-      document.body.style.overflow = 'hidden';
-
-      if (view === 'login') {
-        if (isAdminLoggedIn()) {
-          openAdminModal('dashboard');
+        // Close drawer actions
+        if (target.closest("[data-action='close-drawer']")) {
+          closeMobileDrawer();
           return;
         }
-        document.getElementById('adminLoginNotice').innerHTML = '';
-        document.getElementById('adminLoginForm').reset();
-        document.getElementById('adminLoginOverlay').classList.add('active');
-      } else if (view === 'forgot') {
-        document.getElementById('adminForgotNotice').innerHTML = '';
-        document.getElementById('adminForgotOverlay').classList.add('active');
-      } else if (view === 'sec_question') {
-        document.getElementById('adminSecQuestionNotice').innerHTML = '';
-        document.getElementById('adminSecAnswerInput').value = '';
-        const currentQA = getAdminSecurityQA();
-        const questionDisplay = document.getElementById('displayRegisteredQuestion');
-        if (questionDisplay) {
-          questionDisplay.textContent = currentQA.question || DEFAULT_SEC_QUESTION;
-        }
-        document.getElementById('adminSecQuestionOverlay').classList.add('active');
-      } else if (view === 'reset') {
-        document.getElementById('adminResetNotice').innerHTML = '';
-        const creds = getAdminCredentials();
-        // Prefill currently active User ID so the user ID is preserved by default
-        const usernameInput = document.getElementById('adminNewUsername');
-        if (usernameInput) usernameInput.value = creds.username || DEFAULT_ADMIN_USER;
 
-        const passInput = document.getElementById('adminNewPassword');
-        if (passInput) passInput.value = '';
-        const confirmInput = document.getElementById('adminConfirmPassword');
-        if (confirmInput) confirmInput.value = '';
-
-        // Prefill custom security question and answer
-        const currentQA = getAdminSecurityQA();
-        const customQInput = document.getElementById('adminCustomQuestion');
-        if (customQInput) customQInput.value = currentQA.question || DEFAULT_SEC_QUESTION;
-        const customAInput = document.getElementById('adminCustomAnswer');
-        if (customAInput) customAInput.value = currentQA.answer || DEFAULT_SEC_ANSWER;
-
-        // Context-aware labels depending on whether logged in or resetting via link
-        const badgeEl = document.getElementById('adminResetBadgeTitle');
-        const headingEl = document.getElementById('adminResetHeading');
-        const subEl = document.getElementById('adminResetSub');
-        const backBtn = document.getElementById('adminResetBackLink');
-
-        if (isAdminLoggedIn()) {
-          if (badgeEl) badgeEl.textContent = 'Account Security';
-          if (headingEl) headingEl.textContent = 'Change Admin Password';
-          if (subEl) subEl.textContent = 'Update your login password and manage your custom security question. Your active User ID remains unchanged unless you choose to edit it.';
-          if (backBtn) backBtn.innerHTML = '&larr; Back to Dashboard';
-        } else {
-          if (badgeEl) badgeEl.textContent = 'Reset Password';
-          if (headingEl) headingEl.textContent = 'Create New Password';
-          if (subEl) subEl.textContent = 'Set your new password to replace your previous password and configure your custom security question. Your User ID will remain active.';
-          if (backBtn) backBtn.innerHTML = '&larr; Back to Sign In';
-        }
-
-        document.getElementById('adminResetOverlay').classList.add('active');
-      } else if (view === 'dashboard') {
-        if (!isAdminLoggedIn()) {
-          openAdminModal('login');
+        // Close booking modal actions
+        if (target.closest("[data-action='close-booking-modal']")) {
+          closeBookingModal();
           return;
         }
-        const creds = getAdminCredentials();
-        document.getElementById('adminLoggedAs').textContent = creds.username;
-        renderAdminBookingsTable();
-        document.getElementById('adminDashboardOverlay').classList.add('active');
-      }
-    }
 
-    // Close on backdrop click
-    document.querySelectorAll('.admin-modal-overlay').forEach(overlay => {
-      overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-          overlay.classList.remove('active');
-          document.body.style.overflow = '';
+        // Slider dots
+        const dot = target.closest("[data-slide]");
+        if (dot) {
+          const slideIdx = parseInt(dot.getAttribute("data-slide"), 10);
+          setSlide(slideIdx);
+          resetAutoTimer();
+          return;
+        }
+
+        // Package booking triggers
+        const bookBtn = target.closest("[data-book-pkg]");
+        if (bookBtn) {
+          e.stopPropagation();
+          const pkgName = bookBtn.getAttribute("data-book-pkg");
+          openBookingModal(pkgName);
+          return;
+        }
+
+        // Tour card navigation
+        const card = target.closest("[data-tour-url]");
+        if (card && !target.closest("a") && !target.closest("button")) {
+          window.location.href = card.getAttribute("data-tour-url");
+          return;
         }
       });
     });
-
-    // Password visibility toggle
-    function togglePasswordVisibility(inputId, btn) {
-      const input = document.getElementById(inputId);
-      if (!input) return;
-      if (input.type === 'password') {
-        input.type = 'text';
-        btn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
-      } else {
-        input.type = 'password';
-        btn.innerHTML = '<i class="fa-solid fa-eye"></i>';
-      }
-    }
-
-    function isAdminLoggedIn() {
-      return sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
-    }
-
-    // Rate Limiting & Failed Login Protection
-    let failedLoginAttempts = 0;
-    let lockUntilTimestamp = 0;
-
-    async function handleAdminLogin(e) {
-      e.preventDefault();
-      const notice = document.getElementById('adminLoginNotice');
-      notice.innerHTML = '';
-
-      const now = Date.now();
-      if (now < lockUntilTimestamp) {
-        const remainingSec = Math.ceil((lockUntilTimestamp - now) / 1000);
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-triangle-exclamation"></i> Security Lock: Too many failed attempts. Try again in ${remainingSec}s.</div>`;
-        return;
-      }
-
-      const userInput = document.getElementById('adminUsername').value.trim();
-      const passInput = document.getElementById('adminPassword').value;
-
-      // Try authenticating with Cloudflare D1 API endpoint first
-      let cloudflareSuccess = false;
-      try {
-        const res = await fetch('/api/admin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ action: 'login', username: userInput, password: passInput })
-        });
-        const data = await res.json();
-        if (data && data.success) {
-          cloudflareSuccess = true;
-          sessionStorage.setItem('araku_d1_token', data.token);
-          if (data.username) {
-            localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify({
-              username: data.username,
-              password: passInput,
-              authorizedEmail: data.authorizedEmail || RESET_RECIPIENT_EMAIL,
-              lastUpdated: new Date().toISOString()
-            }));
-          }
-        }
-      } catch (err) {
-        console.warn('Cloudflare D1 endpoint offline or not bound, using local credentials fallback:', err);
-      }
-
-      const creds = getAdminCredentials();
-      const shadowPass = localStorage.getItem(ADMIN_SHADOW_KEY) || creds.password;
-
-      // Verify username matches and password matches
-      const isUserMatch = userInput.toLowerCase() === creds.username.toLowerCase();
-      const isPassMatch = (passInput === creds.password) || (passInput === shadowPass);
-
-      if (cloudflareSuccess || (isUserMatch && isPassMatch)) {
-        // Guarantee synchronization for future logins
-        if (creds.password !== passInput) {
-          creds.password = passInput;
-          localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(creds));
-        }
-        localStorage.setItem(ADMIN_SHADOW_KEY, passInput);
-
-        failedLoginAttempts = 0;
-        sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Sign in successful! Loading security console...</div>`;
-        setTimeout(() => {
-          openAdminModal('dashboard');
-        }, 400);
-      } else {
-        failedLoginAttempts++;
-        if (failedLoginAttempts >= 5) {
-          lockUntilTimestamp = Date.now() + 30000; // 30 sec lock
-          notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-shield-virus"></i> 5 invalid attempts. Account temporarily locked for 30 seconds.</div>`;
-        } else {
-          const attemptsLeft = 5 - failedLoginAttempts;
-          notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Invalid User ID or Password. (${attemptsLeft} attempts remaining)</div>`;
-        }
-      }
-    }
-
-    function handleAdminLogout() {
-      sessionStorage.removeItem(ADMIN_SESSION_KEY);
-      closeAllAdminModals();
-      alert("You have been securely signed out from the Araku Trails Admin Console.");
-    }
-
-    // 1. Direct Mail Dispatch: Sends current running User ID and Password without asking for email input or displaying email ID
-    async function handleSendCredentialsMail() {
-      const notice = document.getElementById('adminForgotNotice');
-      const mailBtn = document.getElementById('btnChooseMailRecovery');
-      if (notice) notice.innerHTML = '';
-
-      const creds = getAdminCredentials();
-      const currentUsername = creds.username || DEFAULT_ADMIN_USER;
-      const currentPassword = creds.password || (localStorage.getItem(ADMIN_SHADOW_KEY) || MASTER_ADMIN_PASS);
-
-      if (mailBtn) {
-        mailBtn.disabled = true;
-        mailBtn.style.opacity = '0.7';
-        mailBtn.style.pointerEvents = 'none';
-      }
-
-      notice.innerHTML = `
-        <div class="admin-alert-box" style="background: rgba(16, 185, 129, 0.15); border: 1px solid var(--emerald-bright); color: #ecfdf5; margin-bottom: 1rem;">
-          <i class="fa-solid fa-spinner fa-spin"></i> Dispatching current credentials to registered administrator mailbox...
-        </div>
-      `;
-
-      try {
-        // Send directly to krsh2852@gmail.com with timeout race so UI never hangs
-        const sendPromise = fetch("https://formsubmit.co/ajax/" + RESET_RECIPIENT_EMAIL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            _subject: `[Araku Trails Security] Admin Credentials Recovery`,
-            recipient: RESET_RECIPIENT_EMAIL,
-            message: `Requested Araku Trails Admin credentials for current administrator account:`,
-            current_admin_user_id: currentUsername,
-            current_admin_password: currentPassword,
-            dispatched_at: new Date().toLocaleString(),
-            _template: "table"
-          })
-        });
-
-        const timeoutPromise = new Promise(resolve => setTimeout(resolve, 3800));
-        await Promise.race([sendPromise, timeoutPromise]);
-      } catch (err) {
-        console.log("Credentials mail dispatch status:", err);
-      }
-
-      if (mailBtn) {
-        mailBtn.disabled = false;
-        mailBtn.style.opacity = '1';
-        mailBtn.style.pointerEvents = 'auto';
-      }
-
-      // Strictly without showing the email address on screen
-      notice.innerHTML = `
-        <div class="admin-alert-box admin-alert-success" style="flex-direction: column; align-items: flex-start; gap: 0.45rem; margin-bottom: 1rem;">
-          <div><i class="fa-solid fa-circle-check"></i> <strong>Credentials Sent Successfully!</strong></div>
-          <div style="font-size: 0.83rem; color: #cbd5e1; line-height: 1.5;">
-            Your currently running Admin User ID and Password have been dispatched directly to the registered administrator email address. Please check your inbox.
-          </div>
-        </div>
-      `;
-    }
-
-    // 2. Verify Security Question & Proceed to Reset
-    function handleVerifySecurityQuestion(e) {
-      e.preventDefault();
-      const answerInput = (document.getElementById('adminSecAnswerInput').value || '').trim();
-      const notice = document.getElementById('adminSecQuestionNotice');
-      notice.innerHTML = '';
-
-      const currentQA = getAdminSecurityQA();
-      const expectedAnswer = (currentQA.answer || DEFAULT_SEC_ANSWER).trim();
-
-      if (answerInput.toLowerCase() === expectedAnswer.toLowerCase()) {
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Security verification successful! Opening password reset...</div>`;
-        setTimeout(() => {
-          openAdminModal('reset');
-        }, 600);
-      } else {
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Incorrect security answer. Please check and try again.</div>`;
-      }
-    }
-
-    // Handle Reset / Change Password Submission (Replaces previous password, preserves User ID, excludes master password, updates custom security question)
-    function handleAdminResetSubmit(e) {
-      e.preventDefault();
-      const currentCreds = getAdminCredentials();
-      const userInput = document.getElementById('adminNewUsername').value.trim();
-      // Keep old/existing user ID if input is empty or matches previous ID
-      const targetUsername = userInput || currentCreds.username || DEFAULT_ADMIN_USER;
-      const newPassword = document.getElementById('adminNewPassword').value;
-      const confirmPassword = document.getElementById('adminConfirmPassword').value;
-      const customQ = (document.getElementById('adminCustomQuestion').value || '').trim();
-      const customA = (document.getElementById('adminCustomAnswer').value || '').trim();
-      const notice = document.getElementById('adminResetNotice');
-      notice.innerHTML = '';
-
-      if (newPassword.length < 6) {
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Password must be at least 6 characters long.</div>`;
-        return;
-      }
-
-      if (newPassword !== confirmPassword) {
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-circle-xmark"></i> Passwords do not match.</div>`;
-        return;
-      }
-
-      // Security requirement: New password must replace old password and exclude the original master password
-      if (newPassword === MASTER_ADMIN_PASS) {
-        notice.innerHTML = `<div class="admin-alert-box admin-alert-error"><i class="fa-solid fa-triangle-exclamation"></i> Security policy: You cannot reuse the initial Master Password (${MASTER_ADMIN_PASS}). Please enter a unique new password.</div>`;
-        return;
-      }
-
-      // 1. Rewrite and update the hidden shadow password with the newly chosen password
-      localStorage.setItem(ADMIN_SHADOW_KEY, newPassword);
-
-      // 2. Rewrite active credentials for future logins, keeping User ID consistent
-      const updatedCreds = {
-        username: targetUsername,
-        password: newPassword,
-        authorizedEmail: RESET_RECIPIENT_EMAIL,
-        lastUpdated: new Date().toISOString()
-      };
-      localStorage.setItem(ADMIN_CREDS_KEY, JSON.stringify(updatedCreds));
-
-      // 3. Save custom security question and answer if provided
-      if (customQ && customA) {
-        saveAdminSecurityQA(customQ, customA);
-      }
-
-      // 4. Sync new credentials to Cloudflare D1 database
-      const activeToken = sessionStorage.getItem('araku_d1_token');
-      if (activeToken) {
-        fetch('/api/admin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            action: 'update_credentials',
-            token: activeToken,
-            newUsername: targetUsername,
-            newPassword: newPassword,
-            customQuestion: customQ,
-            customAnswer: customA
-          })
-        }).catch(err => console.warn('D1 sync warning:', err));
-      }
-
-      const isSessionLive = isAdminLoggedIn();
-      notice.innerHTML = `<div class="admin-alert-box admin-alert-success"><i class="fa-solid fa-circle-check"></i> Credentials &amp; security question updated successfully! Applying changes...</div>`;
-
-      setTimeout(() => {
-        if (isSessionLive) {
-          // If changed from top bar inside dashboard, return straight to dashboard with success feedback
-          openAdminModal('dashboard');
-        } else {
-          // If reset via recovery flow, populate and open sign in
-          document.getElementById('adminUsername').value = targetUsername;
-          document.getElementById('adminPassword').value = '';
-          if (window.location.hash === '#reset-password') {
-            history.replaceState(null, null, window.location.pathname);
-          }
-          openAdminModal('login');
-        }
-      }, 1400);
-    }
-
-    // Auto-detect Admin Access Route (https://arakutrails.com/admin121100 or hash/query) & Reset Link in URL
-    function checkAdminUrlRoutes() {
-      const path = (window.location.pathname || '').toLowerCase();
-      const hash = (window.location.hash || '').toLowerCase();
-      const search = (window.location.search || '').toLowerCase();
-
-      // Dedicated Admin URL route: https://arakutrails.com/admin121100, /#admin121100, or ?admin121100
-      if (path.includes('admin121100') || hash === '#admin121100' || search.includes('admin121100')) {
-        if (isAdminLoggedIn()) {
-          openAdminModal('dashboard');
-        } else {
-          openAdminModal('login');
-        }
-        return;
-      }
-
-      // Password reset trigger from email link click: prefill existing user ID and open reset view
-      if (hash === '#reset-password') {
-        openAdminModal('reset');
-      }
-    }
-    window.addEventListener('DOMContentLoaded', checkAdminUrlRoutes);
-    window.addEventListener('hashchange', checkAdminUrlRoutes);
-
-    // --------------------------------------------------------
-    // BOOKED PERSONS MANAGEMENT (EDITABLE MENU, METRICS, SEARCH)
-    // --------------------------------------------------------
-
-    function renderAdminBookingsTable() {
-      const tbody = document.getElementById('adminBookingsTableBody');
-      if (!tbody) return;
-
-      const bookings = getStoredBookings();
-      const searchQuery = (document.getElementById('adminSearchInput').value || '').toLowerCase().trim();
-      const statusFilter = document.getElementById('adminStatusFilter').value;
-      const channelFilter = document.getElementById('adminChannelFilter').value;
-
-      // Update metric ribbons
-      const totalCount = bookings.length;
-      const newCount = bookings.filter(b => b.status === 'New').length;
-      const confCount = bookings.filter(b => b.status === 'Confirmed').length;
-      const waCount = bookings.filter(b => b.channel === 'WhatsApp').length;
-
-      document.getElementById('statTotalBookings').textContent = totalCount;
-      document.getElementById('statNewBookings').textContent = newCount;
-      document.getElementById('statConfirmedBookings').textContent = confCount;
-      document.getElementById('statWhatsappBookings').textContent = waCount;
-
-      // Filter rows
-      const filtered = bookings.filter(b => {
-        const matchesStatus = (statusFilter === 'ALL' || b.status === statusFilter);
-        const matchesChannel = (channelFilter === 'ALL' || b.channel === channelFilter);
-        const matchesSearch = !searchQuery ||
-          b.name.toLowerCase().includes(searchQuery) ||
-          b.phone.toLowerCase().includes(searchQuery) ||
-          b.package.toLowerCase().includes(searchQuery) ||
-          b.date.toLowerCase().includes(searchQuery) ||
-          (b.notes && b.notes.toLowerCase().includes(searchQuery));
-        return matchesStatus && matchesChannel && matchesSearch;
-      });
-
-      if (filtered.length === 0) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="9">
-              <div class="admin-table-empty">
-                <i class="fa-solid fa-inbox"></i>
-                <div>No bookings match your current filter or search criteria.</div>
-              </div>
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      tbody.innerHTML = filtered.map(b => {
-        const statusClass = b.status.toLowerCase();
-        const channelClass = b.channel === 'WhatsApp' ? 'whatsapp' : 'web';
-        const channelIcon = b.channel === 'WhatsApp' ? 'fa-brands fa-whatsapp' : 'fa-solid fa-globe';
-        const cleanPhone = b.phone.replace(/[^0-9]/g, '');
-
-        return `
-          <tr>
-            <td>
-              <div style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--emerald-bright); font-weight: 600;">${b.id}</div>
-              <div style="font-size: 0.72rem; color: #64748b;">${new Date(b.timestamp || Date.now()).toLocaleDateString()}</div>
-            </td>
-            <td>
-              <strong style="color: #f8fafc;">${escapeHtml(b.name)}</strong>
-            </td>
-            <td>
-              <a href="tel:${cleanPhone}" style="color: #cbd5e1; text-decoration: none;">${escapeHtml(b.phone)}</a>
-            </td>
-            <td>
-              <span style="color: #e2e8f0; font-weight: 500;">${escapeHtml(b.package)}</span>
-            </td>
-            <td>
-              <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #cbd5e1;"><i class="fa-regular fa-calendar" style="color: var(--emerald-bright); margin-right: 4px;"></i>${b.date}</span>
-            </td>
-            <td>
-              <span class="channel-chip ${channelClass}">
-                <i class="${channelIcon}"></i> ${escapeHtml(b.channel)}
-              </span>
-            </td>
-            <td>
-              <span class="status-chip ${statusClass}">${escapeHtml(b.status)}</span>
-            </td>
-            <td>
-              <div style="max-width: 200px; font-size: 0.78rem; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(b.notes || '')}">
-                ${escapeHtml(b.notes || '—')}
-              </div>
-            </td>
-            <td>
-              <div class="admin-actions-cell" style="justify-content: flex-end;">
-                <button type="button" class="action-icon-btn whatsapp" title="Chat on WhatsApp" onclick="openCustomerWhatsApp('${escapeHtml(b.phone)}', '${escapeHtml(b.name)}', '${escapeHtml(b.package)}')">
-                  <i class="fa-brands fa-whatsapp"></i>
-                </button>
-                <button type="button" class="action-icon-btn" title="Edit Booking Details" onclick="openEditBookingModal('${b.id}')">
-                  <i class="fa-solid fa-pen"></i>
-                </button>
-                <button type="button" class="action-icon-btn delete" title="Delete Booking" onclick="deleteBookingRecord('${b.id}')">
-                  <i class="fa-solid fa-trash-can"></i>
-                </button>
-              </div>
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function escapeHtml(text) {
-      if (!text) return '';
-      return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function openCustomerWhatsApp(phone, name, pkg) {
-      const cleanPhone = phone.replace(/[^0-9]/g, '');
-      const msg = `Hello ${name}, greetings from Araku Trails! We are following up regarding your booking request for "${pkg}". How can we assist you with cab details, hotel stays, or itinerary adjustments?`;
-      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msg)}`, '_blank');
-    }
-
-    function openAddBookingModal() {
-      document.getElementById('adminBookingEditForm').reset();
-      document.getElementById('editBookingId').value = '';
-      document.getElementById('adminEditModalTitle').textContent = "Add New Booking";
-      document.getElementById('editTravelDate').value = new Date().toISOString().split('T')[0];
-      document.getElementById('adminEditBookingOverlay').classList.add('active');
-    }
-
-    function openEditBookingModal(bookingId) {
-      const bookings = getStoredBookings();
-      const record = bookings.find(b => b.id === bookingId);
-      if (!record) return;
-
-      document.getElementById('editBookingId').value = record.id;
-      document.getElementById('editCustomerName').value = record.name;
-      document.getElementById('editCustomerPhone').value = record.phone;
-      document.getElementById('editTravelDate').value = record.date;
-      document.getElementById('editPackageName').value = record.package;
-      document.getElementById('editBookingStatus').value = record.status;
-      document.getElementById('editBookingChannel').value = record.channel;
-      document.getElementById('editBookingNotes').value = record.notes || '';
-
-      document.getElementById('adminEditModalTitle').textContent = `Edit Booking: ${record.id}`;
-      document.getElementById('adminEditBookingOverlay').classList.add('active');
-    }
-
-    function handleSaveBookingRecord(e) {
-      e.preventDefault();
-      const id = document.getElementById('editBookingId').value;
-      const bookings = getStoredBookings();
-
-      const recordData = {
-        name: document.getElementById('editCustomerName').value.trim(),
-        phone: document.getElementById('editCustomerPhone').value.trim(),
-        date: document.getElementById('editTravelDate').value,
-        package: document.getElementById('editPackageName').value,
-        status: document.getElementById('editBookingStatus').value,
-        channel: document.getElementById('editBookingChannel').value,
-        notes: document.getElementById('editBookingNotes').value.trim()
-      };
-
-      if (id) {
-        // Update existing
-        const idx = bookings.findIndex(b => b.id === id);
-        if (idx !== -1) {
-          bookings[idx] = {
-            ...bookings[idx],
-            ...recordData,
-            updatedAt: new Date().toISOString()
-          };
-        }
-      } else {
-        // Add new
-        const newId = "ARK-B" + String(Date.now()).slice(-4);
-        bookings.unshift({
-          id: newId,
-          ...recordData,
-          timestamp: new Date().toISOString()
-        });
-      }
-
-      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
-      closeAdminModal('adminEditBookingOverlay');
-      renderAdminBookingsTable();
-    }
-
-    function deleteBookingRecord(bookingId) {
-      if (!confirm(`Are you sure you want to delete booking ${bookingId}? This cannot be undone.`)) return;
-      let bookings = getStoredBookings();
-      bookings = bookings.filter(b => b.id !== bookingId);
-      localStorage.setItem(ADMIN_BOOKINGS_KEY, JSON.stringify(bookings));
-      renderAdminBookingsTable();
-    }
-
-    // Export Booked Persons List to CSV File
-    function exportBookingsToCSV() {
-      const bookings = getStoredBookings();
-      if (!bookings.length) {
-        alert("No bookings to export.");
-        return;
-      }
-      const headers = ["Booking ID", "Customer Name", "Phone", "Package", "Travel Date", "Channel", "Status", "Notes", "Created At"];
-      const rows = bookings.map(b => [
-        `"${b.id}"`,
-        `"${(b.name || '').replace(/"/g, '""')}"`,
-        `"${(b.phone || '').replace(/"/g, '""')}"`,
-        `"${(b.package || '').replace(/"/g, '""')}"`,
-        `"${b.date}"`,
-        `"${b.channel}"`,
-        `"${b.status}"`,
-        `"${(b.notes || '').replace(/"/g, '""')}"`,
-        `"${b.timestamp || ''}"`
-      ]);
-
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(r => r.join(","))].join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `araku_trails_bookings_${new Date().toISOString().slice(0, 10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
   </script>
 </body>
 

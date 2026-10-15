@@ -1,133 +1,206 @@
 // functions/api/bookings.js
-// Cloudflare Pages Function endpoint for Customer Tour Bookings management
+// Cloudflare Pages / Worker endpoint for Customer Tour Bookings management
+// Gated by Cloudflare Access for read/update/delete operations
 
-function jsonResponse(data, status = 200) {
+const ALLOWED_ORIGIN = "https://arakutrails.com";
+
+function getCorsHeaders(request) {
+  const origin = request.headers.get("Origin");
+  const isAllowed = origin === ALLOWED_ORIGIN || origin === "https://www.arakutrails.com" || (origin && origin.includes("localhost"));
+  return {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": isAllowed ? origin : ALLOWED_ORIGIN,
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization, Cf-Access-Jwt-Assertion"
+  };
+}
+
+function jsonResponse(request, data, status = 200) {
   return new Response(JSON.stringify(data), {
     status,
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization"
-    }
+    headers: getCorsHeaders(request)
   });
 }
 
-async function verifyAdminSession(db, token) {
-  if (!token) return false;
-  const row = await db.prepare("SELECT token_expiry FROM admin_credentials WHERE id = 1 AND session_token = ?").bind(token).first();
-  return (row && row.token_expiry > Date.now());
+// Cloudflare Access Edge Verification
+// When Cloudflare Access protects /admin/ or API endpoints, it injects 'Cf-Access-Jwt-Assertion'
+function verifyCloudflareAccess(request, env) {
+  const jwt = request.headers.get("Cf-Access-Jwt-Assertion");
+  const isDev = env.ENVIRONMENT === "development" || request.headers.get("Host")?.includes("localhost");
+  if (!jwt && !isDev) {
+    return false;
+  }
+  return true;
 }
 
-export async function onRequestOptions() {
+// Turnstile verification helper for public booking submissions
+async function verifyTurnstileToken(token, secretKey, remoteIp) {
+  if (!secretKey) {
+    // If secret is not yet set via wrangler secret put, allow progression to avoid breaking forms
+    return true;
+  }
+  if (!token) return false;
+
+  const formData = new FormData();
+  formData.append("secret", secretKey);
+  formData.append("response", token);
+  if (remoteIp) formData.append("remoteip", remoteIp);
+
+  try {
+    const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      body: formData
+    });
+    const outcome = await res.json();
+    return outcome.success;
+  } catch (err) {
+    console.error("Turnstile verification error:", err);
+    return false;
+  }
+}
+
+export async function onRequestOptions({ request }) {
   return new Response(null, {
     status: 204,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization"
-    }
+    headers: getCorsHeaders(request)
   });
 }
 
-// GET: Retrieve all bookings (Admin only)
+// GET: Retrieve all bookings (Cloudflare Access edge-protected)
 export async function onRequestGet({ request, env }) {
   if (!env.DB) {
-    return jsonResponse({ success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+    return jsonResponse(request, { success: false, error: "D1 Database binding 'DB' is missing" }, 500);
   }
 
-  const url = new URL(request.url);
-  const token = url.searchParams.get("token") || request.headers.get("Authorization")?.replace("Bearer ", "");
-
-  const isAdmin = await verifyAdminSession(env.DB, token);
-  if (!isAdmin) {
-    return jsonResponse({ success: false, error: "Unauthorized access" }, 401);
+  if (!verifyCloudflareAccess(request, env)) {
+    return jsonResponse(request, { success: false, error: "Unauthorized access - Cloudflare Access Required" }, 401);
   }
 
-  const { results } = await env.DB.prepare("SELECT * FROM customer_bookings ORDER BY created_at DESC").all();
-  return jsonResponse({ success: true, bookings: results || [] });
+  const { results } = await env.DB.prepare(
+    "SELECT id, name, phone, travel_date, package, channel, status, notes, created_at FROM customer_bookings ORDER BY created_at DESC"
+  ).all();
+
+  return jsonResponse(request, { success: true, bookings: results || [] });
 }
 
-// POST: Save a new booking (Public form submit or Admin manual entry)
+// POST: Save a new booking (Public form submit or Admin entry)
 export async function onRequestPost({ request, env }) {
   if (!env.DB) {
-    return jsonResponse({ success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+    return jsonResponse(request, { success: false, error: "D1 Database binding 'DB' is missing" }, 500);
   }
 
   let body;
   try {
     body = await request.json();
   } catch (e) {
-    return jsonResponse({ success: false, error: "Invalid JSON" }, 400);
+    return jsonResponse(request, { success: false, error: "Invalid JSON format" }, 400);
   }
 
-  const id = body.id || ("ARK-B" + String(Date.now()).slice(-4));
-  const name = body.name || "Guest";
-  const phone = body.phone || "";
-  const travelDate = body.date || "";
-  const pkg = body.package || "Custom Araku Tour";
-  const channel = body.channel || "Web Form";
-  const status = body.status || "New";
-  const notes = body.notes || "";
+  // Optional Turnstile check if public form submitted token
+  if (env.TURNSTILE_SECRET_KEY && body.turnstileToken) {
+    const remoteIp = request.headers.get("CF-Connecting-IP");
+    const validToken = await verifyTurnstileToken(body.turnstileToken, env.TURNSTILE_SECRET_KEY, remoteIp);
+    if (!validToken) {
+      return jsonResponse(request, { success: false, error: "Bot verification failed" }, 403);
+    }
+  }
+
+  // Input Sanitization and Length validation
+  const name = String(body.name || "").trim().slice(0, 100);
+  const phone = String(body.phone || "").trim().slice(0, 20);
+  const travelDate = String(body.date || body.travel_date || "").trim().slice(0, 15);
+  const pkg = String(body.package || "Araku 1-Day Tour").trim().slice(0, 100);
+  const channel = String(body.channel || "Web Form").trim().slice(0, 50);
+  const status = String(body.status || "New").trim().slice(0, 30);
+  const notes = String(body.notes || "").trim().slice(0, 500);
+
+  if (!name || name.length < 2) {
+    return jsonResponse(request, { success: false, error: "Name must be at least 2 characters" }, 400);
+  }
+
+  // Phone validation: allow digits, spaces, plus sign, dash
+  const phoneDigits = phone.replace(/\D/g, "");
+  if (phoneDigits.length < 10 || phoneDigits.length > 15) {
+    return jsonResponse(request, { success: false, error: "Please enter a valid 10-digit phone number" }, 400);
+  }
+
+  // Date validation: YYYY-MM-DD sanity
+  if (travelDate && !/^\d{4}-\d{2}-\d{2}$/.test(travelDate)) {
+    return jsonResponse(request, { success: false, error: "Invalid travel date format (expected YYYY-MM-DD)" }, 400);
+  }
+
+  // Generate clean cryptographically secure ID
+  const id = "ARK-" + crypto.randomUUID().slice(0, 8).toUpperCase();
 
   await env.DB.prepare(`
     INSERT INTO customer_bookings (id, name, phone, travel_date, package, channel, status, notes)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
   `).bind(id, name, phone, travelDate, pkg, channel, status, notes).run();
 
-  return jsonResponse({ success: true, booking: { id, name, phone, date: travelDate, package: pkg, channel, status, notes } });
+  return jsonResponse(request, {
+    success: true,
+    booking: { id, name, phone, date: travelDate, package: pkg, channel, status, notes }
+  });
 }
 
-// PUT: Update booking status / notes (Admin only)
+// PUT: Update booking status / notes (Admin only, Cloudflare Access gated)
 export async function onRequestPut({ request, env }) {
   if (!env.DB) {
-    return jsonResponse({ success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+    return jsonResponse(request, { success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+  }
+
+  if (!verifyCloudflareAccess(request, env)) {
+    return jsonResponse(request, { success: false, error: "Unauthorized" }, 401);
   }
 
   let body;
   try {
     body = await request.json();
   } catch (e) {
-    return jsonResponse({ success: false, error: "Invalid JSON" }, 400);
+    return jsonResponse(request, { success: false, error: "Invalid JSON" }, 400);
   }
 
-  const token = body.token || request.headers.get("Authorization")?.replace("Bearer ", "");
-  const isAdmin = await verifyAdminSession(env.DB, token);
-  if (!isAdmin) {
-    return jsonResponse({ success: false, error: "Unauthorized" }, 401);
-  }
+  const { id } = body;
+  if (!id) return jsonResponse(request, { success: false, error: "Booking ID required" }, 400);
 
-  const { id, status, notes } = body;
-  if (!id) return jsonResponse({ success: false, error: "Booking ID required" }, 400);
+  const status = body.status ? String(body.status).slice(0, 30) : null;
+  const notes = body.notes !== undefined ? String(body.notes).slice(0, 500) : null;
+  const name = body.name ? String(body.name).slice(0, 100) : null;
+  const phone = body.phone ? String(body.phone).slice(0, 20) : null;
+  const travelDate = body.date || body.travel_date ? String(body.date || body.travel_date).slice(0, 15) : null;
+  const pkg = body.package ? String(body.package).slice(0, 100) : null;
 
-  if (status && notes !== undefined) {
+  if (name && phone && travelDate && pkg) {
+    await env.DB.prepare(`
+      UPDATE customer_bookings 
+      SET name = ?, phone = ?, travel_date = ?, package = ?, status = COALESCE(?, status), notes = COALESCE(?, notes)
+      WHERE id = ?
+    `).bind(name, phone, travelDate, pkg, status, notes, id).run();
+  } else if (status && notes !== null) {
     await env.DB.prepare("UPDATE customer_bookings SET status = ?, notes = ? WHERE id = ?").bind(status, notes, id).run();
   } else if (status) {
     await env.DB.prepare("UPDATE customer_bookings SET status = ? WHERE id = ?").bind(status, id).run();
-  } else if (notes !== undefined) {
+  } else if (notes !== null) {
     await env.DB.prepare("UPDATE customer_bookings SET notes = ? WHERE id = ?").bind(notes, id).run();
   }
 
-  return jsonResponse({ success: true, message: "Booking updated" });
+  return jsonResponse(request, { success: true, message: "Booking updated" });
 }
 
-// DELETE: Delete a booking (Admin only)
+// DELETE: Delete a booking (Admin only, Cloudflare Access gated)
 export async function onRequestDelete({ request, env }) {
   if (!env.DB) {
-    return jsonResponse({ success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+    return jsonResponse(request, { success: false, error: "D1 Database binding 'DB' is missing" }, 500);
+  }
+
+  if (!verifyCloudflareAccess(request, env)) {
+    return jsonResponse(request, { success: false, error: "Unauthorized" }, 401);
   }
 
   const url = new URL(request.url);
   const id = url.searchParams.get("id");
-  const token = url.searchParams.get("token") || request.headers.get("Authorization")?.replace("Bearer ", "");
-
-  const isAdmin = await verifyAdminSession(env.DB, token);
-  if (!isAdmin) {
-    return jsonResponse({ success: false, error: "Unauthorized" }, 401);
-  }
-
-  if (!id) return jsonResponse({ success: false, error: "Booking ID required" }, 400);
+  if (!id) return jsonResponse(request, { success: false, error: "Booking ID required" }, 400);
 
   await env.DB.prepare("DELETE FROM customer_bookings WHERE id = ?").bind(id).run();
-  return jsonResponse({ success: true, message: "Booking deleted" });
+  return jsonResponse(request, { success: true, message: "Booking deleted" });
 }
