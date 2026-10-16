@@ -1,0 +1,78 @@
+<!--
+  TEMPLATE: GUIDE PROFILE (Copy to /guides/<guide-slug>.html)
+  
+  PLACEHOLDERS:
+  - {{GUIDE_NAME}}          : e.g. "Appa Rao"
+  - {{VILLAGE_NAME}}        : e.g. "Vanjangi Ridge"
+  - {{YEARS_GUIDING}}       : e.g. "8 Years Guiding"
+  - {{PORTRAIT_IMAGE}}      : e.g. "../images/WhatsApp Image 2026-10-12 at 20.30.45.jpeg"
+  - {{LANGUAGES}}           : e.g. "Telugu • Adivasi Oriya • Hindi"
+  - {{SPECIALTY}}           : e.g. "Mountain Weather Fronts & Dawn Ridge Routes"
+  - {{BIO_PARAGRAPHS}}      : Detailed life story and guiding background
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide Profile: {{GUIDE_NAME}} | Araku Trails</title>
+  <meta name="description" content="Meet {{GUIDE_NAME}}, indigenous community guide from {{VILLAGE_NAME}} with {{YEARS_GUIDING}}.">
+  <meta name="theme-color" content="#B5442A">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sections.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a href="../" class="brand-link">
+        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="44" height="44" style="border-radius: 50%;">
+        <div class="brand-title">Araku <span>Trails</span></div>
+      </a>
+      <a href="./" class="btn btn-secondary" style="font-size: var(--text-xs); min-height: 38px;">
+        &larr; All Guides
+      </a>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 800px; padding: var(--space-12) var(--space-4);">
+    <div style="display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: var(--space-8);">
+      <img src="{{PORTRAIT_IMAGE}}" alt="{{GUIDE_NAME}}" style="width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid var(--paper-warm); box-shadow: var(--shadow-md); margin-bottom: var(--space-4);">
+      <h1 style="font-size: var(--text-3xl); margin-bottom: var(--space-1);">{{GUIDE_NAME}}</h1>
+      <div style="font-size: var(--text-sm); font-weight: 700; color: var(--laterite-deep); text-transform: uppercase; margin-bottom: var(--space-2);">
+        {{VILLAGE_NAME}} &bull; {{YEARS_GUIDING}}
+      </div>
+      <div class="chip chip-forest" style="margin-bottom: var(--space-4);">
+        Specialty: {{SPECIALTY}}
+      </div>
+      <div style="font-size: var(--text-xs); color: var(--ink-muted);">
+        Languages Spoken: {{LANGUAGES}}
+      </div>
+    </div>
+
+    <section style="background: var(--paper-card); border: 1px solid var(--mist); border-radius: var(--radius-md); padding: var(--space-8); box-shadow: var(--shadow-sm); line-height: 1.7;">
+      {{BIO_PARAGRAPHS}}
+    </section>
+
+    <div style="text-align: center; margin-top: var(--space-8);">
+      <a href="../trails/" class="btn btn-primary">
+        Browse Trails Guided by {{GUIDE_NAME}} &rarr;
+      </a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="text-align: center; font-size: var(--text-xs); color: var(--mist);">
+      &copy; 2026 Araku Trails &bull; Office: Kurmannapalem, Visakhapatnam, Andhra Pradesh 530046 &bull; +91 9494177921
+    </div>
+  </footer>
+</body>
+</html>

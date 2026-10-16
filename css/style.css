@@ -485,6 +485,13 @@ body {
   color: #022c15;
 }
 
+/* Mobile actions container: hidden on desktop */
+.pekoe-mobile-actions {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .pekoe-mobile-menu-btn {
   display: none;
   align-items: center;
@@ -619,8 +626,8 @@ body {
   z-index: 2;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.1) 32%, rgba(0, 0, 0, 0.45) 65%, rgba(7, 13, 10, 0.95) 100%),
-    linear-gradient(90deg, rgba(7, 13, 10, 0.72) 0%, rgba(7, 13, 10, 0.35) 50%, transparent 100%);
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, transparent 25%, transparent 55%, rgba(7, 13, 10, 0.75) 100%),
+    linear-gradient(90deg, rgba(7, 13, 10, 0.45) 0%, rgba(7, 13, 10, 0.15) 40%, transparent 75%);
 }
 
 /* Subtle Dot Indicators (Replaces bulky arrows & ticker) */
@@ -852,6 +859,10 @@ body {
   /* Mobile: Clean Header with Brand + Quick Book CTA + Hamburger Menu */
   .pekoe-header-right {
     display: none !important;
+  }
+
+  .pekoe-mobile-actions {
+    display: flex !important;
   }
 
   .pekoe-mobile-menu-btn {

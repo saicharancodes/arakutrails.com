@@ -1,0 +1,169 @@
+<!--
+  TEMPLATE: TRAIL PAGE (Copy to /trails/<slug>.html)
+  
+  PLACEHOLDERS:
+  - {{TRAIL_NAME}}          : e.g. "Vanjangi Dawn Ridge Trail"
+  - {{TRAIL_SLUG}}          : e.g. "vanjangi-ridge-trail"
+  - {{HERO_IMAGE}}          : e.g. "../images/araku-vanjangi-clouds.webp"
+  - {{DIFFICULTY}}          : e.g. "Moderate" or "Easy to Moderate"
+  - {{CATEGORY_CHIP}}       : e.g. "Sunrise Ridge" or "Heirloom Coffee"
+  - {{PARTNER_COMMUNITY}}   : e.g. "Vanjangi Hill Tribal Council"
+  - {{DISTANCE}}            : e.g. "6 km total"
+  - {{DURATION}}            : e.g. "4 to 5 Hours"
+  - {{BEST_SEASON}}         : e.g. "Oct – March"
+  - {{GROUP_LIMIT}}         : e.g. "8 Travellers"
+  - {{OVERVIEW_TEXT}}       : Detailed paragraphs about the trail
+  - {{FITNESS_TEXT}}        : Physical requirements and elevation details
+  - {{SIGNAL_TEXT}}         : Mobile reception realities (Airtel, Jio, BSNL)
+  - {{TOILET_TEXT}}         : Toilet availability facts
+  - {{MEDICAL_TEXT}}        : Nearest clinic/hospital distance in km and minutes
+  - {{WHAT_TO_BRING_TEXT}}  : Footwear, clothing layers, torches, water
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TRAIL_NAME}} — Araku Trails</title>
+  <meta name="description" content="Explore {{TRAIL_NAME}} with local community guides in Araku Valley. Distance: {{DISTANCE}}, Season: {{BEST_SEASON}}.">
+  <link rel="canonical" href="https://arakutrails.com/trails/{{TRAIL_SLUG}}">
+  <meta name="theme-color" content="#B5442A">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="{{TRAIL_NAME}} — Community-Guided Trek">
+  <meta property="og:description" content="Experience {{TRAIL_NAME}} with indigenous tribal stewards in the Eastern Ghats.">
+  <meta property="og:url" content="https://arakutrails.com/trails/{{TRAIL_SLUG}}">
+  <meta property="og:image" content="{{HERO_IMAGE}}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;0,9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/sections.css">
+
+  <style>
+    .trail-detail-hero {
+      position: relative;
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-8) 0;
+      background: linear-gradient(180deg, rgba(26,22,19,0.3) 0%, rgba(26,22,19,0.9) 100%),
+                  url('{{HERO_IMAGE}}') center/cover no-repeat;
+      color: var(--white);
+    }
+    .safety-card {
+      background: var(--paper-warm);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      margin: var(--space-6) 0;
+      border-left: 4px solid var(--laterite);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container site-header-inner">
+      <a href="../" class="brand-link">
+        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="44" height="44" style="border-radius: 50%;">
+        <div class="brand-title">Araku <span>Trails</span></div>
+      </a>
+      <a href="./" class="btn btn-secondary" style="font-size: var(--text-xs); min-height: 38px;">
+        &larr; All Trails
+      </a>
+    </div>
+  </header>
+
+  <div class="trail-detail-hero">
+    <div class="container" style="max-width: 860px;">
+      <span class="chip chip-laterite" style="margin-bottom: var(--space-2);">{{DIFFICULTY}} &bull; {{CATEGORY_CHIP}}</span>
+      <h1 style="color: var(--white); margin-bottom: var(--space-2);">{{TRAIL_NAME}}</h1>
+      <p style="color: var(--mist); font-size: var(--text-lg); margin-bottom: 0;">Partner: {{PARTNER_COMMUNITY}}</p>
+    </div>
+  </div>
+
+  <main class="container" style="max-width: 860px; padding: var(--space-8) var(--space-4) var(--space-16);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-8);">
+      <div style="background: var(--paper-warm); padding: var(--space-4); border-radius: var(--radius-sm);">
+        <span style="font-size: var(--text-xs); color: var(--ink-muted); text-transform: uppercase;">Distance</span>
+        <div style="font-size: var(--text-xl); font-family: var(--font-display); font-weight: 700;">{{DISTANCE}}</div>
+      </div>
+      <div style="background: var(--paper-warm); padding: var(--space-4); border-radius: var(--radius-sm);">
+        <span style="font-size: var(--text-xs); color: var(--ink-muted); text-transform: uppercase;">Duration</span>
+        <div style="font-size: var(--text-xl); font-family: var(--font-display); font-weight: 700;">{{DURATION}}</div>
+      </div>
+      <div style="background: var(--paper-warm); padding: var(--space-4); border-radius: var(--radius-sm);">
+        <span style="font-size: var(--text-xs); color: var(--ink-muted); text-transform: uppercase;">Best Season</span>
+        <div style="font-size: var(--text-xl); font-family: var(--font-display); font-weight: 700;">{{BEST_SEASON}}</div>
+      </div>
+      <div style="background: var(--paper-warm); padding: var(--space-4); border-radius: var(--radius-sm);">
+        <span style="font-size: var(--text-xs); color: var(--ink-muted); text-transform: uppercase;">Max Group</span>
+        <div style="font-size: var(--text-xl); font-family: var(--font-display); font-weight: 700;">{{GROUP_LIMIT}}</div>
+      </div>
+    </div>
+
+    <section style="margin-bottom: var(--space-8);">
+      <h2 style="font-size: var(--text-2xl); margin-bottom: var(--space-3);">Trail Overview</h2>
+      {{OVERVIEW_TEXT}}
+    </section>
+
+    <div class="safety-card">
+      <h3 style="margin-bottom: var(--space-3);">Trail Safety &amp; Access Realities</h3>
+      <ul style="padding-left: var(--space-5); display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--text-sm); color: var(--ink-soft);">
+        <li><strong>Fitness Level:</strong> {{FITNESS_TEXT}}</li>
+        <li><strong>Mobile Signal:</strong> {{SIGNAL_TEXT}}</li>
+        <li><strong>Toilet Facilities:</strong> {{TOILET_TEXT}}</li>
+        <li><strong>Medical Proximity:</strong> {{MEDICAL_TEXT}}</li>
+        <li><strong>What to Bring:</strong> {{WHAT_TO_BRING_TEXT}}</li>
+      </ul>
+    </div>
+
+    <div style="text-align: center; background: var(--paper-card); border: 1px solid var(--mist); border-radius: var(--radius-md); padding: var(--space-8); box-shadow: var(--shadow-sm); margin-top: var(--space-8);">
+      <h3 style="margin-bottom: var(--space-2);">Inquire About Dates</h3>
+      <div style="display: flex; justify-content: center; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-4);">
+        <button type="button" class="btn btn-primary" onclick="openBookingModal('{{TRAIL_NAME}}')">
+          Request Trail Reservation
+        </button>
+        <a href="https://wa.me/919494177921?text=Hello%20Araku%20Trails,%20I%20am%20interested%20in%20{{TRAIL_NAME}}"
+          target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+          WhatsApp Guide Coordinator
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container" style="text-align: center; font-size: var(--text-xs); color: var(--mist);">
+      &copy; 2026 Araku Trails &bull; Office: Kurmannapalem, Visakhapatnam, Andhra Pradesh 530046 &bull; +91 9494177921
+    </div>
+  </footer>
+
+  <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalPackageTitle" aria-hidden="true">
+    <div class="modal-sheet">
+      <button type="button" class="modal-close-btn" data-action="close-booking-modal" aria-label="Close dialog">&times;</button>
+      <div id="bookingModalContent">
+        <h3 id="modalPackageTitle">Book: {{TRAIL_NAME}}</h3>
+        <form id="bookingModalForm" style="display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-3);">
+          <input type="hidden" id="modalSelectedPackage" value="{{TRAIL_NAME}}">
+          <input type="text" id="modalName" required placeholder="Full Name" style="padding: 0.6rem; border: 1px solid var(--mist); border-radius: 4px;">
+          <input type="tel" id="modalPhone" required placeholder="Phone / WhatsApp" style="padding: 0.6rem; border: 1px solid var(--mist); border-radius: 4px;">
+          <input type="date" id="modalDate" required style="padding: 0.6rem; border: 1px solid var(--mist); border-radius: 4px;">
+          <button type="submit" id="btnBookingSubmit" class="btn btn-primary">Submit Request</button>
+        </form>
+      </div>
+      <div id="bookingSuccessBox" style="display: none; text-align: center; padding: 1rem 0;">
+        <h4>Request Sent!</h4>
+        <p id="bookingSuccessMessage"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/booking.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+/* ==========================================================================
+   css/tokens.css — Araku Trails Design System Tokens
+   Palette derived from Araku red earth (laterite), coffee, forest & mist.
+   Dhimsa textile accents: laterite, turmeric, ink.
+   ========================================================================== */
+
+:root {
+  /* --- Colour Palette --- */
+  --paper:         #FAF7F2;   /* page background, misty off-white */
+  --paper-warm:    #F2EDE4;   /* alternating section background */
+  --paper-deep:    #E8E0D3;   /* subtle panels / cards */
+  --paper-card:    #FFFFFF;   /* clean card surface */
+  
+  --ink:           #1A1613;   /* primary text (contrast on paper: ~15:1) */
+  --ink-soft:      #3D362F;   /* headings on light */
+  --ink-muted:     #6B625A;   /* secondary / meta text (contrast on paper: ~5.6:1) */
+  
+  --laterite:      #B5442A;   /* PRIMARY accent — Araku red earth */
+  --laterite-deep: #8E3320;   /* hover / WCAG text-safe variant (contrast on paper: >6:1) */
+  
+  --coffee:        #4A3328;   /* Araku coffee, dark surfaces */
+  --coffee-deep:   #2A1C15;   /* footer, immersive dark sections */
+  --coffee-card:   #38261E;   /* elevated card in coffee section */
+  
+  --forest:        #2E4A35;   /* valley green */
+  --forest-light:  #5C7A5E;   /* muted forest accent */
+  --forest-badge:  #E8EFE9;   /* pale forest tag background */
+  
+  --turmeric:      #D98E2B;   /* warm highlight, badges, sun accent */
+  --turmeric-deep: #A76510;   /* WCAG accessible text variant */
+  --turmeric-soft: #FBF2E3;   /* soft badge tint */
+  
+  --mist:          #D8DCD5;   /* hairlines, dividers, subtle borders */
+  --mist-subtle:   #EBEFE9;   /* ultra light hairline */
+  --white:         #FFFFFF;
+
+  /* Backward compatibility aliases */
+  --card-bg:       var(--paper-card);
+  --panel-bg:      var(--paper-deep);
+  --panel-border:  rgba(74, 51, 40, 0.12);
+  --text-heading:  var(--ink);
+  --text-body:     var(--ink-muted);
+  --text-bright:   var(--ink);
+  --emerald-bright: var(--forest);
+  --shell-bg:      var(--paper);
+
+  /* --- Typography --- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:    'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-telugu:  'Noto Serif Telugu', serif;
+
+  /* --- Fluid Type Scale --- */
+  --text-xs:   0.8125rem;                          /* 13px — microcopy only */
+  --text-sm:   0.9375rem;                          /* 15px */
+  --text-base: 1rem;                               /* 16px — standard body minimum */
+  --text-lg:   1.125rem;                           /* 18px */
+  --text-xl:   clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-2xl:  clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --text-3xl:  clamp(1.875rem, 1.5rem + 1.8vw, 2.75rem);
+  --text-4xl:  clamp(2.25rem, 1.7rem + 2.6vw, 3.5rem);
+  --text-5xl:  clamp(2.75rem, 2rem + 3.6vw, 4.5rem);
+
+  /* --- Spacing Scale (4px-based) --- */
+  --space-1:   0.25rem;    /* 4px */
+  --space-2:   0.5rem;     /* 8px */
+  --space-3:   0.75rem;    /* 12px */
+  --space-4:   1rem;       /* 16px */
+  --space-5:   1.25rem;    /* 20px */
+  --space-6:   1.5rem;     /* 24px */
+  --space-8:   2rem;       /* 32px */
+  --space-10:  2.5rem;     /* 40px */
+  --space-12:  3rem;       /* 48px */
+  --space-16:  4rem;       /* 64px */
+  --space-20:  5rem;       /* 80px */
+
+  /* --- Radii --- */
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   20px;
+  --radius-pill: 999px;
+
+  /* --- Elevation (Warm-tinted shadows for light surfaces) --- */
+  --shadow-sm:   0 2px 8px rgba(74, 51, 40, 0.06);
+  --shadow-md:   0 6px 18px rgba(74, 51, 40, 0.08);
+  --shadow-lg:   0 14px 34px rgba(74, 51, 40, 0.12);
+  --shadow-xl:   0 24px 50px rgba(74, 51, 40, 0.16);
+
+  /* --- Transition & Layout --- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --transition-fast: opacity 0.2s var(--ease-standard), transform 0.2s var(--ease-standard), background-color 0.2s var(--ease-standard), border-color 0.2s var(--ease-standard), color 0.2s var(--ease-standard);
+  --transition-smooth: opacity 0.35s var(--ease-standard), transform 0.35s var(--ease-standard), box-shadow 0.35s var(--ease-standard);
+  --site-max-width: 1200px;
+}

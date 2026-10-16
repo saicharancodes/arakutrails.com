@@ -1,0 +1,295 @@
+/* ==========================================================================
+   css/sections.css — Page Section Layouts & Editorial Rhythm
+   Alternating full-bleed photo, 2-col editorial, snap carousel, immersive coffee
+   ========================================================================== */
+
+/* --- 1. Hero Section (Community-Led & Portrait Art Direction) --- */
+.hero-editorial {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-8) 0;
+  overflow: hidden;
+  background-color: var(--coffee-deep);
+  color: var(--white);
+}
+
+.hero-media-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-slide-item {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-standard);
+  will-change: opacity;
+}
+
+.hero-slide-item.active {
+  opacity: 1;
+}
+
+.hero-slide-item picture,
+.hero-slide-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Single bottom scrim instead of heavy dark fade */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    180deg,
+    rgba(26, 22, 19, 0.15) 0%,
+    rgba(26, 22, 19, 0.3) 45%,
+    rgba(26, 22, 19, 0.88) 100%
+  );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 820px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: rgba(250, 247, 242, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--white);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: var(--space-3);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+}
+
+.hero-desc {
+  font-size: var(--text-lg);
+  color: #F2EDE4;
+  line-height: 1.6;
+  margin-bottom: var(--space-6);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  max-width: 680px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Slider Pause/Play and Accessibility Controls */
+.hero-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.hero-dot-btn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  padding: 0;
+}
+
+.hero-dot-indicator {
+  width: 24px;
+  height: 4px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.35);
+  transition: all 0.3s ease;
+}
+
+.hero-dot-btn.active .hero-dot-indicator {
+  width: 42px;
+  background: var(--turmeric);
+}
+
+.hero-pause-btn {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+/* --- 2. Editorial Two-Column Rhythm (The Trails Section) --- */
+.section-editorial {
+  padding: var(--space-12) 0;
+}
+
+.section-head {
+  margin-bottom: var(--space-8);
+}
+
+/* --- 3. Meet Your Guides (Centrepiece) --- */
+.guides-intro-box {
+  background-color: var(--paper-warm);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  margin-bottom: var(--space-8);
+  border-left: 4px solid var(--forest);
+}
+
+.guides-intro-box h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--ink);
+  margin-bottom: var(--space-2);
+}
+
+.guides-intro-box p {
+  color: var(--ink-soft);
+  margin-bottom: 0;
+}
+
+/* --- 4. Immersive Coffee Section (Responsible Travel / Ethno Charter) --- */
+.charter-card {
+  background-color: var(--coffee-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  margin-top: var(--space-6);
+}
+
+.charter-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+@media (min-width: 600px) {
+  .charter-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.charter-item {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.charter-item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(217, 142, 43, 0.15);
+  color: var(--turmeric);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.charter-item-text h4 {
+  color: var(--white);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-1);
+}
+
+.charter-item-text p {
+  color: var(--mist);
+  font-size: var(--text-sm);
+  margin-bottom: 0;
+}
+
+/* --- 5. Footer (Warm Deep Coffee) --- */
+.site-footer {
+  background-color: var(--coffee-deep);
+  color: var(--mist);
+  padding: var(--space-12) 0 var(--space-8);
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+@media (min-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  }
+}
+
+.footer-col h4 {
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-4);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.footer-col a {
+  color: var(--mist);
+  text-decoration: none;
+  font-size: var(--text-sm);
+}
+
+.footer-col a:hover {
+  color: var(--turmeric);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--mist);
+}
+
+@media (min-width: 600px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
