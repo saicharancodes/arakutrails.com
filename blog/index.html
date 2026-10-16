@@ -8,7 +8,7 @@
   <meta name="description"
     content="Insider travel guides, best time to visit Araku Valley, Ghat road tips, and tribal culture insights by Araku Trails local experts.">
   <link rel="canonical" href="https://arakutrails.com/blog/">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#059669">
 
   <!-- Open Graph & Social Cards -->
   <meta property="og:type" content="website">
@@ -19,7 +19,15 @@
   <meta property="og:image" content="https://arakutrails.com/images/og-index.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts & Icons -->
+  <!-- Theme check before render to prevent flicker -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('araku_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+  <!-- Google Fonts & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -27,171 +35,229 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
 
-  <style>
-    .blog-hero {
-      padding: 4.5rem 1.5rem 2.5rem;
-      background: linear-gradient(180deg, rgba(6, 78, 59, 0.45) 0%, rgba(2, 6, 23, 0.95) 100%);
-      text-align: center;
-      border-bottom: 1px solid var(--panel-border);
-    }
-    .blog-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2.5rem 1.5rem;
-    }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-    .blog-card {
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .blog-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(16, 185, 129, 0.4);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-    }
-    .blog-thumb {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
-    }
-    .blog-body {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-    }
-    .blog-tag {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--emerald-bright);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .blog-title {
-      font-family: var(--font-brand);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 0.6rem;
-      line-height: 1.4;
-    }
-    .blog-excerpt {
-      font-size: 0.88rem;
-      color: var(--text-body);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-    .blog-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 0.85rem;
-      font-size: 0.8rem;
-      color: var(--text-body);
-    }
-  </style>
+  <!-- Clean Editorial Blog Stylesheet -->
+  <link rel="stylesheet" href="../css/blog.css?v=1.1">
 </head>
 
-<body>
+<body class="blog-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Simple Header -->
-  <header style="background: rgba(6, 26, 18, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--panel-border); padding: 1rem 1.5rem; position: sticky; top: 0; z-index: 999;">
-    <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="../" style="display: flex; align-items: center; gap: 0.6rem; text-decoration: none;">
-        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="38" height="38">
-        <span style="font-family: var(--font-brand); font-weight: 800; font-size: 1.25rem; color: #fff;">Araku <span style="color: var(--emerald-bright);">Trails</span></span>
+  <!-- Simple Editorial Header -->
+  <header class="blog-header">
+    <div class="blog-nav-inner">
+      <a href="../" class="blog-brand">
+        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="36" height="36">
+        <span class="blog-brand-title">Araku <span>Trails</span></span>
       </a>
-      <a href="../#packages" class="btn-action-primary" style="padding: 0.5rem 1.1rem; font-size: 0.85rem; text-decoration: none;">
-        <i class="fa-solid fa-layer-group"></i> View Tour Packages
-      </a>
+
+      <div class="blog-nav-actions">
+        <a href="../" class="blog-nav-link">Home</a>
+        <a href="index.html" class="blog-nav-link" style="color: var(--blog-emerald); font-weight: 700;">Blog</a>
+        
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+          <span class="theme-label">Dark</span>
+        </button>
+
+        <a href="../#packages" class="blog-nav-cta">
+          <i class="fa-solid fa-compass"></i> View Tours
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main-content">
-    <section class="blog-hero">
-      <span style="display: inline-block; padding: 0.3rem 0.85rem; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 9999px; font-size: 0.8rem; font-weight: 700; color: var(--emerald-bright); margin-bottom: 0.75rem;">
-        Local Wisdom &bull; Route Tips &bull; Trip Planning
-      </span>
-      <h1 style="font-family: var(--font-brand); font-size: clamp(1.8rem, 4vw, 2.75rem); color: #fff; margin-bottom: 0.75rem;">
-        Araku Trails Travel Journal
-      </h1>
-      <p style="color: var(--text-body); font-size: 1.05rem; max-width: 650px; margin: 0 auto;">
-        Expert guidance from certified local chauffeurs and valley guides to help you make the most of your Eastern Ghats holiday.
+    <!-- Clean Blog Hero Header -->
+    <section class="blog-index-hero">
+      <h1>Araku Valley Travel Journal &amp; Guides</h1>
+      <p>
+        Honest itineraries, ghat road driving guides, seasonal weather breakdowns, and mountain insights curated by native local guides.
       </p>
     </section>
 
-    <div class="blog-container">
-      <div class="blog-grid">
-        <!-- Article 1 -->
+    <!-- Articles Grid -->
+    <div class="blog-index-container">
+      <div class="posts-grid">
+
+        <!-- Card 1: Thonkota Waterfalls -->
         <article>
-          <a href="best-time-to-visit-araku-valley.html" class="blog-card">
-            <img src="../images/araku-vanjangi-clouds.webp" alt="Sunrise over Vanjangi cloud hills in winter" class="blog-thumb" width="600" height="338" loading="lazy" decoding="async">
-            <div class="blog-body">
-              <span class="blog-tag">Seasonal Guide</span>
-              <h2 class="blog-title">Best Time to Visit Araku Valley: Month-by-Month Weather &amp; Highlights</h2>
-              <p class="blog-excerpt">
-                From misty winter cloud beds at Vanjangi (October–March) to lush post-monsoon waterfalls, explore the best months for pleasant temperatures and sightseeing.
+          <a href="thonkota-waterfalls-hidden-gem-araku.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/thonkota-waterfalls.jpg" alt="Spectacular multi-tiered Thonkota Waterfalls near Pedabayalu and Araku Valley" class="post-thumb" width="600" height="337" loading="eager">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Offbeat &amp; Waterfalls</span>
+              <h2 class="post-title">Thonkota Waterfalls: The Hidden Multi-Tiered Secret of Araku &amp; Pedabayalu</h2>
+              <p class="post-excerpt">
+                Tucked away in the remote hills of Pedabayalu, discover this pristine, multi-step natural cascade. Route map, forest trek details, and video documentary by THE 461 CULTURE.
               </p>
-              <div class="blog-meta">
-                <span><i class="fa-regular fa-clock"></i> 5 min read</span>
-                <span style="color: var(--emerald-bright); font-weight: 600;">Read Guide &rarr;</span>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 16, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read &rarr;</span>
               </div>
             </div>
           </a>
         </article>
 
-        <!-- Article 2: Visakhapatnam to Araku Ghat Road -->
+        <!-- Card 2: Kothapalli Waterfalls -->
         <article>
-          <a href="visakhapatnam-to-araku-road-trip-guide.html" class="blog-card">
-            <img src="../images/araku-coffee-plantations.webp" alt="Coffee plantation slopes along Ananthagiri ghat road" class="blog-thumb" width="600" height="338" loading="lazy" decoding="async">
-            <div class="blog-body">
-              <span class="blog-tag">Road Trip &amp; Logistics</span>
-              <h2 class="blog-title">Visakhapatnam to Araku Valley: Ghat Road Route, Distance &amp; Stopovers</h2>
-              <p class="blog-excerpt">
-                Everything you need to know about driving the 115 km scenic Ananthagiri Ghat route: hairpin curves, viewpoints, best breakfast spots, and Borra Caves timing.
+          <a href="kothapalli-waterfalls-complete-guide.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/kothapalli-waterfalls.jpg" alt="Expansive rocky stepped cascades of Kothapalli Waterfalls near Paderu" class="post-thumb" width="600" height="337" loading="eager">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Waterfalls &amp; Nature</span>
+              <h2 class="post-title">Kothapalli Waterfalls: Complete Visitor Guide, Timings, Route &amp; Travel Tips</h2>
+              <p class="post-excerpt">
+                Step-by-step guide to visiting Kothapalli's tiered rock cascades near Paderu. Timings, entry fees, easy 100m walk, local bamboo chicken, and video tour by THE 461 CULTURE.
               </p>
-              <div class="blog-meta">
-                <span><i class="fa-regular fa-clock"></i> 6 min read</span>
-                <span style="color: var(--emerald-bright); font-weight: 600;">Read Guide &rarr;</span>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 16, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read &rarr;</span>
               </div>
             </div>
           </a>
         </article>
+
+        <!-- Card 3: Hukumpeta Tribal Market -->
+        <article>
+          <a href="hukumpeta-tribal-market-araku.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/hukumpeta-tribal-market.jpg" alt="Vibrant Hukumpeta weekly tribal market near Araku Valley" class="post-thumb" width="600" height="337" loading="lazy">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Culture &amp; Local Life</span>
+              <h2 class="post-title">Hukumpeta Weekly Tribal Market: Araku's Spices, Wild Honey &amp; Culture</h2>
+              <p class="post-excerpt">
+                A sensory journey into the weekly mountain santha. Discover pure rock bee honey, high-curcumin hill turmeric, and cultural etiquette with video by THE 461 CULTURE.
+              </p>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 16, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 5 min read &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Card 4: Araku Coffee Guide -->
+        <article>
+          <a href="araku-coffee-plantations-guide.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/araku-coffee-cherries.jpg" alt="Red ripe Arabica coffee cherries on plantation trees in Araku Valley" class="post-thumb" width="600" height="337" loading="lazy">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Coffee &amp; Plantations</span>
+              <h2 class="post-title">Araku Valley Coffee: History, Organic Harvest &amp; Plantation Guide</h2>
+              <p class="post-excerpt">
+                From Ananthagiri hill slopes to Paris cafes: explore shade-grown organic Arabica, Coffee Museum timings, berry harvest months, and video by THE 461 CULTURE.
+              </p>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 16, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Card 5: Road Trip Guide -->
+        <article>
+          <a href="visakhapatnam-to-araku-road-trip-guide.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/og-vizag-araku-2n-3d.jpg" alt="Visakhapatnam to Araku Valley road trip via Ananthagiri ghat road" class="post-thumb" width="600" height="337" loading="lazy">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Road Trip &amp; Logistics</span>
+              <h2 class="post-title">Visakhapatnam to Araku Valley: The Complete Ghat Road Driving Guide</h2>
+              <p class="post-excerpt">
+                Everything you need to know about driving the 115 km scenic route: 27 hairpin curves, best breakfast pit-stops, Galikonda viewpoint, and Borra Caves timing.
+              </p>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 16, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 7 min read &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Card 6: Best Time to Visit -->
+        <article>
+          <a href="best-time-to-visit-araku-valley.html" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/araku-vanjangi-clouds.webp" alt="Vanjangi ocean of clouds during winter sunrise in Araku Valley" class="post-thumb" width="600" height="337" loading="lazy">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Weather &amp; Seasons</span>
+              <h2 class="post-title">Best Time to Visit Araku Valley: Month-by-Month Weather, Seasons &amp; Tips</h2>
+              <p class="post-excerpt">
+                Explore winter fog, Vanjangi cloud sunrise, monsoon waterfalls, and tribal coffee harvest periods to choose the ideal dates for your vacation.
+              </p>
+              <div class="post-footer-meta">
+                <span><i class="fa-regular fa-calendar"></i> Oct 15, 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 min read &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+        <!-- Card 3: Hot Air Balloon & Hill Adventures -->
+        <article>
+          <a href="../#packages" class="post-card">
+            <div class="post-thumb-wrap">
+              <img src="../images/araku-hot-air-balloon.webp" alt="Hot air balloon flying over the coffee hills and valleys of Araku" class="post-thumb" width="600" height="337" loading="lazy">
+            </div>
+            <div class="post-body">
+              <span class="post-tag">Tour Experiences</span>
+              <h2 class="post-title">Curated Araku Valley Tours: 1-Day, 2-Day &amp; Lambasingi Itineraries</h2>
+              <p class="post-excerpt">
+                Experience hassle-free travel with private sanitized vehicles, experienced native drivers, resort stays, and customizable tribal village excursions.
+              </p>
+              <div class="post-footer-meta">
+                <span><i class="fa-solid fa-car"></i> From ₹2,499</span>
+                <span>Explore Packages &rarr;</span>
+              </div>
+            </div>
+          </a>
+        </article>
+
+      </div>
+
+      <!-- Quick Tour Advisory Box -->
+      <div class="blog-cta-banner" style="margin-top: 4.5rem;">
+        <h3>Planning a Trip to Araku Valley?</h3>
+        <p>
+          Need local advice on route conditions, cottage booking, or customized family itineraries? Talk directly to our local Araku travel team.
+        </p>
+        <div class="blog-cta-actions">
+          <a href="https://wa.me/919494177921?text=Hi%20Araku%20Trails,%20I'm%20planning%20a%20trip%20and%20need%20travel%20advice" target="_blank" rel="noopener noreferrer" class="btn-primary-green">
+            <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a href="tel:+919494177921" class="btn-secondary-outline">
+            <i class="fa-solid fa-phone"></i> +91 9494177921
+          </a>
+        </div>
       </div>
     </div>
   </main>
 
-  <footer class="dash-footer-meta" style="margin-top: 3rem;">
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="footer-logo-img" width="32" height="32">
-      <div>
-        &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Office: Kurmannapalem, Visakhapatnam, Andhra Pradesh - 530046
+  <!-- Editorial Footer -->
+  <footer class="blog-footer">
+    <div class="blog-footer-inner">
+      <div class="blog-footer-links">
+        <a href="../">Home</a>
+        <a href="index.html">Blog</a>
+        <a href="../araku-1-day-tour.html">1-Day Tour</a>
+        <a href="../araku-1n-2d-tour.html">2-Day Tour</a>
+        <a href="../privacy-policy.html">Privacy Policy</a>
       </div>
-    </div>
-    <div class="footer-quick-contacts">
-      <a href="tel:+919494177921"><i class="fa-solid fa-phone"></i> +91 9494177921</a>
-      <a href="mailto:krsh2852@gmail.com"><i class="fa-solid fa-envelope"></i> krsh2852@gmail.com</a>
-      <a href="../privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+      <div>
+        &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Visakhapatnam, Andhra Pradesh
+      </div>
     </div>
   </footer>
 
+  <script src="../js/blog.js?v=1.1"></script>
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>

@@ -8,7 +8,7 @@
   <meta name="description"
     content="Complete month-by-month guide to Araku Valley weather, winter mist, Vanjangi cloud sunrise, waterfalls, and peak tourism seasons in the Eastern Ghats.">
   <link rel="canonical" href="https://arakutrails.com/blog/best-time-to-visit-araku-valley.html">
-  <meta name="theme-color" content="#10b981">
+  <meta name="theme-color" content="#059669">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -19,7 +19,15 @@
   <meta property="og:image" content="https://arakutrails.com/images/og-araku-1n-2d.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Fonts & Icons -->
+  <!-- Theme check before render to prevent flicker -->
+  <script>
+    (function () {
+      var saved = localStorage.getItem('araku_theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+    })();
+  </script>
+
+  <!-- Google Fonts & Font Awesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -27,18 +35,21 @@
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="icon" type="image/x-icon" href="../favicon.ico">
-  <link rel="stylesheet" href="../css/style.css?v=3.1">
 
+  <!-- Clean Editorial Blog Stylesheet -->
+  <link rel="stylesheet" href="../css/blog.css?v=1.1">
+
+  <!-- Schema.org Article Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     "headline": "Best Time to Visit Araku Valley: Weather, Seasons & Tips",
     "description": "Complete month-by-month guide to Araku Valley weather, winter mist, Vanjangi cloud sunrise, and peak tourism seasons.",
     "image": "https://arakutrails.com/images/og-araku-1n-2d.jpg",
     "author": {
       "@type": "Organization",
-      "name": "Araku Trails",
+      "name": "Araku Trails Editorial Desk",
       "url": "https://arakutrails.com"
     },
     "publisher": {
@@ -50,178 +61,277 @@
       }
     },
     "datePublished": "2026-10-15",
-    "dateModified": "2026-10-15"
+    "dateModified": "2026-10-16",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://arakutrails.com/blog/best-time-to-visit-araku-valley.html"
+    }
   }
   </script>
-
-  <style>
-    .article-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-    }
-    .article-wrap h1 {
-      font-family: var(--font-brand);
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      color: #fff;
-      line-height: 1.3;
-      margin-bottom: 1rem;
-    }
-    .article-meta-bar {
-      display: flex;
-      align-items: center;
-      gap: 1.25rem;
-      color: var(--text-body);
-      font-size: 0.88rem;
-      padding-bottom: 1.5rem;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid var(--panel-border);
-      flex-wrap: wrap;
-    }
-    .article-meta-bar span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .article-content {
-      color: #cbd5e1;
-      font-size: 1.05rem;
-      line-height: 1.85;
-    }
-    .article-content h2 {
-      font-family: var(--font-brand);
-      font-size: 1.65rem;
-      color: #f8fafc;
-      margin: 2.5rem 0 1rem;
-    }
-    .article-content h3 {
-      font-family: var(--font-brand);
-      font-size: 1.3rem;
-      color: var(--emerald-bright);
-      margin: 1.75rem 0 0.75rem;
-    }
-    .article-content p {
-      margin-bottom: 1.35rem;
-    }
-    .article-content ul {
-      margin-bottom: 1.5rem;
-      padding-left: 1.5rem;
-    }
-    .article-content li {
-      margin-bottom: 0.5rem;
-    }
-    .season-card {
-      background: var(--card-bg);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      margin: 1.5rem 0;
-    }
-    .cta-banner {
-      background: linear-gradient(135deg, rgba(6, 78, 59, 0.6) 0%, rgba(15, 23, 42, 0.95) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      margin: 3rem 0;
-      text-align: center;
-    }
-  </style>
 </head>
 
-<body>
+<body class="blog-page">
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <header style="background: rgba(6, 26, 18, 0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--panel-border); padding: 1rem 1.5rem; position: sticky; top: 0; z-index: 999;">
-    <div style="max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-      <a href="../" style="display: flex; align-items: center; gap: 0.6rem; text-decoration: none;">
-        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="38" height="38">
-        <span style="font-family: var(--font-brand); font-weight: 800; font-size: 1.25rem; color: #fff;">Araku <span style="color: var(--emerald-bright);">Trails</span></span>
+  <!-- Simple Editorial Header -->
+  <header class="blog-header">
+    <div class="blog-nav-inner">
+      <a href="../" class="blog-brand">
+        <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" width="36" height="36">
+        <span class="blog-brand-title">Araku <span>Trails</span></span>
       </a>
-      <a href="index.html" style="color: var(--emerald-bright); font-size: 0.9rem; text-decoration: none; font-weight: 600;">
-        &larr; All Articles
-      </a>
+
+      <div class="blog-nav-actions">
+        <a href="../" class="blog-nav-link">Home</a>
+        <a href="index.html" class="blog-nav-link">Blog</a>
+        
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+          <span class="theme-label">Dark</span>
+        </button>
+
+        <a href="../araku-1-day-tour.html" class="blog-nav-cta">
+          <i class="fa-solid fa-compass"></i> View Tours
+        </a>
+      </div>
     </div>
   </header>
 
   <main id="main-content">
-    <article class="article-wrap">
-      <nav aria-label="Breadcrumb" style="margin-bottom: 1.25rem; font-size: 0.85rem; color: var(--text-body);">
-        <a href="../" style="color: var(--text-body); text-decoration: none;">Home</a> /
-        <a href="index.html" style="color: var(--text-body); text-decoration: none;">Blog</a> /
-        <span style="color: var(--emerald-bright);">Best Time to Visit</span>
+    <article class="article-container">
+      <!-- Breadcrumbs -->
+      <nav aria-label="Breadcrumb" class="blog-breadcrumbs">
+        <a href="../">Home</a>
+        <span class="sep">/</span>
+        <a href="index.html">Blog</a>
+        <span class="sep">/</span>
+        <span class="current">Best Time to Visit</span>
       </nav>
 
-      <h1>Best Time to Visit Araku Valley: Month-by-Month Weather &amp; Highlights</h1>
+      <!-- Category Tag -->
+      <span class="article-badge">Weather &amp; Seasons</span>
 
-      <div class="article-meta-bar">
-        <span><i class="fa-solid fa-user-pen"></i> By Araku Trails Editorial Desk</span>
-        <span><i class="fa-regular fa-calendar"></i> October 15, 2026</span>
-        <span><i class="fa-regular fa-clock"></i> 5 min read</span>
+      <!-- Title -->
+      <h1 class="article-title">Best Time to Visit Araku Valley: Month-by-Month Weather, Seasons &amp; Travel Tips</h1>
+
+      <!-- Meta Bar -->
+      <div class="article-meta">
+        <div class="meta-author">
+          <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Editorial" class="meta-avatar" width="38" height="38">
+          <span>Araku Trails Desk</span>
+        </div>
+        <div class="meta-item">
+          <i class="fa-regular fa-calendar"></i>
+          <span>October 15, 2026</span>
+        </div>
+        <div class="meta-item">
+          <i class="fa-regular fa-clock"></i>
+          <span>6 min read</span>
+        </div>
       </div>
 
-      <img src="../images/araku-vanjangi-clouds.webp" alt="Vanjangi ocean of clouds at sunrise" style="width: 100%; border-radius: var(--radius-lg); margin-bottom: 2rem; border: 1px solid var(--panel-border);" width="1200" height="675">
+      <!-- Hero Figure (Natural aspect ratio, uncompressed) -->
+      <figure class="article-figure">
+        <img src="../images/araku-vanjangi-clouds.webp" alt="Vanjangi ocean of clouds at dawn with golden sunrise in Araku Valley" width="1400" height="787" loading="eager">
+        <figcaption>The breathtaking Vanjangi "Ocean of Clouds" during the crisp winter morning season in Araku Valley</figcaption>
+      </figure>
 
-      <div class="article-content">
+      <!-- Lead Intro -->
+      <p class="article-lead">
+        Perched high at an elevation of 911 metres (2,989 feet) above sea level in the Eastern Ghats of Andhra Pradesh, <strong>Araku Valley</strong> is cherished for pleasant hill breezes, aroma-rich organic coffee estates, and fog-shrouded peaks. While Araku welcomes visitors year-round from coastal Visakhapatnam, choosing the right season can elevate your hill holiday into a truly unforgettable escape.
+      </p>
+
+      <div class="article-body">
         <p>
-          Perched at an elevation of 911 meters (2,989 feet) in the Eastern Ghats of Andhra Pradesh, <strong>Araku Valley</strong> is famous for pleasant hill breezes, aromatic organic coffee plantations, and mist-covered valleys. While Araku is a year-round getaway from coastal Visakhapatnam, knowing seasonal highlights helps you pick the perfect time for your travel style.
+          Whether your goal is to hike up Vanjangi before dawn to witness clouds rolling beneath your feet, enjoy a resort campfire under starry mountain skies, or admire swollen waterfalls surrounded by monsoon rainforests, here is your definitive seasonal guide.
         </p>
 
-        <h2>1. Winter (October to March) — The Peak Season</h2>
-        <div class="season-card">
-          <p><strong>Average Temperature:</strong> 8°C – 25°C &bull; <strong>Ideal for:</strong> Sightseeing, Vanjangi Sunrise, Bonfires &amp; Camping</p>
-          <p>
-            Winter is unquestionably the most magical season in Araku Valley. The air is crisp, early mornings are wrapped in thick fog, and evenings around a resort campfire with tribal Dhimsa dance are unforgettable.
-          </p>
-          <ul>
-            <li><strong>Vanjangi Cloud Ocean:</strong> Between November and February, hikers can witness the spectacular sunrise at Vanjangi Hills where clouds float beneath your feet.</li>
-            <li><strong>Coffee Harvest:</strong> Red coffee berries ripen across Ananthagiri hills, filling the air with fragrance.</li>
-            <li><strong>Chilly Lambasingi:</strong> Nearby Lambasingi records temperatures as low as 0°C to 3°C in December and January.</li>
+        <!-- Table of Contents -->
+        <div class="toc-box">
+          <div class="toc-header">
+            <span class="toc-title"><i class="fa-solid fa-list-ul"></i> Table of Contents</span>
+            <button class="toc-toggle-btn" type="button" aria-label="Toggle Table of Contents">[Hide]</button>
+          </div>
+          <ul class="toc-list">
+            <li><a href="#season-overview"><i class="fa-solid fa-angle-right"></i> Seasonal Summary at a Glance</a></li>
+            <li><a href="#winter"><i class="fa-solid fa-snowflake"></i> 1. Winter (October to March) — Peak Tourism</a></li>
+            <li><a href="#monsoon"><i class="fa-solid fa-cloud-showers-heavy"></i> 2. Monsoon (July to September) — Waterfalls &amp; Mist</a></li>
+            <li><a href="#summer"><i class="fa-solid fa-sun"></i> 3. Summer (April to June) — Weekend Escapes</a></li>
+            <li><a href="#vanjangi-guide"><i class="fa-solid fa-angle-right"></i> Vanjangi Cloud Sunrise: When &amp; How to Plan</a></li>
+            <li><a href="#packing-tips"><i class="fa-solid fa-angle-right"></i> What to Pack for Each Season</a></li>
+            <li><a href="#book-trip"><i class="fa-solid fa-angle-right"></i> Planning Your Guided Araku Experience</a></li>
           </ul>
         </div>
 
-        <h2>2. Monsoon (July to September) — Lush Greenery &amp; Waterfalls</h2>
-        <div class="season-card">
-          <p><strong>Average Temperature:</strong> 20°C – 28°C &bull; <strong>Ideal for:</strong> Waterfall Lovers, Photography &amp; Nature Walks</p>
-          <p>
-            The monsoon paints the Eastern Ghats in emerald greens. Cascading waterfalls like Katiki, Tatipudi, and Chaparai rapids flow at full force. Rain showers are intermittent, making road trips through the Ananthagiri Ghat road breathtakingly beautiful.
+        <!-- Season Overview -->
+        <h2 id="season-overview">Seasonal Summary at a Glance</h2>
+        <p>
+          Araku Valley experiences three distinct micro-climatic seasons influenced by the Eastern Ghats topography:
+        </p>
+
+        <div class="season-grid">
+          <!-- Winter -->
+          <div class="season-card winter" id="winter">
+            <div class="season-header">
+              <h3>Winter (October – March)</h3>
+              <span class="season-tag peak">Peak Season</span>
+            </div>
+            <p><strong>Avg Temperature:</strong> 8°C &ndash; 25°C &bull; <strong>Highlight:</strong> Vanjangi Cloud Bed, Foggy Mornings, Night Bonfires</p>
+            <p>
+              Winter is unquestionably the most popular and magical time to visit Araku. The air is delightfully cool, morning fog hangs over coffee plantations until 10:00 AM, and nighttime temperatures drop to a comfortable chill.
+            </p>
+            <ul>
+              <li><strong>Vanjangi Hill Sunrise:</strong> November through February is the prime window to witness the sea of clouds stretching across the valley at dawn.</li>
+              <li><strong>Coffee Berry Harvest:</strong> Watch tribal farmers hand-pick crimson Arabica berries across Ananthagiri.</li>
+              <li><strong>Lambasingi Cold Snaps:</strong> Just 90 km away, Lambasingi (the "Kashmir of Andhra") often touches 1°C to 4°C in mid-January.</li>
+            </ul>
+          </div>
+
+          <!-- Figure showing bonfire resort -->
+          <figure class="article-figure">
+            <img src="../images/araku-resort-bonfire.webp" alt="Night campfire and resort gathering in Araku Valley under stars" width="1400" height="1050" loading="lazy">
+            <figcaption>Winter evenings in Araku: Bonfires, mild hill breezes, and Dhimsa tribal dance</figcaption>
+          </figure>
+
+          <!-- Monsoon -->
+          <div class="season-card monsoon" id="monsoon">
+            <div class="season-header">
+              <h3>Monsoon (July – September)</h3>
+              <span class="season-tag moderate">Lush &amp; Dramatic</span>
+            </div>
+            <p><strong>Avg Temperature:</strong> 20°C &ndash; 28°C &bull; <strong>Highlight:</strong> Full-Flow Waterfalls, Emerald Green Valleys, Cloud Forest</p>
+            <p>
+              If you love moody hill station weather, rainy day road trips, and dramatic cloud formations, the monsoon months will mesmerize you. The Eastern Ghats transform into a vivid emerald green blanket with hundreds of seasonal cascades tumbling down roadside cliffs.
+            </p>
+            <ul>
+              <li><strong>Katiki &amp; Chaparai Waterfalls:</strong> Water flows at their absolute peak volume, making rocky natural water slides exciting to watch.</li>
+              <li><strong>Fresh Mountain Streams:</strong> Streams flowing near Borra Caves and tribal hamlets run crystalline and pure.</li>
+              <li><strong>Fewer Crowds:</strong> Enjoy serene viewpoints without holiday rush.</li>
+            </ul>
+          </div>
+
+          <!-- Figure showing waterfall trek -->
+          <figure class="article-figure">
+            <img src="../images/araku-trekking-waterfalls.webp" alt="Trekking through lush green forest streams and waterfalls in Araku Valley" width="1050" height="1400" loading="lazy">
+            <figcaption>Monsoon treks to hidden waterfalls in the tribal reserve forests of Ananthagiri</figcaption>
+          </figure>
+
+          <!-- Summer -->
+          <div class="season-card summer" id="summer">
+            <div class="season-header">
+              <h3>Summer (April – June)</h3>
+              <span class="season-tag low">Quiet &amp; Budget Friendly</span>
+            </div>
+            <p><strong>Avg Temperature:</strong> 22°C &ndash; 35°C &bull; <strong>Highlight:</strong> Borra Caves, Museum Walks, Padmapuram Gardens</p>
+            <p>
+              While daytime temperatures in the plains around Vizag can soar above 40°C, Araku remains significantly cooler due to its 900+ metre elevation. Evenings are pleasant, hotel rates are economical, and major sightseeing locations have minimal wait times.
+            </p>
+          </div>
+        </div>
+
+        <!-- Vanjangi Guide -->
+        <h2 id="vanjangi-guide">Vanjangi Cloud Sunrise: When &amp; How to Plan</h2>
+        <p>
+          The <strong>Vanjangi Hills sunrise viewpoint</strong> (located about 25 km from Araku near Paderu) has gained national fame as South India’s most magnificent cloud sea. To see the thick white carpet of clouds at its peak:
+        </p>
+        <div class="card-box">
+          <h4 style="margin-top: 0; margin-bottom: 0.5rem; color: var(--blog-emerald);"><i class="fa-solid fa-mountain-sun"></i> Vanjangi Sunrise Checklist</h4>
+          <ul style="margin: 0.5rem 0 0 1.25rem;">
+            <li><strong>Prime Months:</strong> Mid-November through late February.</li>
+            <li><strong>Trek Start Time:</strong> Reach the base village by 4:00 AM to complete the 3.5 km hike before the 5:45 AM sunrise.</li>
+            <li><strong>Flashlights &amp; Grip Shoes:</strong> The rocky trail is completely unlit; carry strong torches or headlamps.</li>
+            <li><strong>Stay Local:</strong> Stay overnight at Araku town or choose our private 1N/2D tour package that includes pre-arranged dawn transport.</li>
+          </ul>
+        </div>
+
+        <!-- Packing Tips -->
+        <h2 id="packing-tips">What to Pack for Each Season</h2>
+        <div class="tip-callout">
+          <div class="tip-title"><i class="fa-solid fa-suitcase"></i> Packing Advice</div>
+          <p style="margin: 0; font-size: 0.95rem;">
+            <strong>October to February:</strong> Bring layered woollens, thermals (especially for children and elderly), light windcheaters, and moisturizers for the dry mountain morning air.<br><br>
+            <strong>July to September:</strong> Pack a sturdy umbrella, rain poncho, waterproof phone pouch, and slip-resistant footwear for waterfall visits.<br><br>
+            <strong>April to June:</strong> Light cotton garments, sun hats, polarized sunglasses, and sunscreen for daytime excursions.
           </p>
         </div>
 
-        <h2>3. Summer (April to June) — A Quick Weekend Escape</h2>
-        <div class="season-card">
-          <p><strong>Average Temperature:</strong> 22°C – 35°C &bull; <strong>Ideal for:</strong> Avoiding Crowds &amp; Budget Travel</p>
+        <!-- Planning Your Guided Araku Experience -->
+        <h2 id="book-trip">Planning Your Guided Araku Experience</h2>
+        <p>
+          Regardless of which month you travel, planning your logistics with native local experts guarantees that you don't miss hidden viewpoints, seasonal coffee tastings, or optimal cave timings.
+        </p>
+
+        <!-- Tour CTA Banner -->
+        <div class="blog-cta-banner">
+          <h3>Ready to Visit Araku Valley in Its Best Season?</h3>
           <p>
-            While daytime temperatures can warm up, Araku remains 6°C to 8°C cooler than coastal Visakhapatnam, offering an accessible weekend refuge. Evenings remain breezy and comfortable for exploring Borra Caves and Padmapuram Gardens.
+            Book your private sanitized cab with experienced local drivers. Flexible itineraries, hotel pickup, and zero cancellation fee up to 24 hours prior.
           </p>
+          <div class="blog-cta-actions">
+            <a href="../araku-1-day-tour.html" class="btn-primary-green">
+              <i class="fa-solid fa-car"></i> Araku 1-Day Tour (₹2,499)
+            </a>
+            <a href="../araku-1n-2d-tour.html" class="btn-secondary-outline">
+              <i class="fa-solid fa-hotel"></i> 1N / 2D Resort Stay (₹4,999)
+            </a>
+          </div>
         </div>
 
-        <div class="cta-banner">
-          <h3 style="font-family: var(--font-brand); font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Ready to Explore Araku Valley?</h3>
-          <p style="color: #cbd5e1; font-size: 0.95rem; margin-bottom: 1.5rem;">
-            Book an exclusive private vehicle tour with experienced local drivers and zero cancellation fee up to 24 hours prior.
-          </p>
-          <a href="../araku-1-day-tour.html" class="btn-action-primary" style="padding: 0.75rem 1.6rem; font-size: 0.95rem; text-decoration: none; display: inline-block;">
-            Explore Araku 1-Day Tour (₹2,499)
-          </a>
+        <!-- Author Box -->
+        <div class="author-box">
+          <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Local Guides" width="68" height="68">
+          <div class="author-info">
+            <h4>Written by Araku Trails Editorial Team</h4>
+            <p>
+              We are a team of native guides and drivers born and raised in the Eastern Ghats. Our mission is to help travellers experience the authentic beauty, coffee culture, and tribal hospitality of Araku Valley safely and comfortably.
+            </p>
+          </div>
         </div>
+
+        <!-- Related Posts -->
+        <div class="related-posts">
+          <h3>Continue Reading More Araku Travel Guides</h3>
+          <div class="related-grid">
+            <a href="visakhapatnam-to-araku-road-trip-guide.html" class="related-card">
+              <img src="../images/og-vizag-araku-2n-3d.jpg" alt="Visakhapatnam to Araku road trip" class="related-thumb" width="600" height="337">
+              <div class="related-body">
+                <span class="related-tag">Road Trip &amp; Logistics</span>
+                <h4 class="related-title">Visakhapatnam to Araku: The Complete Ghat Road Driving Guide</h4>
+              </div>
+            </a>
+
+            <a href="thonkota-waterfalls-hidden-gem-araku.html" class="related-card">
+              <img src="../images/thonkota-waterfalls.jpg" alt="Thonkota Waterfalls near Pedabayalu" class="related-thumb" width="600" height="337">
+              <div class="related-body">
+                <span class="related-tag">Offbeat &amp; Waterfalls</span>
+                <h4 class="related-title">Thonkota Waterfalls: The Hidden Secret of Pedabayalu</h4>
+              </div>
+            </a>
+          </div>
+        </div>
+
       </div>
     </article>
   </main>
 
-  <footer class="dash-footer-meta">
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <img src="../images/arakutrails-logo-128.png" alt="Araku Trails Logo" class="footer-logo-img" width="32" height="32">
-      <div>
-        &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Office: Kurmannapalem, Visakhapatnam, Andhra Pradesh - 530046
+  <!-- Editorial Footer -->
+  <footer class="blog-footer">
+    <div class="blog-footer-inner">
+      <div class="blog-footer-links">
+        <a href="../">Home</a>
+        <a href="index.html">Blog</a>
+        <a href="../araku-1-day-tour.html">1-Day Tour</a>
+        <a href="../araku-1n-2d-tour.html">2-Day Tour</a>
+        <a href="../privacy-policy.html">Privacy Policy</a>
       </div>
-    </div>
-    <div class="footer-quick-contacts">
-      <a href="tel:+919494177921"><i class="fa-solid fa-phone"></i> +91 9494177921</a>
-      <a href="mailto:krsh2852@gmail.com"><i class="fa-solid fa-envelope"></i> krsh2852@gmail.com</a>
-      <a href="../privacy-policy.html"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a>
+      <div>
+        &copy; <span id="currentYear"></span> <strong>arakutrails.com</strong> &bull; Visakhapatnam, Andhra Pradesh
+      </div>
     </div>
   </footer>
 
+  <script src="../js/blog.js?v=1.1"></script>
   <script>
     document.getElementById('currentYear').textContent = new Date().getFullYear();
   </script>
